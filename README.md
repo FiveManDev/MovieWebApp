@@ -4,12 +4,9 @@
 
 ### 1. Build project
 
-    ```
     dotnet build
-    ```
 
 ### 2. Run project with hot reload
 
-    ```
     dotnet watch
-    ```
+    
