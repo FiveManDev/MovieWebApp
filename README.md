@@ -2,13 +2,13 @@
 
 ## After clone project please run the followwing
 
-### BUild project
+### 1. Build project
 
     ```bash
     dotnet build
     ```
 
-### Run project with hot reload
+### 2. Run project with hot reload
 
     ```bash
     dotnet watch
