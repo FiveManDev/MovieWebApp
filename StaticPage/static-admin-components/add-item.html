@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css" />
+    <link rel="stylesheet" href="css/magnific-popup.css" />
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css" />
+    <link rel="stylesheet" href="css/select2.min.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+
+    <!-- Favicons -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="icon/favicon-32x32.png"
+      sizes="32x32"
+    />
+    <link rel="apple-touch-icon" href="icon/favicon-32x32.png" />
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Dmitry Volkov" />
+    <title>FlixGo – Online Movies, TV Shows & Cinema HTML Template</title>
+  </head>
+
+  <body>
+    <!-- main content -->
+    <main class="main">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- main title -->
+          <div class="col-12">
+            <div class="main__title">
+              <h2>Add new item</h2>
+            </div>
+          </div>
+          <!-- end main title -->
+
+          <!-- form -->
+          <div class="col-12">
+            <form action="#" class="form">
+              <div class="row">
+                <div class="col-12 col-md-5 form__cover">
+                  <div class="row">
+                    <div class="col-12 col-sm-6 col-md-12">
+                      <div class="form__img">
+                        <label for="form__img-upload"
+                          >Upload cover (270 x 400)</label
+                        >
+                        <input
+                          id="form__img-upload"
+                          name="form__img-upload"
+                          type="file"
+                          accept=".png, .jpg, .jpeg"
+                        />
+                        <img id="form__img" src="#" alt=" " />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-7 form__content">
+                  <div class="row">
+                    <div class="col-12">
+                      <input
+                        type="text"
+                        class="form__input"
+                        placeholder="Title"
+                      />
+                    </div>
+
+                    <div class="col-12">
+                      <textarea
+                        id="text"
+                        name="text"
+                        class="form__textarea"
+                        placeholder="Description"
+                      ></textarea>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-3">
+                      <input
+                        type="text"
+                        class="form__input"
+                        placeholder="Release year"
+                      />
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-3">
+                      <input
+                        type="text"
+                        class="form__input"
+                        placeholder="Running timed in minutes"
+                      />
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-3">
+                      <select class="js-example-basic-single" id="quality">
+                        <option value=""></option>
+                        <option value="FullHD">FullHD</option>
+                        <option value="HD">HD</option>
+                      </select>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-3">
+                      <input
+                        type="text"
+                        class="form__input"
+                        placeholder="Age"
+                      />
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                      <select
+                        class="js-example-basic-multiple"
+                        id="country"
+                        multiple="multiple"
+                      >
+                        <option value="Viet Nam">Viet Nam</option>
+                      </select>
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                      <select
+                        class="js-example-basic-multiple"
+                        id="genre"
+                        multiple="multiple"
+                      >
+                        <option value="Action">Action</option>
+                      </select>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form__gallery">
+                        <label id="gallery1" for="form__gallery-upload"
+                          >Upload photos</label
+                        >
+                        <input
+                          data-name="#gallery1"
+                          id="form__gallery-upload"
+                          name="gallery"
+                          class="form__gallery-upload"
+                          type="file"
+                          accept=".png, .jpg, .jpeg"
+                          multiple
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <ul class="form__radio">
+                    <li>
+                      <span>Item type:</span>
+                    </li>
+                    <li>
+                      <input
+                        id="type1"
+                        type="radio"
+                        name="type"
+                        data-toggle="collapse"
+                        data-target=".multi-collapse"
+                        checked=""
+                      />
+                      <label for="type1">Movie</label>
+                    </li>
+                    <li>
+                      <input
+                        id="type2"
+                        type="radio"
+                        name="type"
+                        data-toggle="collapse"
+                        data-target=".multi-collapse"
+                      />
+                      <label for="type2">TV Series</label>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="col-12">
+                  <div class="row">
+                    <!-- movie -->
+                    <div class="col-12">
+                      <div
+                        class="collapse show multi-collapse"
+                        id="multiCollapseExample1"
+                      >
+                        <div class="form__video">
+                          <label id="movie1" for="form__video-upload"
+                            >Upload video</label
+                          >
+                          <input
+                            data-name="#movie1"
+                            id="form__video-upload"
+                            name="movie"
+                            class="form__video-upload"
+                            type="file"
+                            accept="video/mp4,video/x-m4v,video/*"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end movie -->
+
+                    <!-- tv series -->
+                    <div class="col-12">
+                      <div
+                        class="collapse multi-collapse"
+                        id="multiCollapseExample2"
+                      >
+                        <!-- season -->
+                        <div class="form__season">
+                          <div class="form__season-title">
+                            <div class="row">
+                              <div class="col-12">
+                                <span class="form__title">Season #1</span>
+                              </div>
+
+                              <div class="col-12 col-sm-6 col-md-5 col-xl-6">
+                                <input
+                                  type="text"
+                                  class="form__input"
+                                  placeholder="Season title"
+                                />
+                              </div>
+
+                              <div class="col-12 col-sm-6 col-md-4 col-xl-4">
+                                <input
+                                  type="text"
+                                  class="form__input"
+                                  placeholder="Season info"
+                                />
+                              </div>
+
+                              <div class="col-12 col-sm-4 col-md-3 col-xl-2">
+                                <button class="form__btn form__btn--add">
+                                  add season
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- episode -->
+                          <div class="form__episode">
+                            <div class="row">
+                              <div class="col-12">
+                                <span class="form__title">Episode #1</span>
+                                <button class="form__delete" type="button">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"
+                                    />
+                                  </svg>
+                                </button>
+                              </div>
+
+                              <div class="col-12 col-md-6">
+                                <input
+                                  type="text"
+                                  class="form__input"
+                                  placeholder="Episode title 1"
+                                />
+                              </div>
+
+                              <div class="col-12 col-md-6">
+                                <input
+                                  type="text"
+                                  class="form__input"
+                                  placeholder="Air date"
+                                />
+                              </div>
+
+                              <div class="col-12">
+                                <div class="form__video">
+                                  <label id="s1s1" for="form__video-upload1"
+                                    >Upload episode 1</label
+                                  >
+                                  <input
+                                    data-name="#s1s1"
+                                    id="form__video-upload1"
+                                    name="s1s1"
+                                    class="form__video-upload"
+                                    type="file"
+                                    accept="video/mp4,video/x-m4v,video/*"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- end episode -->
+
+                          <!-- episode -->
+                          <div class="form__episode">
+                            <div class="row">
+                              <div class="col-12">
+                                <span class="form__title">Episode #2</span>
+                                <button class="form__delete" type="button">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"
+                                    />
+                                  </svg>
+                                </button>
+                              </div>
+
+                              <div class="col-12 col-md-6">
+                                <input
+                                  type="text"
+                                  class="form__input"
+                                  placeholder="Episode title 2"
+                                />
+                              </div>
+
+                              <div class="col-12 col-md-6">
+                                <input
+                                  type="text"
+                                  class="form__input"
+                                  placeholder="Air date"
+                                />
+                              </div>
+
+                              <div class="col-12 col-sm-8 col-md-9 col-xl-10">
+                                <div class="form__video">
+                                  <label id="s1s2" for="form__video-upload2"
+                                    >Upload episode 2</label
+                                  >
+                                  <input
+                                    data-name="#s1s2"
+                                    id="form__video-upload2"
+                                    name="s1s2"
+                                    class="form__video-upload"
+                                    type="file"
+                                    accept="video/mp4,video/x-m4v,video/*"
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="col-12 col-sm-4 col-md-3 col-xl-2">
+                                <button class="form__btn form__btn--add">
+                                  add episode
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- end episode -->
+                        </div>
+                        <!-- end season -->
+                      </div>
+                    </div>
+                    <!-- end tv series -->
+
+                    <div class="col-12">
+                      <button type="button" class="form__btn">publish</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- end form -->
+        </div>
+      </div>
+    </main>
+    <!-- end main content -->
+
+    <!-- JS -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.mousewheel.min.js"></script>
+    <script src="js/jquery.mCustomScrollbar.min.js"></script>
+    <script src="js/select2.min.js"></script>
+    <script src="js/admin.js"></script>
+  </body>
+</html>
