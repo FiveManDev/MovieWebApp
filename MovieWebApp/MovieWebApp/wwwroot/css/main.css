@@ -1342,9 +1342,6 @@ ul {
     background-color: #28282d;
 }
 
-.section--first {
-    margin-top: 70px;
-}
 
     .section--first .section__title {
         margin-bottom: 0;
@@ -1378,9 +1375,6 @@ ul {
         align-items: center;
     }
 
-    .section--first {
-        margin-top: 80px;
-    }
 }
 
 @media (min-width: 992px) {
