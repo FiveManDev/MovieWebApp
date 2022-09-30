@@ -38,14 +38,12 @@ namespace MovieWebApp.API.ApiConfig
             }
             return null;
         }
-        public static async Task<ApiResponse> Post(string ApiUrl, object ReqParams = null, string Token = null)
+        public static async Task<ApiResponse> Post(string ApiUrl, object ReqParams , string Token = null)
         {
             try
             {
-                var param = ReqParams.GetQueryString();
                 using HttpClient client = ConfigRequest(Token);
-                HttpContent content = new StringContent("", Encoding.UTF8, "application/json");
-                var result = client.PostAsync(ApiUrl + param, content).Result;
+                var result = client.PostAsJsonAsync(ApiUrl, ReqParams).Result;
                 var streamRead = await result.Content.ReadAsStringAsync();
                 var jsonResult = JObject.Parse(streamRead);
                 var response = jsonResult.ToObject<ApiResponse>();
@@ -57,14 +55,12 @@ namespace MovieWebApp.API.ApiConfig
             }
             return null;
         }
-        public static async Task<ApiResponse> Put(string ApiUrl, object ReqParams = null, string Token = null)
+        public static async Task<ApiResponse> Put(string ApiUrl, object ReqParams, string Token = null)
         {
             try
             {
-                var param = ReqParams.GetQueryString();
                 using HttpClient client = ConfigRequest(Token);
-                HttpContent content = new StringContent("", Encoding.UTF8, "application/json");
-                var result = client.PutAsync(ApiUrl + param, content).Result;
+                var result = client.PutAsJsonAsync(ApiUrl, ReqParams).Result;
                 var streamRead = await result.Content.ReadAsStringAsync();
                 var jsonResult = JObject.Parse(streamRead);
                 var response = jsonResult.ToObject<ApiResponse>();
