@@ -11,21 +11,21 @@
             <div class="col-12">
                 <div class="sign__content">
                     <!-- registration form -->
-                    <form action="#" class="sign__form">
+                    <form method="post" class="sign__form">
                         <a href="index.html" class="sign__logo">
                             <img src="~/images/logo.svg" alt="">
                         </a>
 
                         <div class="sign__group">
-                            <input type="text" class="sign__input" placeholder="Name">
+                            <input asp-for="CreateUserRequestDTO.UserName" type="text" class="sign__input" placeholder="Name">
                         </div>
 
                         <div class="sign__group">
-                            <input type="text" class="sign__input" placeholder="Email">
+                            <input asp-for="CreateUserRequestDTO.Email" type="text" class="sign__input" placeholder="Email">
                         </div>
 
                         <div class="sign__group">
-                            <input type="password" class="sign__input" placeholder="Password">
+                            <input asp-for="CreateUserRequestDTO.Password" type="password" class="sign__input" placeholder="Password">
                         </div>
 
                         <div class="sign__group sign__group--checkbox">
@@ -33,7 +33,7 @@
                             <label for="remember">I agree to the <a href="privacy.html">Privacy Policy</a></label>
                         </div>
 
-                        <button class="sign__btn" type="button">Sign up</button>
+                        <button class="sign__btn" type="submit">Sign up</button>
 
                         <span class="sign__text">Already have an account? <a href="signin.html">Sign in!</a></span>
                     </form>
