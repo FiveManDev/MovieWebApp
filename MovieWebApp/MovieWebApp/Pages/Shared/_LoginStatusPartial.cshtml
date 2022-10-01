@@ -1,6 +1,6 @@
 ﻿@if (User.Identity.IsAuthenticated){
     <form method="post" class="form-inline" asp-page="/Logout/Index">
-        Welcome @User.Claims.FirstOrDefault(claim => claim.Type.Equals("UserID")).Value
+        Welcome @User.Identity.Name
         <button type="submit" class="ml-2 btn btn-link">Logout</button>
     </form>
 } else {

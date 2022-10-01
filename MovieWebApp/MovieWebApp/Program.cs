@@ -57,6 +57,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
 app.Use(async (context, next) =>
 {
     var result = context.Request.Cookies.TryGetValue("accessToken", out string accessToken);
@@ -67,9 +68,11 @@ app.Use(async (context, next) =>
     await next();
 });
 
+// for status code error
+app.UseStatusCodePagesWithRedirects("/ErrorPage/Error{0}");
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
-Console.WriteLine(AppSettings.Host);
 app.Run();

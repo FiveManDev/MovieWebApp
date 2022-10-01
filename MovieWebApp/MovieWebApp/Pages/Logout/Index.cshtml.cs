@@ -11,8 +11,8 @@ namespace MovieWebApp.Pages.Logout
         public IActionResult OnPost()
         {
             HttpContext.Response.Cookies.Delete("accessToken");
-            HttpContext.Response.Cookies.Delete("accessToken");
-            return Redirect("Login/Index");
+            HttpContext.Response.Cookies.Delete("refreshToken");
+            return Redirect("/Login/Index");
         }
 
     }

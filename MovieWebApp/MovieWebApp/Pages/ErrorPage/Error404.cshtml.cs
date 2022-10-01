@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MovieWebApp.Pages._404_page
+namespace MovieWebApp.Pages.ErrorPage
 {
-    public class IndexModel : PageModel
+    public class Error404Model : PageModel
     {
         public void OnGet()
         {

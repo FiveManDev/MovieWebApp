@@ -16,6 +16,16 @@ namespace MovieWebApp.Pages.Login
         {
             _userServices = userServices;
         }
+
+        public IActionResult OnGet()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect("/About/Index");
+            }
+            return Page();
+        }
+
         public async Task<IActionResult> OnPost()
         {
             var tokenModel = await _userServices.Login(LoginDTO);
@@ -25,7 +35,7 @@ namespace MovieWebApp.Pages.Login
             }
             HttpContext.Response.Cookies.Append("accessToken", tokenModel.AccessToken, new CookieOptions { HttpOnly = true });
             HttpContext.Response.Cookies.Append("refreshToken", tokenModel.AccessToken, new CookieOptions { HttpOnly = true });
-            return Redirect("About/Index");
+            return Redirect("/About/Index");
         }
 
     }
