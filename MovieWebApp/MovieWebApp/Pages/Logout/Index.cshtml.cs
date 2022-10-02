@@ -1,8 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MovieAPI.Models.DTO;
-using MovieWebApp.Models;
-using MovieWebApp.Service;
 
 namespace MovieWebApp.Pages.Logout
 {

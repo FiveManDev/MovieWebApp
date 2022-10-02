@@ -1,13 +1,6 @@
-﻿using System.Net.Http;
-using System;
-using System.Net.Http.Json;
-using System.Reflection;
-using MovieWebApp.Utility.Extension;
-using Microsoft.AspNetCore.Mvc;
-using MovieAPI.Models.DTO;
-using Newtonsoft.Json;
-using System.Xml.Linq;
+﻿using MovieAPI.Models.DTO;
 using MovieWebApp.Models;
+using MovieWebApp.Utility.Extension;
 
 namespace MovieWebApp.Service
 {

@@ -30,10 +30,18 @@
                         </div>
 
                         <button class="sign__btn" type="submit">Sign in</button>
-
+                        <div class="col">
+                            <a href="#" class="fb btn">
+                                <i class="fab fa-facebook-f mr-25"></i> Login with Facebook
+                            </a>
+                            <a href="#" class="google btn">
+                                <i class="fab fa-google mr-25">
+                                </i> Login with Google
+                            </a>
+                        </div>
                         <span class="sign__text">Don't have an account? <a asp-page="/Register/Index">Sign up!</a></span>
 
-                        <span class="sign__text"><a href="forgot.html">Forgot password?</a></span>
+                        <span class="sign__text"><a href="/forgot-password">Forgot password?</a></span>
                     </form>
                     <!-- end authorization form -->
                 </div>
@@ -41,3 +49,46 @@
         </div>
     </div>
 </div>
+<div id="toast"></div>
+
+<style>
+    .btn {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 4px;
+        margin: 5px 0;
+        opacity: 0.85;
+        display: inline-block;
+        font-size: 17px;
+        line-height: 20px;
+        text-decoration: none; /* remove underline from anchors */
+    }
+    .mr-25{
+        margin-right: 25px;
+    }
+
+        .btn:hover {
+            opacity: 1;
+        }
+
+    /* add appropriate colors to fb, twitter and google buttons */
+    .fb {
+        background-color: #3B5998;
+        color: white;
+    }
+
+    .google {
+        background-color: #dd4b39;
+        color: white;
+    }
+
+    /* Two-column layout */
+    .col {
+        float: left;
+        width: 100%;
+        margin: auto;
+        margin-top: 6px;
+    }
+
+</style>
