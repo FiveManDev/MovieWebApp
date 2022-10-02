@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MovieWebApp.API.ApiConfig;
 using MovieWebApp.Utility.Extension;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 
 namespace MovieWebApp.API

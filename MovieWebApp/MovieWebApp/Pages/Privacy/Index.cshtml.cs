@@ -1,7 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MovieWebApp.Pages.Privacy_policy
+namespace MovieWebApp.Pages.Privacy
 {
     public class IndexModel : PageModel
     {

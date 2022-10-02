@@ -1,4 +1,4 @@
-﻿namespace MovieWebApp.Models.ViewModels
+﻿namespace MovieWebApp.Models.Domain
 {
     public class empty1
     {

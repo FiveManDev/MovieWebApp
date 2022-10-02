@@ -11,6 +11,7 @@ AppSettings.SecretKey = builder.Configuration["AppSettings:SecretKey"];
 #region Add services to the container
 // Add razorpage services 
 builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
 //Add JWT services 
 var secretKeyByte = Encoding.UTF8.GetBytes(AppSettings.SecretKey);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -46,13 +47,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 
-//// Delete this when starting project
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=Home}/{action=Index}");
-////////////////////////////////////////////////
-///
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -74,5 +68,6 @@ app.UseStatusCodePagesWithRedirects("/ErrorPage/Error{0}");
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapBlazorHub();
 app.MapRazorPages();
 app.Run();

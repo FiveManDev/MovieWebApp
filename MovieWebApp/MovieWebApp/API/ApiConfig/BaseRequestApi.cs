@@ -1,7 +1,6 @@
 ﻿using MovieWebApp.Utility.Extension;
 using Newtonsoft.Json.Linq;
 using System.Net.Http.Headers;
-using System.Text;
 
 namespace MovieWebApp.API.ApiConfig
 {
