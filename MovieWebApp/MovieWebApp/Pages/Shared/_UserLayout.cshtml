@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Movies Streaming</title>
 
+    <meta name="description" content="Online Movies, TV Shows & Cinema">
+    <meta name="keywords" content="">
+    <meta name="author" content="Fivemandev">
+    <title>Movies Streaming – Online Movies, TV Shows & Cinema</title>
+
+
+    <base href="~/" />
+    <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
+
     <!-- CSS -->
     <link rel="stylesheet" href="~/css/bootstrap-reboot.min.css" asp-append-version="true">
     <link rel="stylesheet" href="~/css/bootstrap-grid.min.css" asp-append-version="true">
@@ -15,7 +24,9 @@
     <link rel="stylesheet" href="~/css/photoswipe.css" asp-append-version="true">
     <link rel="stylesheet" href="~/css/default-skin.css" asp-append-version="true">
     <link rel="stylesheet" href="~/css/main.css" asp-append-version="true">
-    <link rel="stylesheet" href="~/css/toast.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/toast2.css" asp-append-version="true" />
+    <!-- ToastJS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" asp-append-version="true" />
 
     <!-- Favicons -->
     <link rel="icon" type="image/png" href="~/images/icon/favicon-32x32.png" sizes="32x32">
@@ -23,13 +34,6 @@
 
     <!--Font Awesome -->
     <link href="https://kit-pro.fontawesome.com/releases/v5.15.4/css/pro.min.css" rel="stylesheet">
-
-    <meta name="description" content="Online Movies, TV Shows & Cinema">
-    <meta name="keywords" content="">
-    <meta name="author" content="Fivemandev">
-    <title>Movies Streaming – Online Movies, TV Shows & Cinema</title>
-
-
 
 </head>
 <body>
@@ -107,7 +111,10 @@
 
                                             <ul class="dropdown-menu header__dropdown-menu" aria-labelledby="dropdownMenuLang">
                                                 <!-- check is admin here -->
-                                                <!--   <li><a href="/admin">Admin</a></li> -->
+                                                @if ((User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.Role).Value.Equals("Admin"))
+                                                {
+                                                    <li><a href="/admin">Admin</a></li>
+                                                }
                                                 <li><a href="/profile">Profile</a></li>
                                                 <li><a href="/logout">Logout</a></li>
                                             </ul>
@@ -152,6 +159,7 @@
 
         <div class="flex-grow-1 margin-main-body">
             <main role="main">
+                <partial name="_Notification" />
                 @RenderBody()
             </main>
         </div>
@@ -264,8 +272,15 @@
     <script src="~/js/photoswipe-ui-default.min.js"></script>
     <script src="~/js/main.js" asp-append-version="true"></script>
     <script src="~/js/toast.js" asp-append-version="true"></script>
-    <script src="_framework/blazor.server.js"></script>
 
+    <!-- ToastJS -->
+    <!-- Also need <script src="~/js/jquery-3.6.0.min.js"></script> available at line 255-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!-- SweetJS -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/common.js"></script>
+
+    <script src="_framework/blazor.server.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
     @*chèn cái này vào body nào muốn viết thêm js riêng

@@ -46,11 +46,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
-app.UseRouting();
 
 app.Use(async (context, next) =>
 {
@@ -62,12 +59,15 @@ app.Use(async (context, next) =>
     await next();
 });
 
+app.UseRouting();
+
 // for status code error
 app.UseStatusCodePagesWithRedirects("/ErrorPage/Error{0}");
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapBlazorHub();
 app.MapRazorPages();
+app.MapBlazorHub();
+
 app.Run();
