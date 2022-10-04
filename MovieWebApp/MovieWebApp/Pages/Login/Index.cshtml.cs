@@ -21,7 +21,7 @@ namespace MovieWebApp.Pages.Login
         {
             if (User.Identity.IsAuthenticated)
             {
-                return Redirect("/About/Index");
+                return Redirect("/");
             }
             return Page();
         }
@@ -31,11 +31,25 @@ namespace MovieWebApp.Pages.Login
             var tokenModel = await _userServices.Login(LoginDTO);
             if (tokenModel == null)
             {
-                return NotFound();
+                return Page();
             }
-            HttpContext.Response.Cookies.Append("accessToken", tokenModel.AccessToken, new CookieOptions { HttpOnly = true });
-            HttpContext.Response.Cookies.Append("refreshToken", tokenModel.AccessToken, new CookieOptions { HttpOnly = true });
-            return Redirect("/About/Index");
+
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = LoginDTO.RememberMe ? DateTime.Now.AddDays(30) : null
+            };  
+
+            HttpContext.Response.Cookies.Append("accessToken", tokenModel.AccessToken,
+                cookieOptions
+            );
+            
+            HttpContext.Response.Cookies.Append("refreshToken", tokenModel.AccessToken,
+                cookieOptions
+            );
+            
+            TempData["success"] = "Login success!";
+            return Redirect("/");
         }
 
     }
