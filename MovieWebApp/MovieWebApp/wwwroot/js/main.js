@@ -107,7 +107,7 @@ $(document).ready(function () {
     });
 
     $('.content__mobile-tabs-menu li').on('click', function () {
-        var text = $(this).text();
+        var text = $.trim($(this).text());
         var item = $(this);
         var id = item.closest('.content__mobile-tabs').attr('id');
         $('#' + id).find('.content__mobile-tabs-btn input').val(text);
