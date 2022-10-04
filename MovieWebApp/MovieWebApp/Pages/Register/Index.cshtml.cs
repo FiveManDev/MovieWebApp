@@ -19,7 +19,7 @@ namespace MovieWebApp.Pages.Register
 
         public async Task<IActionResult> OnPost()
         {
-            var response = await _userServices.CreateUser(CreateUserRequestDTO);
+            var response = await _userServices.CreateUser(HttpContext, CreateUserRequestDTO);
             if (response)
             {
                 return RedirectToPage("/Login/Index");

@@ -28,7 +28,7 @@ namespace MovieWebApp.Pages.Login
 
         public async Task<IActionResult> OnPost()
         {
-            var tokenModel = await _userServices.Login(LoginDTO);
+            var tokenModel = await _userServices.Login(HttpContext, LoginDTO);
             if (tokenModel == null)
             {
                 return Page();

@@ -1,24 +1,37 @@
 ﻿using MovieAPI.Models.DTO;
 using MovieWebApp.Models;
 using MovieWebApp.Utility.Extension;
+using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 
 namespace MovieWebApp.Service
 {
     public class UserServices
     {
         private readonly IHttpClientFactory _httpClientFactory;
+        private HttpClient _httpClient;
 
         public UserServices(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<bool> CreateUser(CreateUserRequestDTO createUserRequestDTO)
+        public void getClient(HttpContext context)
         {
-            var client = _httpClientFactory.CreateClient("api");
+            _httpClient = _httpClientFactory.CreateClient("api");
+            var result = context.Request.Cookies.TryGetValue("accessToken", out string token);
+            if (result)
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            }
+        }
+
+        public async Task<bool> CreateUser(HttpContext context, CreateUserRequestDTO createUserRequestDTO)
+        {
+            getClient(context);
             try
             {
-                var response = await client.PostAsJsonAsync("/api/v1/User/CreateUser", createUserRequestDTO);
+                var response = await _httpClient.PostAsJsonAsync("/api/v1/User/CreateUser", createUserRequestDTO);
 
                 // check status code: not yet
                 if (response.IsSuccessStatusCode)
@@ -35,27 +48,27 @@ namespace MovieWebApp.Service
                 return false;
             }
 
-            //var request = new HttpRequestMessage(HttpMethod.Get, "url");
+            //var request = new httprequestmessage(httpmethod.get, "url");
 
-            //var client = _httpClientFactory.CreateClient();
-            //var response = await client.SendAsync(request);
-            //if (response.IsSuccessStatusCode)
+            //var client = _httpclientfactory.createclient();
+            //var response = await client.sendasync(request);
+            //if (response.issuccessstatuscode)
             //{
-            //    model = await response.Content.ReadFromJsonAsync<model>();
+            //    model = await response.content.readfromjsonasync<model>();
             //}
             //else
             //{
-            //    return response.ReasonPhrase;
+            //    return response.reasonphrase;
             //}
 
         }
 
-        public async Task<TokenModel> Login(LoginDTO loginDTO)
+        public async Task<TokenModel> Login(HttpContext context, LoginDTO loginDTO)
         {
-            var client = _httpClientFactory.CreateClient("api");
+            getClient(context);
             try
             {
-                var response = await client.PostAsJsonAsync("/api/v1/User/Login", loginDTO);
+                var response = await _httpClient.PostAsJsonAsync("/api/v1/User/Login", loginDTO);
 
                 // check status code: not yet
                 if (response.IsSuccessStatusCode)
@@ -74,6 +87,36 @@ namespace MovieWebApp.Service
             {
                 return null;
             }
+        }
+
+        public async Task<UserDTO> GetUserInformation(HttpContext context, string id)
+        {
+            getClient(context);
+            try
+            {
+                string url = $"/api/v1/User/GetUserInformation?id={id}";
+                var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
+                return ExtensionMethods.ToModel<UserDTO>(response.Data);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            //var request = new HttpRequestMessage(HttpMethod.Get, url);
+
+            ////var client = _httpclientfactory.createclient();
+            //var response = await _httpClient.SendAsync(request);
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    var rawData = await response.Content.ReadAsStringAsync();
+            //    var responseApi = ExtensionMethods.ToModel<ApiResponse>(rawData);
+            //    if (responseApi.IsSuccess)
+            //    {
+            //        return ExtensionMethods.ToModel<UserDTO>(responseApi.Data);
+            //    }
+            //}
+            //return null;
         }
     }
 }
