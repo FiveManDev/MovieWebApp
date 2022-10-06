@@ -31,10 +31,10 @@
 
                         <button class="sign__btn" type="submit">Sign in</button>
                         <div class="col">
-                            <a href="#" class="fb btn">
+                            <a asp-page="/Login/LoginService" asp-page-handler="FacebookLogin" class="fb btn">
                                 <i class="fab fa-facebook-f mr-25"></i> Login with Facebook
                             </a>
-                            <a href="#" class="google btn">
+                            <a asp-page="/Login/LoginService" asp-page-handler="GoogleLogin" class="google btn">
                                 <i class="fab fa-google mr-25">
                                 </i> Login with Google
                             </a>

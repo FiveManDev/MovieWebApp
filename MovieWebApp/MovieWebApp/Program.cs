@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MovieWebApp.Service;
 using MovieWebApp.Utility.Extension;
@@ -11,9 +13,16 @@ AppSettings.SecretKey = builder.Configuration["AppSettings:SecretKey"];
 #region Add services to the container
 // Add razorpage services 
 builder.Services.AddRazorPages();
-//Add JWT services 
+//Add services JWT, Google and Facebook 
 var secretKeyByte = Encoding.UTF8.GetBytes(AppSettings.SecretKey);
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+}).AddCookie(options =>
+{
+    options.LoginPath = "/login/LoginService/";
+})
     .AddJwtBearer(opt =>
     {
         opt.SaveToken = true;
@@ -25,16 +34,30 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(secretKeyByte),
             ClockSkew = TimeSpan.Zero
         };
-    });
+    })
+    .AddGoogle(options =>
+    {
+        IConfigurationSection googleAuthNSection =
+        builder.Configuration.GetSection("Authentication:Google");
+        options.ClientId = googleAuthNSection["ClientId"];
+        options.ClientSecret = googleAuthNSection["ClientSecret"];
+    })
+   .AddFacebook(options =>
+   {
+       IConfigurationSection facebookAuthNSection =
+       builder.Configuration.GetSection("Authentication:Facebook");
+       options.ClientId = facebookAuthNSection["ClientId"];
+       options.ClientSecret = facebookAuthNSection["ClientSecret"];
+   });
 // Add HttpClient services
 builder.Services.AddHttpClient("api", c =>
 {
     c.BaseAddress = new Uri(AppSettings.Host);
 });
-
+// Add Config Login With Google and Facebook
 builder.Services.AddSingleton<UserServices>();
-
 #endregion
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -56,7 +79,7 @@ app.Use(async (context, next) =>
     var result = context.Request.Cookies.TryGetValue("accessToken", out string accessToken);
     if (result)
     {
-        context.Request.Headers.Authorization = "Bearer " + accessToken; 
+        context.Request.Headers.Authorization = "Bearer " + accessToken;
     }
     await next();
 });
