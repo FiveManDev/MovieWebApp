@@ -1,0 +1,51 @@
+﻿@page
+@model MovieWebApp.Pages.New_password.IndexModel
+@{
+    Layout = "_EmptyLayout";
+    ViewData["Title"] = "New Password";
+}
+
+<div class="sign section--bg" data-bg="images/section/section.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="sign__content">
+                    <!-- authorization form -->
+                    <form method="post" class="sign__form">
+                        <a href="/" class="sign__logo">
+                            <img src="~/images/logo.svg" alt="">
+                        </a>
+
+                        <div class="sign__group">
+                            <input id="forgot_password_new" type="password" class="sign__input" placeholder="Enter new password" name="NewPassword" required>
+                        </div>
+                        <div class="sign__group">
+                            <input id="forgot_password_confirm" type="password" class="sign__input" placeholder="Confirm new password" name="ConfirmPassword" required>
+                        </div>
+
+                        <button class="sign__btn" type="submit">Change password</button>
+
+                        <span class="sign__text">Please enter new password to change</span>
+                    </form>
+                    <!-- end authorization form -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+      var password = document.getElementById("forgot_password_new");
+      var confirm_password = document.getElementById("forgot_password_confirm");
+
+       function validatePassword()  {
+             if  (password.value != confirm_password.value) {
+                       confirm_password.setCustomValidity("Passwords don't match");
+             } else {
+                       confirm_password.setCustomValidity('');
+             }
+       }
+
+       password.onchange = validatePassword;
+       confirm_password.onkeyup = validatePassword;
+</script>

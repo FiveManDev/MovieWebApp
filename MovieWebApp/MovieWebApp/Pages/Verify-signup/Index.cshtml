@@ -1,0 +1,32 @@
+﻿@page
+@model MovieWebApp.Pages.Verify_signup.IndexModel
+@{
+    Layout = "_EmptyLayout";
+    ViewData["Title"] = "Verify Signup Email";
+}
+
+<div class="sign section--bg" data-bg="images/section/section.jpg">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="sign__content">
+					<!-- authorization form -->
+					<form method="post" class="sign__form">
+						<a href="/" class="sign__logo">
+							<img src="~/images/logo.svg" alt="">
+						</a>
+
+						<div class="sign__group">
+							<input type="text" class="sign__input" placeholder="_ _ _ _ _ _" pattern="[0-9]{6}">
+						</div>
+						
+						<button class="sign__btn" type="submit">Submit code</button>
+
+						<span class="sign__text">Please check the code in your email</span>
+					</form>
+					<!-- end authorization form -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
