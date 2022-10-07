@@ -28,16 +28,19 @@ namespace MovieWebApp.Pages.Login
 
         public async Task<IActionResult> OnPost()
         {
+            await Task.Delay(5000);
             var tokenModel = await _userServices.Login(HttpContext, LoginDTO);
             if (tokenModel == null)
             {
+                TempData["error"] = "Login failed!";
+                TempData["success"] = null;
                 return Page();
             }
 
             var cookieOptions = new CookieOptions
             {
                 HttpOnly = true,
-                Expires = LoginDTO.RememberMe ? DateTime.Now.AddDays(30) : null
+                Expires = LoginDTO.RememberMe ? DateTime.Now.AddDays(30) : null 
             };  
 
             HttpContext.Response.Cookies.Append("accessToken", tokenModel.AccessToken,
@@ -47,7 +50,8 @@ namespace MovieWebApp.Pages.Login
             HttpContext.Response.Cookies.Append("refreshToken", tokenModel.AccessToken,
                 cookieOptions
             );
-            
+
+            TempData["error"] = null;
             TempData["success"] = "Login success!";
             return Redirect("/");
         }
