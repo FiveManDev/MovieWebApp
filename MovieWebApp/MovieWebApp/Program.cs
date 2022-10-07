@@ -15,44 +15,17 @@ AppSettings.SecretKey = builder.Configuration["AppSettings:SecretKey"];
 builder.Services.AddRazorPages();
 //Add services JWT, Google and Facebook 
 var secretKeyByte = Encoding.UTF8.GetBytes(AppSettings.SecretKey);
-//builder.Services.AddAuthentication(options =>
-//{
-//    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-//    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-//}).AddCookie(options =>
-//{
-//    options.LoginPath = "/login/LoginService/";
-//})
-//    .AddJwtBearer(opt =>
-//    {
-//        opt.SaveToken = true;
-//        opt.TokenValidationParameters = new TokenValidationParameters
-//        {
-//            ValidateIssuer = false,
-//            ValidateAudience = false,
-//            ValidateIssuerSigningKey = true,
-//            IssuerSigningKey = new SymmetricSecurityKey(secretKeyByte),
-//            ClockSkew = TimeSpan.Zero
-//        };
-//    })
-//    .AddGoogle(options =>
-//    {
-//        IConfigurationSection googleAuthNSection =
-//        builder.Configuration.GetSection("Authentication:Google");
-//        options.ClientId = googleAuthNSection["ClientId"];
-//        options.ClientSecret = googleAuthNSection["ClientSecret"];
-//    })
-//   .AddFacebook(options =>
-//   {
-//       IConfigurationSection facebookAuthNSection =
-//       builder.Configuration.GetSection("Authentication:Facebook");
-//       options.ClientId = facebookAuthNSection["ClientId"];
-//       options.ClientSecret = facebookAuthNSection["ClientSecret"];
-//   });
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+}).AddCookie(options =>
+{
+    options.LoginPath = "/login";
+})
     .AddJwtBearer(opt =>
     {
+        opt.SaveToken = true;
         opt.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = false,
@@ -61,14 +34,26 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(secretKeyByte),
             ClockSkew = TimeSpan.Zero
         };
-    });
-
+    })
+    .AddGoogle(options =>
+    {
+        IConfigurationSection googleAuthNSection =
+        builder.Configuration.GetSection("Authentication:Google");
+        options.ClientId = googleAuthNSection["ClientId"];
+        options.ClientSecret = googleAuthNSection["ClientSecret"];
+    })
+   .AddFacebook(options =>
+   {
+       IConfigurationSection facebookAuthNSection =
+       builder.Configuration.GetSection("Authentication:Facebook");
+       options.ClientId = facebookAuthNSection["ClientId"];
+       options.ClientSecret = facebookAuthNSection["ClientSecret"];
+   });
 // Add HttpClient services
 builder.Services.AddHttpClient("api", c =>
 {
     c.BaseAddress = new Uri(AppSettings.Host);
 });
-// Add Config Login With Google and Facebook
 builder.Services.AddSingleton<UserServices>();
 #endregion
 
