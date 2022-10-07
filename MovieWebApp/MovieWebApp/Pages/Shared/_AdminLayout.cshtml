@@ -35,6 +35,7 @@
         var ActiveDashboard = "sidebar__nav-link--active";
         var ActiveCatalog = "";
         var ActiveUsers = "";
+        var ActiveSupport = "";
         var ActiveReviews = "";
         var ActiveFeature = "";
 
@@ -44,6 +45,7 @@
                 ActiveDashboard = "sidebar__nav-link--active";
                 ActiveCatalog = "";
                 ActiveUsers = "";
+                ActiveSupport = "";
                 ActiveReviews = "";
                 ActiveFeature = "";
                 break;
@@ -51,6 +53,7 @@
                 ActiveDashboard = "";
                 ActiveCatalog = "sidebar__nav-link--active";
                 ActiveUsers = "";
+                ActiveSupport = "";
                 ActiveReviews = "";
                 ActiveFeature = "";
                 break;
@@ -58,6 +61,15 @@
                 ActiveDashboard = "";
                 ActiveCatalog = "";
                 ActiveUsers = "sidebar__nav-link--active";
+                ActiveSupport = "";
+                ActiveReviews = "";
+                ActiveFeature = "";
+                break;
+            case "/Admin/Support-chat":
+                ActiveDashboard = "";
+                ActiveCatalog = "";
+                ActiveUsers = "";
+                ActiveSupport = "sidebar__nav-link--active";
                 ActiveReviews = "";
                 ActiveFeature = "";
                 break;
@@ -65,6 +77,7 @@
                 ActiveDashboard = "";
                 ActiveCatalog = "";
                 ActiveUsers = "";
+                ActiveSupport = "";
                 ActiveReviews = "sidebar__nav-link--active";
                 ActiveFeature = "";
                 break;
@@ -72,6 +85,7 @@
                 ActiveDashboard = "";
                 ActiveCatalog = "";
                 ActiveUsers = "";
+                ActiveSupport = "";
                 ActiveReviews = "";
                 ActiveFeature = "sidebar__nav-link--active";
                 break;
@@ -79,6 +93,7 @@
                 ActiveDashboard = "";
                 ActiveCatalog = "";
                 ActiveUsers = "";
+                ActiveSupport = "";
                 ActiveReviews = "";
                 ActiveFeature = "sidebar__nav-link--active";
                 break;
@@ -119,7 +134,6 @@
             <div class="sidebar__user-title">
                 <span>Admin</span>
                 <p>John Doe</p>
-                @Url.RouteUrl(ViewContext.RouteData.Values)
             </div>
 
             <button class="sidebar__user-btn" type="button">
@@ -159,6 +173,12 @@
                     Users
                 </a>
             </li>
+
+
+            <li class="sidebar__nav-item ">
+                <a href="/admin/support-chat" class="sidebar__nav-link @ActiveSupport"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.61,19.19A7,7,0,0,0,17.87,8.62,8,8,0,1,0,3.68,14.91L2.29,16.29a1,1,0,0,0-.21,1.09A1,1,0,0,0,3,18H8.69A7,7,0,0,0,15,22h6a1,1,0,0,0,.92-.62,1,1,0,0,0-.21-1.09ZM8,15a6.63,6.63,0,0,0,.08,1H5.41l.35-.34a1,1,0,0,0,0-1.42A5.93,5.93,0,0,1,4,10a6,6,0,0,1,6-6,5.94,5.94,0,0,1,5.65,4c-.22,0-.43,0-.65,0A7,7,0,0,0,8,15ZM18.54,20l.05.05H15a5,5,0,1,1,3.54-1.46,1,1,0,0,0-.3.7A1,1,0,0,0,18.54,20Z" /></svg> Suports</a>
+            </li>
+
 
             <li class="sidebar__nav-item">
                 <a href="/admin/reviews" class="sidebar__nav-link @ActiveReviews">

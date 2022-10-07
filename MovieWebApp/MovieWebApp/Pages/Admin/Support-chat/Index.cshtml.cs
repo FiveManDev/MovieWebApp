@@ -1,10 +1,8 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MovieWebApp.Pages.Admin
+namespace MovieWebApp.Pages.Admin.Support_chat
 {
-    //[Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     {
         public void OnGet()

@@ -1,0 +1,114 @@
+﻿@page
+@model MovieWebApp.Pages.Admin.Support_chat.IndexModel
+@{
+    ViewData["Title"] = "Manage Support";
+}
+
+<!-- main content -->
+<main class="main">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- main title -->
+            <div class="col-12">
+                <div class="main__title">
+                    <h2>Support message</h2>
+
+                    <span class="main__title-stat">3,702 Total</span>
+
+                </div>
+            </div>
+            <!-- end main title -->
+            <!-- users -->
+            <div class="col-12">
+                <div class="main__table-wrap">
+                    <table class="main__table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>BASIC INFO</th>
+                                <th>MESSAGES</th>
+                                <th></th>
+
+                                <th></th>
+                                <th></th>
+                                <th>Time</th>
+                                <th>STATUS</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>
+                                    <div class="main__table-text">31</div>
+                                </td>
+                                <td>
+                                    <div class="main__user">
+                                        <div class="main__avatar">
+                                            <img src="~/images/user.svg" alt="">
+                                        </div>
+                                        <div class="main__meta">
+                                            <h3>John Doe</h3>
+                                            <span>email@email.com</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="main__table-text">Lorem Ipsum</div>
+                                </td>
+                                <td> </td>
+
+                                <td></td>
+
+                                <td></td>
+
+                                <td>
+                                    <div class="main__table-text">24 Oct 2019</div>
+                                </td>
+                                <td>
+                                    <div class="main__table-text main__table-text--green">New</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="main__table-text">31</div>
+                                </td>
+                                <td>
+                                    <div class="main__user">
+                                        <div class="main__avatar">
+                                            <img src="~/images/user.svg" alt="">
+                                        </div>
+                                        <div class="main__meta">
+                                            <h3>John Doe</h3>
+                                            <span>email@email.com</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="main__table-text">Lorem Ipsum</div>
+                                </td>
+                                <td> </td>
+
+                                <td></td>
+
+                                <td></td>
+
+                                <td>
+                                    <div class="main__table-text">24 Oct 2019</div>
+                                </td>
+                                <td>
+                                    <div class="main__table-text main__table-text--red">Old</div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- end users -->
+            <!-- paginator -->
+
+        </div>
+    </div>
+</main>
+<!-- end main content -->
