@@ -14,6 +14,9 @@ namespace MovieWebApp.Pages.Profile
         [BindProperty]
         public UserDTO UserDTO { get; set; }
 
+        [BindProperty]
+        public ChangePasswordDTO ChangePasswordDTO { get; set; }
+
         public IndexModel(UserServices userServices)
         {
             _userServices = userServices;
@@ -22,6 +25,18 @@ namespace MovieWebApp.Pages.Profile
         {
             var userId = (User.Identity as ClaimsIdentity).FindFirst("UserID").Value;
             UserDTO = await _userServices.GetUserInformation(HttpContext, userId);
+            return Page();
+        }
+        public async Task<IActionResult> OnPostChangePassword()
+        {
+            var result = await _userServices.ChangePassword(HttpContext, ChangePasswordDTO);
+            if (result.IsSuccess)
+            {
+                TempData["success"] = result.Message;
+            } else 
+            {
+                TempData["error"] = result.Message;
+            }
             return Page();
         }
     }

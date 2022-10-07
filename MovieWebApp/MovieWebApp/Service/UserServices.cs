@@ -118,5 +118,23 @@ namespace MovieWebApp.Service
             //}
             //return null;
         }
+
+        public async Task<ApiResponse> ChangePassword(HttpContext context, ChangePasswordDTO changePasswordDTO)
+        {
+            getClient(context);
+            try
+            {
+                var response = await _httpClient.PostAsJsonAsync("/api/v1/User/ChangePassword", changePasswordDTO);
+
+                // check status code: not yet
+                var rawData = await response.Content.ReadAsStringAsync();
+                var responseApi = ExtensionMethods.ToModel<ApiResponse>(rawData);
+                return responseApi;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }
