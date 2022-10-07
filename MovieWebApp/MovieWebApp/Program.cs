@@ -21,7 +21,7 @@ builder.Services.AddAuthentication(options =>
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 }).AddCookie(options =>
 {
-    options.LoginPath = "/login/LoginService/";
+    options.LoginPath = "/login/";
 })
     .AddJwtBearer(opt =>
     {
