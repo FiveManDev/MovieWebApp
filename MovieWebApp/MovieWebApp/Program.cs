@@ -56,7 +56,7 @@ builder.Services.AddHttpClient("api", c =>
 });
 builder.Services.AddSingleton<UserServices>();
 #endregion
-
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.9" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.9" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,4 +26,7 @@
     <Folder Include="wwwroot\lib\jquery\dist\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
+  </ItemGroup>
 </Project>
