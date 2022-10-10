@@ -4,7 +4,6 @@
     Layout = "_EmptyLayout";
     ViewData["Title"] = "Login";
 }
-
 <div class="sign section--bg" data-bg="/images/section/section.jpg">
     <div class="container">
         <div class="row">
@@ -29,7 +28,7 @@
                             <label for="remember">Remember Me</label>
                         </div>
 
-                        <button class="sign__btn" type="submit">Sign in</button>
+                        <button class="sign__btn" onclick="loading()" type="submit">Sign in</button>
                         <div class="col">
                             <a asp-page="/Login/LoginService" asp-page-handler="FacebookLogin" class="fb btn">
                                 <i class="fab fa-facebook-f mr-25"></i> Login with Facebook
@@ -92,3 +91,13 @@
     }
 
 </style>
+
+@section Scripts
+{
+    <script>
+        function loading(){
+            loading = document.getElementById("loading");
+            loading.hidden = false;
+        }
+    </script>
+}

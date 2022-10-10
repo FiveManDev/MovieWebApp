@@ -29,10 +29,14 @@
     <meta name="author" content="Fivemandev">
     <title>Movies Streaming – Online Movies, TV Shows & Cinema</title>
 
+    <!-- ToastJS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/loading.css" asp-append-version="true" />
 
 </head>
 <body>
-
+    <partial name="./Shared/Component/Common/_Loading" />
+    <partial name="_Notification" />
     @RenderBody()
 
     <!-- end main content -->
