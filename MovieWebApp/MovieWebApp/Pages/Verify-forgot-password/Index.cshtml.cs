@@ -8,5 +8,16 @@ namespace MovieWebApp.Pages.Verify_forgot_password
         public void OnGet()
         {
         }
+        public IActionResult OnPost(string verifycode)
+        {
+            TempData["email"] = TempData["email"];
+            var code = TempData["code"];
+            if (string.Equals(code, verifycode))
+            {
+                return RedirectToPage("/New-password/Index");
+            }
+            return Page();
+
+        }
     }
 }

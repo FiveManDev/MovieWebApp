@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MovieAPI.Models.DTO;
 using MovieWebApp.Service;
+using Newtonsoft.Json;
+using System.Reflection;
 
 namespace MovieWebApp.Pages.Register
 {
@@ -19,10 +21,12 @@ namespace MovieWebApp.Pages.Register
 
         public async Task<IActionResult> OnPost()
         {
-            var response = await _userServices.CreateUser(HttpContext, CreateUserRequestDTO);
-            if (response)
+            var response = await _userServices.ConfirmEmail(HttpContext, CreateUserRequestDTO.Email);
+            if (!string.Equals(response, ""))
             {
-                return RedirectToPage("/Login/Index");
+                TempData["user"] = JsonConvert.SerializeObject(CreateUserRequestDTO);
+                TempData["code"] = response;
+                return RedirectToPage("/Verify-signup/Index");
             }
             return Page();
         }
