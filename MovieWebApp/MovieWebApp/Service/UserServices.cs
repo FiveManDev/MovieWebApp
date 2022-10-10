@@ -1,4 +1,5 @@
 ﻿using MovieAPI.Models.DTO;
+using MovieWebApp.API.ApiConfig;
 using MovieWebApp.Models;
 using MovieWebApp.Utility.Extension;
 using Newtonsoft.Json.Linq;
@@ -62,7 +63,60 @@ namespace MovieWebApp.Service
             //}
 
         }
+        public async Task<string> ConfirmEmail(HttpContext context, string email)
+        {
+            getClient(context);
+            try
+            {
+                var response = await _httpClient.PostAsJsonAsync(MovieApiUrl.ConfirmEmail, email);
 
+                // check status code: not yet
+                if (response.IsSuccessStatusCode)
+                {
+                    var rawData = await response.Content.ReadAsStringAsync();
+                    var responseApi = ExtensionMethods.ToModel<ApiResponse>(rawData);
+                    return responseApi.Data.ToString();
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+
+            
+
+        }
+        public async Task<string> ConfirmEmailForgotPassword(HttpContext context, string email)
+        {
+            getClient(context);
+            try
+            {
+                var response = await _httpClient.PostAsJsonAsync(MovieApiUrl.ConfirmEmailForgotPassword, email);
+
+                // check status code: not yet
+                if (response.IsSuccessStatusCode)
+                {
+                    var rawData = await response.Content.ReadAsStringAsync();
+                    var responseApi = ExtensionMethods.ToModel<ApiResponse>(rawData);
+                    return responseApi.Data.ToString();
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+
+
+
+        }
         public async Task<TokenModel> Login(HttpContext context, LoginDTO loginDTO)
         {
             getClient(context);
@@ -88,7 +142,31 @@ namespace MovieWebApp.Service
                 return null;
             }
         }
+        public async Task<TokenModel> LoginWithService(HttpContext context, ServiceLoginModel serviceLoginModel)
+        {
+            getClient(context);
+            try
+            {
+                var response = await _httpClient.PostAsJsonAsync(MovieApiUrl.LoginWithService, serviceLoginModel);
 
+                // check status code: not yet
+                if (response.IsSuccessStatusCode)
+                {
+                    var rawData = await response.Content.ReadAsStringAsync();
+                    var responseApi = ExtensionMethods.ToModel<ApiResponse>(rawData);
+                    if (responseApi.IsSuccess)
+                    {
+                        return ExtensionMethods.ToModel<TokenModel>(responseApi.Data);
+                    }
+                    return null;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public async Task<UserDTO> GetUserInformation(HttpContext context, string id)
         {
             getClient(context);
@@ -136,5 +214,31 @@ namespace MovieWebApp.Service
                 return null;
             }
         }
+        public async Task<Boolean> ResetPassword(HttpContext context, Object resetPassword)
+        {
+            getClient(context);
+            try
+            {
+                var response = await _httpClient.PostAsJsonAsync(MovieApiUrl.ResetPasword, resetPassword);
+
+                // check status code: not yet
+                if (response.IsSuccessStatusCode)
+                {
+                    var rawData = await response.Content.ReadAsStringAsync();
+                    var responseApi = ExtensionMethods.ToModel<ApiResponse>(rawData);
+                    if (responseApi.IsSuccess)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
     }
 }
