@@ -55,6 +55,7 @@ builder.Services.AddHttpClient("api", c =>
     c.BaseAddress = new Uri(AppSettings.Host);
 });
 builder.Services.AddSingleton<UserServices>();
+builder.Services.AddSingleton<ProfileServices>();
 #endregion
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 var app = builder.Build();

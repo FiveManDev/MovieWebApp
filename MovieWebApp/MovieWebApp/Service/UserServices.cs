@@ -167,36 +167,6 @@ namespace MovieWebApp.Service
                 return null;
             }
         }
-        public async Task<UserDTO> GetUserInformation(HttpContext context, string id)
-        {
-            getClient(context);
-            try
-            {
-                string url = $"/api/v1/User/GetUserInformation?id={id}";
-                var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
-                return ExtensionMethods.ToModel<UserDTO>(response.Data);
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-
-            //var request = new HttpRequestMessage(HttpMethod.Get, url);
-
-            ////var client = _httpclientfactory.createclient();
-            //var response = await _httpClient.SendAsync(request);
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    var rawData = await response.Content.ReadAsStringAsync();
-            //    var responseApi = ExtensionMethods.ToModel<ApiResponse>(rawData);
-            //    if (responseApi.IsSuccess)
-            //    {
-            //        return ExtensionMethods.ToModel<UserDTO>(responseApi.Data);
-            //    }
-            //}
-            //return null;
-        }
-
         public async Task<ApiResponse> ChangePassword(HttpContext context, ChangePasswordDTO changePasswordDTO)
         {
             getClient(context);
