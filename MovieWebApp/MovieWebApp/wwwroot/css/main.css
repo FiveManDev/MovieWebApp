@@ -4885,3 +4885,6 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 .main_table-content {
   max-width: 600px;
 }
+.disabled-link {
+    pointer-events: none;
+}
