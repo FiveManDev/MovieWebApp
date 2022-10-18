@@ -4886,5 +4886,12 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   max-width: 600px;
 }
 .disabled-link {
-    pointer-events: none;
+  pointer-events: none;
+}
+.cut-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 160px;
+  height: 1.2em;
+  white-space: nowrap;
 }

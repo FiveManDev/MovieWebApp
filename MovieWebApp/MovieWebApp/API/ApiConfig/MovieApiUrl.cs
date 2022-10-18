@@ -5,10 +5,15 @@
         #region User
         public const string Login = "api/v1/User/Login";
         public const string GetAllUser = "";
+        public const string CreateUser = "/api/v1/User/CreateUser";
         public const string ConfirmEmail = "api/v1/User/ConfirmEmail";
         public const string ConfirmEmailForgotPassword = "api/v1/User/ConfirmEmailForgotPassword";
         public const string LoginWithService = "api/v1/User/LoginWithService";
         public const string ResetPasword = "api/v1/User/ResetPassword";
+        public const string ChangePassword = "/api/v1/User/ChangePassword";
+        public const string ChangeFirstLastName = "/api/v1/Profile/UpdateProfileForUser";
+        public const string GetClassOfUser = "api/v1/User/GetClassOfUser";
+        public const string GetInformation = "/api/v1/Profile/GetInformation";
         #endregion
 
         #region test
