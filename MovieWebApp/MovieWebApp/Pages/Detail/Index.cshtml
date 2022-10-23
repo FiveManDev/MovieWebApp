@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id?}"
 @model MovieWebApp.Pages.Detail.IndexModel
 @{
     ViewData["Title"] = "Movie Details";
@@ -7,14 +7,14 @@
 <!-- details -->
 <section class="section details">
     <!-- details background -->
-    <div class="details__bg" data-bg="images/home/home__bg.jpg"></div>
+    <div class="details__bg" data-bg=@Model.MovieDTO.CoverImage></div>
     <!-- end details background -->
     <!-- details content -->
     <div class="container">
         <div class="row">
             <!-- title -->
             <div class="col-12">
-                <h1 class="details__title">I Dream in Another Language</h1>
+                <h1 class="details__title">@Model.MovieDTO.MovieName</h1>
             </div>
             <!-- end title -->
             <!-- content -->
@@ -22,37 +22,36 @@
                 <div class="card card--details">
                     <!-- card cover -->
                     <div class="card__cover">
-                        <img src="images/covers/cover.jpg" alt="">
+                        <img src=@Model.MovieDTO.Thumbnail alt="">
                     </div>
                     <!-- end card cover -->
                     <!-- card content -->
                     <div class="card__content">
                         <div class="card__wrap">
-                            <span class="card__rate"> 8.4</span>
+                            <span class="card__rate"> @Model.MovieDTO.Rating</span>
 
                             <ul class="card__list">
-                                <li>HD</li>
-                                <li>16+</li>
+                                <li>@Model.MovieDTO.Quality</li>
+                                <li>@Model.MovieDTO.Age</li>
                             </ul>
                         </div>
 
                         <ul class="card__meta">
                             <li>
-                                <span>Genre:</span> <a href="#">Action</a>
-                                <a href="#">Triler</a>
+                                <span>Genre:</span>
+                                @foreach (var item in Model.MovieDTO.Genres)
+                                {
+                                    <a href="#" class="disabled-link">@item</a>
+                                }
                             </li>
-                            <li><span>Release year:</span> 2017</li>
-                            <li><span>Running time:</span> 120 min</li>
-                            <li><span>Country:</span> <a href="#">USA</a> </li>
+                            <li><span>Release year:</span> @Model.MovieDTO.ReleaseTime</li>
+                            <li><span>Running time:</span> @Model.MovieDTO.RunningTime min</li>
+                            <li><span>Country:</span> <a href="#" class="disabled-link">@Model.MovieDTO.Country</a>
+                            </li>
                         </ul>
 
                         <div class="card__description card__description--details">
-                            It is a long established fact that a reader will be distracted by the readable content
-                            of a page when looking at its layout. The point of using Lorem Ipsum is that it has a
-                            more-or-less normal distribution of letters, as opposed to using 'Content here, content
-                            here', making it look like readable English. Many desktop publishing packages and web
-                            page editors now use Lorem Ipsum as their default model text, and a search for 'lorem
-                            ipsum' will uncover many web sites still in their infancy.
+                            @Model.MovieDTO.Description
                         </div>
                     </div>
                     <!-- end card content -->
@@ -61,27 +60,19 @@
             <!-- end content -->
             <!-- player -->
             <div class="col-12 col-xl-6">
-                <video controls cross origin playsinline
-                       poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" id="player">
+                <video controls cross origin playsinline poster=@Model.MovieDTO.Thumbnail id="player">
                     <!-- Video files -->
-                    <source src="https://moviewebapi.s3.ap-southeast-1.amazonaws.com/Video/1.mp4?AWSAccessKeyId=AKIAUBYK6ZN225WS3AEB&Expires=1696951404&Signature=owI%2BOJUvTlkSH%2FsUROJCqsqLSi4%3D"
-                            type="video/mp4" size="576">
-                    <source src="https://moviewebapi.s3.ap-southeast-1.amazonaws.com/Video/1.mp4?AWSAccessKeyId=AKIAUBYK6ZN225WS3AEB&Expires=1696951404&Signature=owI%2BOJUvTlkSH%2FsUROJCqsqLSi4%3D"
-                            type="video/mp4" size="720">
-                    <source src="https://moviewebapi.s3.ap-southeast-1.amazonaws.com/Video/1.mp4?AWSAccessKeyId=AKIAUBYK6ZN225WS3AEB&Expires=1696951404&Signature=owI%2BOJUvTlkSH%2FsUROJCqsqLSi4%3D"
-                            type="video/mp4" size="1080">
-                    <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1440p.mp4"
-                            type="video/mp4" size="1440">
+                    <source src=@Model.MovieDTO.MovieURL type="video/mp4" size="576">
+                    <source src=@Model.MovieDTO.MovieURL type="video/mp4" size="720">
+                    <source src=@Model.MovieDTO.MovieURL type="video/mp4" size="1080">
+                    <source src=@Model.MovieDTO.MovieURL type="video/mp4" size="1440">
 
                     <!-- Caption files -->
-                    <track kind="captions" label="English" srclang="en"
-                           src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt" default>
-                    <track kind="captions" label="Français" srclang="fr"
-                           src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.fr.vtt">
+                    <track kind="captions" label="English" srclang="en" src="" default>
+                    <track kind="captions" label="Français" srclang="fr" src="">
 
                     <!-- Fallback for browsers that don't support the <video> element -->
-                    <a href="https://moviewebapi.s3.ap-southeast-1.amazonaws.com/Video/1.mp4?AWSAccessKeyId=AKIAUBYK6ZN225WS3AEB&Expires=1696951404&Signature=owI%2BOJUvTlkSH%2FsUROJCqsqLSi4%3D"
-                       download>Download</a>
+                    <a href=@Model.MovieDTO.MovieURL download>Download</a>
                 </video>
             </div>
             <!-- end player -->
@@ -103,28 +94,17 @@
                     <ul class="nav nav-tabs content__tabs" id="content__tabs" role="tablist">
 
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active" data-toggle="tab" href="#tab-2" role="tab"
-                               aria-controls="tab-2" aria-selected="true">Reviews</a>
+                            <a class="nav-link active" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2"
+                                aria-selected="true">Reviews</a>
                         </li>
 
                     </ul>
                     <!-- end content tabs nav -->
                     <!-- content mobile tabs nav -->
                     <div class="content__mobile-tabs" id="content__mobile-tabs">
-                        <div class="content__mobile-tabs-btn dropdown-toggle" role="navigation" id="mobile-tabs"
-                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="content__mobile-tabs-btn dropdown-toggle" role="navigation" id="mobile-tabs">
                             <input type="button" value="Reviews">
                             <span></span>
-                        </div>
-
-                        <div class="content__mobile-tabs-menu dropdown-menu" aria-labelledby="mobile-tabs">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="2-tab" data-toggle="tab"
-                                       href="#tab-2" role="tab" aria-controls="tab-2"
-                                       aria-selected="true">Reviews</a>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                     <!-- end content mobile tabs nav -->
@@ -147,18 +127,41 @@
                                 <div class="reviews">
                                     <ul class="reviews__list">
                                         <!-- reviews item -->
-                                        <partial name="Shared/Component/User/_ReviewItem" />
+                                        @if (Model.ReviewDTOs != null)
+                                        {
+                                            @foreach (var review in Model.ReviewDTOs)
+                                            {
+                                                @await Html.PartialAsync("Shared/Component/User/_ReviewItem", review)
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <h1 class="home__title" style="margin: 20px;">NO REVIEW OF THIS MOVIE</h1>
+                                        }
                                         <!-- end reviews item -->
                                     </ul>
 
-                                    <form action="#" class="form">
-                                        <input type="text" class="form__input" placeholder="Title">
-                                        <textarea class="form__textarea" placeholder="Review"></textarea>
+                                    <form method="post" asp-page-handler="Review" class="form">
+                                        <input type="text" class="form__input" placeholder="Title"
+                                            asp-for="CreateReviewDTO.title" required>
+                                        <textarea class="form__textarea" placeholder="Review"
+                                            asp-for="CreateReviewDTO.reviewContent" required></textarea>
                                         <div class="form__slider">
-                                            <div class="form__slider-rating" id="slider__rating"></div>
-                                            <div class="form__slider-value" id="form__slider-value"></div>
+                                            <input class="form__slider-rating custom_slider" type="range"
+                                                id="slider__rating" value="0" min="0" max="10"
+                                                oninput="range_weight_disp.value = slider__rating.value"
+                                                asp-for="CreateReviewDTO.rating" required>
+                                            <output id="range_weight_disp" class="range_weight_disp slider__rating"
+                                                value="1">0</output>
                                         </div>
-                                        <button type="button" class="form__btn">Send</button>
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                            <button type="submit" class="form__btn">Send</button>
+                                        }
+                                        else
+                                        {
+                                            <a href="/login" class="section__btn">Send</a>
+                                        }
                                     </form>
                                 </div>
                             </div>
@@ -179,10 +182,15 @@
                     </div>
                     <!-- end section title -->
                     <!-- card -->
-                    <partial name="Shared/Component/User/_MovieCardType2" />
-                    <partial name="Shared/Component/User/_MovieCardType2" />
-                    <partial name="Shared/Component/User/_MovieCardType2" />
-                    <partial name="Shared/Component/User/_MovieCardType2" />
+                    @if (Model.MovieDTOs != null)
+                    {
+                        @foreach (var movie in @Model.MovieDTOs)
+                        {
+                            @await Html.PartialAsync("Shared/Component/User/_MovieCardType2",movie, new
+                    ViewDataDictionary(ViewData) { {"UserClass", @Model.UserClass}})
+                        }
+                    }
+
                     <!-- end card -->
 
                 </div>

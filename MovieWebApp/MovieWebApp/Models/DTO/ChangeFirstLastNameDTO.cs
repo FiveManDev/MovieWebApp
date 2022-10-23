@@ -6,7 +6,7 @@ namespace MovieAPI.Models.DTO
     {
 
         [Required]
-        public Guid UserID { get; set; }
+        public Guid userID { get; set; }
         [Required]
         [StringLength(maximumLength: 20, MinimumLength = 3)]
         public string FirstName { get; set; }

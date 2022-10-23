@@ -33,7 +33,7 @@ namespace MovieWebApp.Service
                 var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
                 return ExtensionMethods.ToModel<UserDTO>(response.Data);
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }
@@ -42,10 +42,6 @@ namespace MovieWebApp.Service
         public async Task<ApiResponse> ChangeFirstLastName(HttpContext context, ChangeFirstLastNameDTO ChangeFirstLastNameDTO)
         {
             getClient(context);
-            System.Console.WriteLine("IN SERVICE: -----------------------------------------------------------");
-            System.Console.WriteLine("SERVICE out: " + ChangeFirstLastNameDTO.UserID);
-            System.Console.WriteLine("SERVICE out: " + ChangeFirstLastNameDTO.FirstName);
-            System.Console.WriteLine("SERVICE out: " + ChangeFirstLastNameDTO.LastName);
             try
             {
                 var response = await _httpClient.PutAsJsonAsync(MovieApiUrl.ChangeFirstLastName, ChangeFirstLastNameDTO);
@@ -55,7 +51,7 @@ namespace MovieWebApp.Service
                 var responseApi = ExtensionMethods.ToModel<ApiResponse>(rawData);
                 return responseApi;
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }

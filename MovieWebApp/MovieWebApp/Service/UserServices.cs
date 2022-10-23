@@ -44,7 +44,7 @@ namespace MovieWebApp.Service
                     return false;
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }
@@ -69,7 +69,7 @@ namespace MovieWebApp.Service
                     return "";
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return "";
             }
@@ -96,7 +96,7 @@ namespace MovieWebApp.Service
                     return "";
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return "";
             }
@@ -124,7 +124,7 @@ namespace MovieWebApp.Service
                 }
                 return null;
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }
@@ -149,7 +149,7 @@ namespace MovieWebApp.Service
                 }
                 return null;
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }
@@ -166,7 +166,7 @@ namespace MovieWebApp.Service
                 var responseApi = ExtensionMethods.ToModel<ApiResponse>(rawData);
                 return responseApi;
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }
@@ -206,7 +206,7 @@ namespace MovieWebApp.Service
                 var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
                 return response.Data.ToString();
             }
-            catch (Exception ex)
+            catch
             {
                 return "";
             }

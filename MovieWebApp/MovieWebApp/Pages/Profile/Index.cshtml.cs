@@ -52,11 +52,8 @@ namespace MovieWebApp.Pages.Profile
         public async Task<IActionResult> OnPostChangeFirstLastName()
         {
             var userId = (User.Identity as ClaimsIdentity).FindFirst("UserID").Value;
-            ChangeFirstLastNameDTO.UserID = Guid.Parse(userId);
+            ChangeFirstLastNameDTO.userID = Guid.Parse(userId);
             var result = await _profileServices.ChangeFirstLastName(HttpContext, ChangeFirstLastNameDTO);
-            System.Console.WriteLine("Test out: " + ChangeFirstLastNameDTO.UserID);
-            System.Console.WriteLine("Test out: " + ChangeFirstLastNameDTO.FirstName);
-            System.Console.WriteLine("Test out: " + ChangeFirstLastNameDTO.LastName);
             if (result.IsSuccess)
             {
                 TempData["success"] = "Change name success!";

@@ -16,6 +16,23 @@
         public const string GetInformation = "/api/v1/Profile/GetInformation";
         #endregion
 
+        #region Movie
+        public const string GetTopLatestPublicationMovies = "/api/v1/Movie/GetTopLatestPublicationMovies";
+        public const string GetTopLatestReleaseMovies = "/api/v1/Movie/GetTopLatestReleaseMovies";
+        public const string GetMovie = "/api/v1/Movie/GetMovieInformationById";
+        public const string GetAllMovieIsPremium = "/api/v1/Movie/GetAllMovieIsPremium";
+        public const string GetMoviesBasedOnGenre = "/api/v1/Movie/GetMoviesBasedOnGenre";
+        #endregion
+
+        #region Genre
+        public const string GetAllGenre = "/api/v1/Genre/GetAll";
+        #endregion 
+
+        #region Review
+        public const string CreateReview = "/api/v1/Review/CreateReview";
+        public const string GetAllReviewsOfMovie = "/api/v1/Review/GetAllReviewsOfMovie";
+        #endregion 
+
         #region test
         public const string test = "api/v1/Files/test";
         public const string testpost = "api/v1/Files/testpost";

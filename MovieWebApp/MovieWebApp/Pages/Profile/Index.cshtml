@@ -38,7 +38,8 @@
                                 <img src="~/images/user.svg" alt="">
                             </div>
                             <div class="profile__meta">
-                                <h3 class="cut-text">@Model.UserDTO.UserName</h3>
+                                <h3 class="cut-text">@Model.UserDTO.Profile.FirstName @Model.UserDTO.Profile.LastName
+                                </h3>
                                 @if (@Model.UserDTO.Authorization.AuthorizationLevel == 1)
                                 {
                                     <span class="cut-text">Role: User</span>
@@ -142,6 +143,19 @@
                     else
                     {
                         @* <!-- price --> *@
+                        <div class="col-12 col-md-6 order-md-1 col-lg-4 order-lg-1">
+                            <div class="price price--profile price--premium">
+                                <div class="price__item price__item--first"><span>Basic</span> <span>Free</span></div>
+                                <div class="price__item"><span>7 days</span></div>
+                                <div class="price__item"><span>720p Resolution</span></div>
+                                <div class="price__item"><span>Limited Availability</span></div>
+                                <div class="price__item"><span>Desktop Only</span></div>
+                                <div class="price__item"><span>Limited Support</span></div>
+                                <a href="#" class="price__btn disabled-link">Your Previous Plan</a>
+                            </div>
+                        </div>
+                        @* <!-- end price --> *@
+                        @* <!-- price --> *@
                         <div class="col-12 order-md-3 col-lg-4 order-lg-2">
                             <div class="price price--profile price--premium">
                                 <div class="price__item price__item--first">
@@ -152,7 +166,7 @@
                                 <div class="price__item"><span>Lifetime Availability</span></div>
                                 <div class="price__item"><span>TV & Desktop</span></div>
                                 <div class="price__item"><span>24/7 Support</span></div>
-                                <a href="#" class="price__btn">Your Plan</a>
+                                <a href="#" class="price__btn disabled-link">Your Plan</a>
                             </div>
                         </div>
                         @* <!-- end price --> *@
