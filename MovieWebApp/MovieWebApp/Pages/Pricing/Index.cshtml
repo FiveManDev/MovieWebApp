@@ -66,38 +66,45 @@
 					<div class="price__item"><span>Limited Availability</span></div>
 					<div class="price__item"><span>Desktop Only</span></div>
 					<div class="price__item"><span>Limited Support</span></div>
-					<a href="@linkToPlan" class="price__btn @disableLink">
+					<a  class="price__btn @disableLink">
 						@if (@Model.UserClass == "Basic")
 						{
 							<text>Your Plan</text>
 						}
 						else
 						{
-							<text>Choose Plan</text>
+							<text>Already Plan</text>
 						}</a>
 				</div>
 			</div>
 			@* <!-- end price --> *@
 			@* <!-- price --> *@
 			<div class="col-12 order-md-3 col-lg-4 order-lg-2">
-				<div class="price @planPremium">
-					<div class="price__item price__item--first"><span>Premium</span> <span>$19.99</span></div>
+				<form method="post">
+					<div class="price @planPremium">
+					<div class="price__item price__item--first"><span>@Model.ClassificationDTOs[1].ClassName</span> <span>$@Model.ClassificationDTOs[1].ClassPrice</span></div>
 					<div class="price__item"><span>1 Month</span></div>
 					<div class="price__item"><span>Full HD</span></div>
 					<div class="price__item"><span>Lifetime Availability</span></div>
 					<div class="price__item"><span>TV & Desktop</span></div>
 					<div class="price__item"><span>24/7 Support</span></div>
-					<a href="@linkToPlan" class="price__btn @disableLink">
-						@if (@Model.UserClass == "Premium")
+						<input type="hidden" name="amount" value="@Model.ClassificationDTOs[1].ClassPrice" />
+					@if (@Model.UserClass == "Premium")
 						{
-							<text>Your Plan</text>
+							<a class="price__btn ">
+								Your Plan
+							</a>
 						}
 						else
 						{
-							<text>Choose Plan</text>
+							<button type="submit" class="price__btn ">
+							Choose Plan
+							</button>
 						}
-					</a>
+				</form>
 				</div>
+				
+				
 			</div>
 			@* <!-- end price --> *@
 			@* <!-- price --> *@

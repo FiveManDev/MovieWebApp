@@ -56,6 +56,9 @@ builder.Services.AddHttpClient("api", c =>
 });
 builder.Services.AddSingleton<UserServices>();
 builder.Services.AddSingleton<ProfileServices>();
+builder.Services.AddSingleton<MovieServices>();
+builder.Services.AddSingleton<ReviewServices>();
+builder.Services.AddSingleton<ClassificationServices>();
 //Add services Momo
 AppSettings.PartnerCode = builder.Configuration["MomoConnectionInformation:PartnerCode"];
 AppSettings.MomoAccessKey = builder.Configuration["MomoConnectionInformation:AccessKey"];
@@ -63,8 +66,6 @@ AppSettings.MomoSerectkey = builder.Configuration["MomoConnectionInformation:Ser
 AppSettings.Endpoint = builder.Configuration["MomoConnectionInformation:Endpoint"];
 AppSettings.ReturnUrl = builder.Configuration["MomoConnectionInformation:ReturnUrl"];
 AppSettings.NotifyUrl = builder.Configuration["MomoConnectionInformation:Notifyurl"];
-builder.Services.AddSingleton<MovieServices>();
-builder.Services.AddSingleton<ReviewServices>();
 #endregion
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 var app = builder.Build();
