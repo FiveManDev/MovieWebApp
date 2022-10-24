@@ -4886,5 +4886,45 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   max-width: 600px;
 }
 .disabled-link {
-    pointer-events: none;
+  pointer-events: none;
+}
+.cut-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 160px;
+  height: 1.2em;
+  white-space: nowrap;
+}
+.resp_img {
+  width: 247px;
+  height: 366px;
+}
+.resp_img2 {
+  width: 160px;
+  height: 237px;
+}
+@media (max-width: 576px) {
+  .resp_img,
+  .resp_img2 {
+    width: 182px;
+    height: 270px;
+  }
+}
+.range_weight_disp {
+  color: white;
+}
+
+.form__slider-rating {
+  width: 150px;
+  margin-right: 20px;
+  border-radius: 4px;
+}
+
+.form__slider-rating {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.form__slider-rating {
+  background-color: #ff5860;
+  box-shadow: 0 0 20px 0 rgba(255, 88, 96, 0.5);
 }

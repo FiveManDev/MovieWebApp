@@ -18,6 +18,12 @@ namespace MovieWebApp.Pages.Profile
         [BindProperty]
         public ChangePasswordDTO ChangePasswordDTO { get; set; }
 
+        [BindProperty]
+        public ChangeFirstLastNameDTO ChangeFirstLastNameDTO { get; set; }
+
+        [BindProperty]
+        public string UserClass { get; set; }
+
         public IndexModel(UserServices userServices, ProfileServices profileServices)
         {
             _userServices = userServices;
@@ -27,6 +33,7 @@ namespace MovieWebApp.Pages.Profile
         {
             var userId = (User.Identity as ClaimsIdentity).FindFirst("UserID").Value;
             UserDTO = await _profileServices.GetInformation(HttpContext, userId);
+            UserClass = await _userServices.GetClassOfUser(HttpContext, userId);
             return Page();
         }
         public async Task<IActionResult> OnPostChangePassword()
@@ -34,12 +41,29 @@ namespace MovieWebApp.Pages.Profile
             var result = await _userServices.ChangePassword(HttpContext, ChangePasswordDTO);
             if (result.IsSuccess)
             {
-                TempData["success"] = result.Message;
-            } else 
-            {
-                TempData["error"] = result.Message;
+                TempData["success"] = "Change password success!";
             }
-            return Page();
+            else
+            {
+                TempData["error"] = "Change password fail!";
+            }
+            return RedirectToPage("/Profile/Index");
         }
+        public async Task<IActionResult> OnPostChangeFirstLastName()
+        {
+            var userId = (User.Identity as ClaimsIdentity).FindFirst("UserID").Value;
+            ChangeFirstLastNameDTO.userID = Guid.Parse(userId);
+            var result = await _profileServices.ChangeFirstLastName(HttpContext, ChangeFirstLastNameDTO);
+            if (result.IsSuccess)
+            {
+                TempData["success"] = "Change name success!";
+            }
+            else
+            {
+                TempData["error"] = "Change name fail!";
+            }
+            return RedirectToPage("/Profile/Index");
+        }
+
     }
 }

@@ -63,6 +63,8 @@ AppSettings.MomoSerectkey = builder.Configuration["MomoConnectionInformation:Ser
 AppSettings.Endpoint = builder.Configuration["MomoConnectionInformation:Endpoint"];
 AppSettings.ReturnUrl = builder.Configuration["MomoConnectionInformation:ReturnUrl"];
 AppSettings.NotifyUrl = builder.Configuration["MomoConnectionInformation:Notifyurl"];
+builder.Services.AddSingleton<MovieServices>();
+builder.Services.AddSingleton<ReviewServices>();
 #endregion
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 var app = builder.Build();

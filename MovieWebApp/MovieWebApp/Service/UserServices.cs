@@ -32,7 +32,7 @@ namespace MovieWebApp.Service
             getClient(context);
             try
             {
-                var response = await _httpClient.PostAsJsonAsync("/api/v1/User/CreateUser", createUserRequestDTO);
+                var response = await _httpClient.PostAsJsonAsync(MovieApiUrl.CreateUser, createUserRequestDTO);
 
                 // check status code: not yet
                 if (response.IsSuccessStatusCode)
@@ -44,23 +44,10 @@ namespace MovieWebApp.Service
                     return false;
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }
-
-            //var request = new httprequestmessage(httpmethod.get, "url");
-
-            //var client = _httpclientfactory.createclient();
-            //var response = await client.sendasync(request);
-            //if (response.issuccessstatuscode)
-            //{
-            //    model = await response.content.readfromjsonasync<model>();
-            //}
-            //else
-            //{
-            //    return response.reasonphrase;
-            //}
 
         }
         public async Task<string> ConfirmEmail(HttpContext context, string email)
@@ -82,12 +69,12 @@ namespace MovieWebApp.Service
                     return "";
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return "";
             }
 
-            
+
 
         }
         public async Task<string> ConfirmEmailForgotPassword(HttpContext context, string email)
@@ -109,7 +96,7 @@ namespace MovieWebApp.Service
                     return "";
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return "";
             }
@@ -122,7 +109,7 @@ namespace MovieWebApp.Service
             getClient(context);
             try
             {
-                var response = await _httpClient.PostAsJsonAsync("/api/v1/User/Login", loginDTO);
+                var response = await _httpClient.PostAsJsonAsync(MovieApiUrl.Login, loginDTO);
 
                 // check status code: not yet
                 if (response.IsSuccessStatusCode)
@@ -137,7 +124,7 @@ namespace MovieWebApp.Service
                 }
                 return null;
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }
@@ -162,7 +149,7 @@ namespace MovieWebApp.Service
                 }
                 return null;
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }
@@ -172,14 +159,14 @@ namespace MovieWebApp.Service
             getClient(context);
             try
             {
-                var response = await _httpClient.PostAsJsonAsync("/api/v1/User/ChangePassword", changePasswordDTO);
+                var response = await _httpClient.PostAsJsonAsync(MovieApiUrl.ChangePassword, changePasswordDTO);
 
                 // check status code: not yet
                 var rawData = await response.Content.ReadAsStringAsync();
                 var responseApi = ExtensionMethods.ToModel<ApiResponse>(rawData);
                 return responseApi;
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }
@@ -204,11 +191,26 @@ namespace MovieWebApp.Service
                 }
                 return false;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }
         }
+        public async Task<string> GetClassOfUser(HttpContext context, string id)
+        {
+            getClient(context);
+            if (id == null || id == "") return "";
+            try
+            {
+                string url = MovieApiUrl.GetClassOfUser + $"?UserID={id}";
+                var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
+                return response.Data.ToString();
+            }
+            catch
+            {
+                return "";
+            }
 
+        }
     }
 }
