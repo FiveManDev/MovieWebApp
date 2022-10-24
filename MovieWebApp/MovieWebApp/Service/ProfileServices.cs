@@ -1,7 +1,7 @@
 ﻿using MovieAPI.Models.DTO;
 using MovieWebApp.Utility.Extension;
 using System.Net.Http.Headers;
-
+using MovieWebApp.API.ApiConfig;
 namespace MovieWebApp.Service
 {
     public class ProfileServices
@@ -29,29 +29,32 @@ namespace MovieWebApp.Service
             getClient(context);
             try
             {
-                string url = $"/api/v1/Profile/GetInformation?UserID={id}";
+                string url = MovieApiUrl.GetInformation + $"?UserID={id}";
                 var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
                 return ExtensionMethods.ToModel<UserDTO>(response.Data);
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }
 
-            //var request = new HttpRequestMessage(HttpMethod.Get, url);
+        }
+        public async Task<ApiResponse> ChangeFirstLastName(HttpContext context, ChangeFirstLastNameDTO ChangeFirstLastNameDTO)
+        {
+            getClient(context);
+            try
+            {
+                var response = await _httpClient.PutAsJsonAsync(MovieApiUrl.ChangeFirstLastName, ChangeFirstLastNameDTO);
 
-            ////var client = _httpclientfactory.createclient();
-            //var response = await _httpClient.SendAsync(request);
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    var rawData = await response.Content.ReadAsStringAsync();
-            //    var responseApi = ExtensionMethods.ToModel<ApiResponse>(rawData);
-            //    if (responseApi.IsSuccess)
-            //    {
-            //        return ExtensionMethods.ToModel<UserDTO>(responseApi.Data);
-            //    }
-            //}
-            //return null;
+                // check status code: not yet
+                var rawData = await response.Content.ReadAsStringAsync();
+                var responseApi = ExtensionMethods.ToModel<ApiResponse>(rawData);
+                return responseApi;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
 

@@ -56,6 +56,8 @@ builder.Services.AddHttpClient("api", c =>
 });
 builder.Services.AddSingleton<UserServices>();
 builder.Services.AddSingleton<ProfileServices>();
+builder.Services.AddSingleton<MovieServices>();
+builder.Services.AddSingleton<ReviewServices>();
 #endregion
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 var app = builder.Build();

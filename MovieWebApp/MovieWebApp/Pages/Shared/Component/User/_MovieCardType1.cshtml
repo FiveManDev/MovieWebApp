@@ -1,38 +1,59 @@
-﻿<!-- card -->
+﻿@model MovieAPI.Models.DTO.MovieDTO
+@{
+    var type = ViewData["UserClass"] as string;
+    var url = "";
+    if (type == "Premium")
+    {
+        url = "/detail/" + Model.MovieID;
+    }
+    else if (type == "Basic" && Model.ClassName == "Premium")
+    {
+        url = "/Pricing";
+    }
+    else if (type == "" && Model.ClassName == "Premium")
+    {
+        url = "/Login";
+    }
+    else
+    {
+        url = "/detail/" + Model.MovieID;
+    }
+
+}
+<!-- card -->
 <div class="col-6 col-sm-12 col-lg-6">
     <div class="card card--list">
-        <a href="/detail" class="card__cover">
-            <img src="images/covers/cover.jpg" alt="">
+        <a href=@url class="card__cover">
+            <img src=@Model.Thumbnail alt="" loading="lazy">
             <span class="card__play">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M18.54,9,8.88,3.46a3.42,3.42,0,0,0-5.13,3V17.58A3.42,3.42,0,0,0,7.17,21a3.43,3.43,0,0,0,1.71-.46L18.54,15a3.42,3.42,0,0,0,0-5.92Zm-1,4.19L7.88,18.81a1.44,1.44,0,0,1-1.42,0,1.42,1.42,0,0,1-.71-1.23V6.42a1.42,1.42,0,0,1,.71-1.23A1.51,1.51,0,0,1,7.17,5a1.54,1.54,0,0,1,.71.19l9.66,5.58a1.42,1.42,0,0,1,0,2.46Z" />
+                    <path
+                        d="M18.54,9,8.88,3.46a3.42,3.42,0,0,0-5.13,3V17.58A3.42,3.42,0,0,0,7.17,21a3.43,3.43,0,0,0,1.71-.46L18.54,15a3.42,3.42,0,0,0,0-5.92Zm-1,4.19L7.88,18.81a1.44,1.44,0,0,1-1.42,0,1.42,1.42,0,0,1-.71-1.23V6.42a1.42,1.42,0,0,1,.71-1.23A1.51,1.51,0,0,1,7.17,5a1.54,1.54,0,0,1,.71.19l9.66,5.58a1.42,1.42,0,0,1,0,2.46Z" />
                 </svg>
             </span>
         </a>
 
         <div class="card__content">
-            <h3 class="card__title"><a href="#">I Dream in Another Language</a></h3>
+            <h3 class="card__title"><a href=@url>@Model.MovieName</a></h3>
             <span class="card__category">
-                <a href="#">Action</a>
-                <a href="#">Triler</a>
+                @foreach (var item in Model.Genres)
+                {
+                    <a href="#" class="disable-link">@item</a>
+                }
             </span>
 
             <div class="card__wrap">
-                <span class="card__rate"> 8.4</span>
+                <span class="card__rate"> @Model.Rating</span>
 
                 <ul class="card__list">
-                    <li>HD</li>
-                    <li>16+</li>
+                    <li>@Model.Quality</li>
+                    <li>@Model.Age</li>
                 </ul>
             </div>
 
             <div class="card__description">
                 <p>
-                    It is a long established fact that a reader will be distracted by the
-                    readable content of a page when looking at its layout. The point of using
-                    Lorem Ipsum is that it has a more-or-less normal distribution of letters, as
-                    opposed to using 'Content here, content here', making it look like readable
-                    English.
+                    @Model.Description
                 </p>
             </div>
         </div>

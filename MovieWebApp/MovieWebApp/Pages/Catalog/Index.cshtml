@@ -36,7 +36,7 @@
                             <span class="filter__item-label">GENRE:</span>
 
                             <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-genre"
-                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <input type="button" value="Action/Adventure">
                                 <span></span>
                             </div>
@@ -87,7 +87,7 @@
                             <span class="filter__item-label">QUALITY:</span>
 
                             <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-quality"
-                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <input type="button" value="HD 1080">
                                 <span></span>
                             </div>
@@ -106,7 +106,7 @@
                             <span class="filter__item-label">IMBd:</span>
 
                             <div class="filter__item-btn dropdown-toggle" role="button" id="filter-rate"
-                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="filter__range">
                                     <div id="filter__imbd-start"></div>
                                     <div id="filter__imbd-end"></div>
@@ -115,7 +115,7 @@
                             </div>
 
                             <div class="filter__item-menu filter__item-menu--range dropdown-menu"
-                                 aria-labelledby="filter-rate">
+                                aria-labelledby="filter-rate">
                                 <div id="filter__imbd"></div>
                             </div>
                         </div>
@@ -125,7 +125,7 @@
                             <span class="filter__item-label">RELEASE YEAR:</span>
 
                             <div class="filter__item-btn dropdown-toggle" role="button" id="filter-year"
-                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="filter__range">
                                     <div id="filter__years-start"></div>
                                     <div id="filter__years-end"></div>
@@ -134,7 +134,7 @@
                             </div>
 
                             <div class="filter__item-menu filter__item-menu--range dropdown-menu"
-                                 aria-labelledby="filter-year">
+                                aria-labelledby="filter-year">
                                 <div id="filter__years"></div>
                             </div>
                         </div>
@@ -156,10 +156,10 @@
         <div class="row row--grid">
 
             <!-- card -->
-            <partial name="Shared/Component/User/_MovieCardType3" />
-            <partial name="Shared/Component/User/_MovieCardType3" />
-            <partial name="Shared/Component/User/_MovieCardType3" />
-            <partial name="Shared/Component/User/_MovieCardType3" />
+            @* <partial name="Shared/Component/User/_MovieCardType3" />
+                <partial name="Shared/Component/User/_MovieCardType3" />
+                <partial name="Shared/Component/User/_MovieCardType3" />
+                <partial name="Shared/Component/User/_MovieCardType3" /> *@
             <!-- end card -->
         </div>
 
@@ -170,8 +170,9 @@
                     <li class="paginator__item paginator__item--prev">
                         <a href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
-                                 viewBox="0 0 24 24">
-                                <path d="M8.5,12.8l5.7,5.6c0.4,0.4,1,0.4,1.4,0c0,0,0,0,0,0c0.4-0.4,0.4-1,0-1.4l-4.9-5l4.9-5c0.4-0.4,0.4-1,0-1.4c-0.2-0.2-0.4-0.3-0.7-0.3c-0.3,0-0.5,0.1-0.7,0.3l-5.7,5.6C8.1,11.7,8.1,12.3,8.5,12.8C8.5,12.7,8.5,12.7,8.5,12.8z" />
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M8.5,12.8l5.7,5.6c0.4,0.4,1,0.4,1.4,0c0,0,0,0,0,0c0.4-0.4,0.4-1,0-1.4l-4.9-5l4.9-5c0.4-0.4,0.4-1,0-1.4c-0.2-0.2-0.4-0.3-0.7-0.3c-0.3,0-0.5,0.1-0.7,0.3l-5.7,5.6C8.1,11.7,8.1,12.3,8.5,12.8C8.5,12.7,8.5,12.7,8.5,12.8z" />
                             </svg>
                         </a>
                     </li>
@@ -182,7 +183,8 @@
                     <li class="paginator__item paginator__item--next">
                         <a href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M15.54,11.29,9.88,5.64a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.95,5L8.46,17a1,1,0,0,0,0,1.41,1,1,0,0,0,.71.3,1,1,0,0,0,.71-.3l5.66-5.65A1,1,0,0,0,15.54,11.29Z" />
+                                <path
+                                    d="M15.54,11.29,9.88,5.64a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.95,5L8.46,17a1,1,0,0,0,0,1.41,1,1,0,0,0,.71.3,1,1,0,0,0,.71-.3l5.66-5.65A1,1,0,0,0,15.54,11.29Z" />
                             </svg>
                         </a>
                     </li>
@@ -206,18 +208,25 @@
 
         <div class="row row--grid">
 
+
             <!-- card -->
-            <partial name="Shared/Component/User/_MovieCardType3" />
-            <partial name="Shared/Component/User/_MovieCardType3" />
-            <partial name="Shared/Component/User/_MovieCardType3" />
-            <partial name="Shared/Component/User/_MovieCardType3" />
-            <partial name="Shared/Component/User/_MovieCardType3" />
-            <partial name="Shared/Component/User/_MovieCardType3" />
+            @if (Model.MoviePremiumDTOs != null)
+            {
+                @foreach (var movie in @Model.MoviePremiumDTOs)
+                {
+                    @await Html.PartialAsync("Shared/Component/User/_MovieCardType3", movie, new
+            ViewDataDictionary(ViewData) { {"UserClass", @Model.UserClass}})
+                }
+            }
+            else
+            {
+                <h1 class="home__title" style="margin: 20px;">NO MOVIES OF THIS TYPE</h1>
+            }
             <!-- end card -->
             <!-- section btn -->
-            <div class="col-12">
+            @* <div class="col-12">
                 <a href="#" class="section__btn">Show more</a>
-            </div>
+                </div> *@
             <!-- end section btn -->
         </div>
     </div>
