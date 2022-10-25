@@ -4,9 +4,9 @@ namespace MovieWebApp.Models.DTO
     {
         public Guid genreID { get; set; }
         public string quality { get; set; }
-        public int ratingMin { get; set; }
-        public int ratingMax { get; set; }
-        public int releaseTimeMin { get; set; }
-        public int releaseTimeMax { get; set; }
+        public string ratingMin { get; set; }
+        public string ratingMax { get; set; }
+        public string releaseTimeMin { get; set; }
+        public string releaseTimeMax { get; set; }
     }
 }

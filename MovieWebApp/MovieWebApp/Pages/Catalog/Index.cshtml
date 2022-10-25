@@ -29,122 +29,106 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="filter__content">
-                    <div class="filter__items">
-                        <!-- filter item -->
-                        <div class="filter__item" id="filter__genre">
-                            <span class="filter__item-label">GENRE:</span>
+                <form method="post" asp-page-handler="Filter" class="profile__form">
+                    <div class="filter__content">
+                        <div class="filter__items">
+                            <!-- filter item -->
+                            <div class="filter__item" id="filter__genre">
+                                <span class="filter__item-label">GENRE:</span>
 
-                            <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-genre"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <input type="button" value="Action/Adventure">
-                                <span></span>
-                            </div>
-
-                            <ul class="filter__item-menu dropdown-menu scrollbar-dropdown"
-                                aria-labelledby="filter-genre">
-                                <li>Action/Adventure</li>
-                                <li>Animals</li>
-                                <li>Animation</li>
-                                <li>Biography</li>
-                                <li>Comedy</li>
-                                <li>Cooking</li>
-                                <li>Dance</li>
-                                <li>Documentary</li>
-                                <li>Drama</li>
-                                <li>Education</li>
-                                <li>Entertainment</li>
-                                <li>Family</li>
-                                <li>Fantasy</li>
-                                <li>History</li>
-                                <li>Horror</li>
-                                <li>Independent</li>
-                                <li>International</li>
-                                <li>Kids</li>
-                                <li>Kids & Family</li>
-                                <li>Medical</li>
-                                <li>Military/War</li>
-                                <li>Music</li>
-                                <li>Musical</li>
-                                <li>Mystery/Crime</li>
-                                <li>Nature</li>
-                                <li>Paranormal</li>
-                                <li>Politics</li>
-                                <li>Racing</li>
-                                <li>Romance</li>
-                                <li>Sci-Fi/Horror</li>
-                                <li>Science</li>
-                                <li>Science Fiction</li>
-                                <li>Science/Nature</li>
-                                <li>Spanish</li>
-                                <li>Travel</li>
-                                <li>Western</li>
-                            </ul>
-                        </div>
-                        <!-- end filter item -->
-                        <!-- filter item -->
-                        <div class="filter__item" id="filter__quality">
-                            <span class="filter__item-label">QUALITY:</span>
-
-                            <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-quality"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <input type="button" value="HD 1080">
-                                <span></span>
-                            </div>
-
-                            <ul class="filter__item-menu dropdown-menu scrollbar-dropdown"
-                                aria-labelledby="filter-quality">
-                                <li>HD 1080</li>
-                                <li>HD 720</li>
-                                <li>DVD</li>
-                                <li>TS</li>
-                            </ul>
-                        </div>
-                        <!-- end filter item -->
-                        <!-- filter item -->
-                        <div class="filter__item" id="filter__rate">
-                            <span class="filter__item-label">IMBd:</span>
-
-                            <div class="filter__item-btn dropdown-toggle" role="button" id="filter-rate"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="filter__range">
-                                    <div id="filter__imbd-start"></div>
-                                    <div id="filter__imbd-end"></div>
+                                <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-genre"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <input type="text" class="resize_input" value="Action" asp-for="genreName">
+                                    <span></span>
                                 </div>
-                                <span></span>
-                            </div>
 
-                            <div class="filter__item-menu filter__item-menu--range dropdown-menu"
-                                aria-labelledby="filter-rate">
-                                <div id="filter__imbd"></div>
+                                <ul class="filter__item-menu dropdown-menu scrollbar-dropdown"
+                                    aria-labelledby="filter-genre">
+                                    @if (@Model.GenreDTOs != null)
+                                    {
+                                        @foreach (var Genre in @Model.GenreDTOs)
+                                        {
+                                            <li>@Genre.GenreName</li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <li>Null</li>
+                                    }
+                                </ul>
                             </div>
-                        </div>
-                        <!-- end filter item -->
-                        <!-- filter item -->
-                        <div class="filter__item" id="filter__year">
-                            <span class="filter__item-label">RELEASE YEAR:</span>
+                            <!-- end filter item -->
+                            <!-- filter item -->
+                            <div class="filter__item" id="filter__quality">
+                                <span class="filter__item-label">QUALITY:</span>
 
-                            <div class="filter__item-btn dropdown-toggle" role="button" id="filter-year"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="filter__range">
-                                    <div id="filter__years-start"></div>
-                                    <div id="filter__years-end"></div>
+                                <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-quality"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <input type="text" class="resize_input2" value="1080p60"
+                                        asp-for="catalogFilterDTO.quality">
+                                    <span></span>
                                 </div>
-                                <span></span>
-                            </div>
 
-                            <div class="filter__item-menu filter__item-menu--range dropdown-menu"
-                                aria-labelledby="filter-year">
-                                <div id="filter__years"></div>
+                                <ul class="filter__item-menu dropdown-menu scrollbar-dropdown"
+                                    aria-labelledby="filter-quality">
+                                    <li>1080p60</li>
+                                    <li>720p60</li>
+                                    <li>480p</li>
+                                    <li>360p</li>
+                                </ul>
                             </div>
+                            <!-- end filter item -->
+                            <!-- filter item -->
+                            <div class="filter__item" id="filter__rate">
+                                <span class="filter__item-label">IMBd:</span>
+
+                                <div class="filter__item-btn dropdown-toggle" role="button" id="filter-rate"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="filter__range">
+                                        <input type="text" class="resizenum" asp-for="catalogFilterDTO.ratingMin"
+                                            value="2.5" />
+                                        <p class="ratingLine"> - </p>
+                                        <input type="text" class="resizenum" asp-for="catalogFilterDTO.ratingMax"
+                                            value="8.6" />
+                                    </div>
+                                    <span></span>
+                                </div>
+
+                                <div class="filter__item-menu filter__item-menu--range dropdown-menu"
+                                    aria-labelledby="filter-rate">
+                                    <div id="filter__imbd"></div>
+                                </div>
+                            </div>
+                            <!-- end filter item -->
+                            <!-- filter item -->
+                            <div class="filter__item" id="filter__year">
+                                <span class="filter__item-label">RELEASE YEAR:</span>
+
+                                <div class="filter__item-btn dropdown-toggle" role="button" id="filter-year"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="filter__range">
+                                        <input type="text" class="resizenum2" asp-for="catalogFilterDTO.releaseTimeMin"
+                                            value="2005" />
+                                        <p class="ratingLine"> - </p>
+                                        <input type="text" class="resizenum2" asp-for="catalogFilterDTO.releaseTimeMax"
+                                            value="2015" />
+                                    </div>
+                                    <span></span>
+                                </div>
+
+                                <div class="filter__item-menu filter__item-menu--range dropdown-menu"
+                                    aria-labelledby="filter-year">
+                                    <div id="filter__years"></div>
+                                </div>
+                            </div>
+                            <!-- end filter item -->
                         </div>
-                        <!-- end filter item -->
+
+                        <!-- filter btn -->
+                        <button class="filter__btn" type="submit">apply filter</button>
+                        <!-- end filter btn -->
                     </div>
-
-                    <!-- filter btn -->
-                    <button class="filter__btn" type="button">apply filter</button>
-                    <!-- end filter btn -->
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -156,42 +140,21 @@
         <div class="row row--grid">
 
             <!-- card -->
-            @* <partial name="Shared/Component/User/_MovieCardType3" />
-                <partial name="Shared/Component/User/_MovieCardType3" />
-                <partial name="Shared/Component/User/_MovieCardType3" />
-                <partial name="Shared/Component/User/_MovieCardType3" /> *@
+            @if (Model.MovieFilters != null)
+            {
+                @foreach (var movie in @Model.MovieFilters)
+                {
+                    @await Html.PartialAsync("Shared/Component/User/_MovieCardType3", movie, new
+            ViewDataDictionary(ViewData) { {"UserClass", @Model.UserClass}})
+                }
+            }
+            else
+            {
+                <h1 class="home__title" style="margin: 20px;">NO MOVIES OF THIS TYPE</h1>
+            }
             <!-- end card -->
         </div>
 
-        <div class="row">
-            <!-- paginator -->
-            <div class="col-12">
-                <ul class="paginator">
-                    <li class="paginator__item paginator__item--prev">
-                        <a href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M8.5,12.8l5.7,5.6c0.4,0.4,1,0.4,1.4,0c0,0,0,0,0,0c0.4-0.4,0.4-1,0-1.4l-4.9-5l4.9-5c0.4-0.4,0.4-1,0-1.4c-0.2-0.2-0.4-0.3-0.7-0.3c-0.3,0-0.5,0.1-0.7,0.3l-5.7,5.6C8.1,11.7,8.1,12.3,8.5,12.8C8.5,12.7,8.5,12.7,8.5,12.8z" />
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="paginator__item paginator__item--active"><a href="#">1</a></li>
-                    <li class="paginator__item "><a href="#">2</a></li>
-                    <li class="paginator__item"><a href="#">3</a></li>
-                    <li class="paginator__item"><a href="#">4</a></li>
-                    <li class="paginator__item paginator__item--next">
-                        <a href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path
-                                    d="M15.54,11.29,9.88,5.64a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.95,5L8.46,17a1,1,0,0,0,0,1.41,1,1,0,0,0,.71.3,1,1,0,0,0,.71-.3l5.66-5.65A1,1,0,0,0,15.54,11.29Z" />
-                            </svg>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <!-- end paginator -->
-        </div>
     </div>
 </div>
 <!-- end catalog -->

@@ -1,0 +1,53 @@
+@page
+@model MovieWebApp.Pages.Search.IndexModel
+@{
+
+    ViewData["Title"] = "Search";
+}
+
+<!-- content -->
+<section class="content">
+    <div class="content__head">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- content title -->
+                    <h2 class="content__title" style="margin-bottom:20px;"> Rearch result of "@Model.searchText"</h2>
+                    <!-- end content title -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- content tabs -->
+        <div class="tab-content" id="myTabContent">
+
+            <div class="row row--grid">
+                <!-- card -->
+                @if (Model.MovieSearched != null)
+
+                {
+                    @foreach (var movie in @Model.MovieSearched)
+                    {
+                        @await Html.PartialAsync("Shared/Component/User/_MovieCardType1", movie, new
+                ViewDataDictionary(ViewData) { {"UserClass", @Model.UserClass}})
+
+                    }
+
+                }
+
+                else
+
+                {
+                    <h1 class="home__title" style="margin: 20px;">No results found for "@Model.searchText"</h1>
+
+                }
+                <!-- end card -->
+            </div>
+
+        </div>
+        <!-- end content tabs -->
+    </div>
+</section>
+<!-- end content -->

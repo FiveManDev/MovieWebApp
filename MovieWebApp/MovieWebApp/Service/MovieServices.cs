@@ -1,5 +1,6 @@
 using MovieAPI.Models.DTO;
 using MovieWebApp.API.ApiConfig;
+using MovieWebApp.Models.DTO;
 using MovieWebApp.Utility.Extension;
 using System.Net.Http.Headers;
 
@@ -105,6 +106,44 @@ namespace MovieWebApp.Service
             try
             {
                 string url = MovieApiUrl.GetMoviesBasedOnGenre + $"?genreID={id}" + $"&top={top}";
+                var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
+                if (response.IsSuccess)
+                {
+                    return ExtensionMethods.ToModel<List<MovieDTO>>(response.Data);
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
+        public async Task<List<MovieDTO>> GetMovieBaseOnFilter(HttpContext context, CatalogFilterDTO CatalogFilterDTO)
+        {
+            getClient(context);
+            try
+            {
+                string url = MovieApiUrl.GetMovieBaseOnFilter;
+                var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
+                if (response.IsSuccess)
+                {
+                    return ExtensionMethods.ToModel<List<MovieDTO>>(response.Data);
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
+        public async Task<List<MovieDTO>> GetMoviesBasedOnSearchTextInCatalog(HttpContext context, string searchText)
+        {
+            getClient(context);
+            try
+            {
+                string url = MovieApiUrl.GetMoviesBasedOnSearchTextInCatalog + $"?searchText={searchText}";
                 var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
                 if (response.IsSuccess)
                 {

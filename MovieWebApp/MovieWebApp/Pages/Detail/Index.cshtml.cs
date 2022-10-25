@@ -20,6 +20,8 @@ namespace MovieWebApp.Pages.Detail
         [BindProperty]
         public List<MovieDTO> MovieDTOs { get; set; }
         public string UserClass { get; set; }
+        [BindProperty]
+        public string rating { get; set; }
         public IndexModel(UserServices userServices, MovieServices movieServices, ReviewServices reviewServices)
         {
             _userServices = userServices;
@@ -64,6 +66,7 @@ namespace MovieWebApp.Pages.Detail
             CreateReviewDTO.reviewTime = DateTime.Now;
             CreateReviewDTO.userID = (User.Identity as ClaimsIdentity).FindFirst("UserID").Value;
             CreateReviewDTO.movieID = id;
+            CreateReviewDTO.rating = Int32.Parse(rating);
 
             var result = await _reviewServices.CreateReview(HttpContext, CreateReviewDTO);
             if (result)

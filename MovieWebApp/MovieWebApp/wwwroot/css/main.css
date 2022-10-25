@@ -4928,3 +4928,28 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   background-color: #ff5860;
   box-shadow: 0 0 20px 0 rgba(255, 88, 96, 0.5);
 }
+.resize_input {
+  width: 130px !important;
+  margin: 0 !important;
+}
+.resize_input2 {
+  width: 70px !important;
+  margin: 0 !important;
+}
+.ratingLine {
+  padding: 10px;
+  margin: 0 !important;
+}
+.resizenum {
+  width: 25px !important;
+  margin: 0 !important;
+}
+.resizenum2 {
+  width: 40px !important;
+  margin: 0 !important;
+}
+.custom_review_input {
+  background: transparent;
+  border: none;
+  color: white;
+}
