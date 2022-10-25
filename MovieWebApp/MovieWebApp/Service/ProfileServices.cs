@@ -56,7 +56,23 @@ namespace MovieWebApp.Service
                 return null;
             }
         }
+        public async Task<bool> PremiumUpgrade(HttpContext context, Guid UserID)
+        {
+            getClient(context);
+            try
+            {
+                var response = await _httpClient.PutAsJsonAsync(MovieApiUrl.PremiumUpgrade, UserID);
 
+                // check status code: not yet
+                var rawData = await response.Content.ReadAsStringAsync();
+                var responseApi = ExtensionMethods.ToModel<ApiResponse>(rawData);
+                return responseApi.IsSuccess;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
     }
 }

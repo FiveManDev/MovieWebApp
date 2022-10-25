@@ -14,6 +14,7 @@
         public const string ChangeFirstLastName = "/api/v1/Profile/UpdateProfileForUser";
         public const string GetClassOfUser = "api/v1/User/GetClassOfUser";
         public const string GetInformation = "/api/v1/Profile/GetInformation";
+        public const string PremiumUpgrade = "/api/v1/Profile/PremiumUpgrade";
         #endregion
 
         #region Movie
@@ -31,7 +32,10 @@
         #region Review
         public const string CreateReview = "/api/v1/Review/CreateReview";
         public const string GetAllReviewsOfMovie = "/api/v1/Review/GetAllReviewsOfMovie";
-        #endregion 
+        #endregion
+        #region Classification
+        public const string GetAllClassification = "/api/v1/Classification/GetAll";
+        #endregion
 
         #region test
         public const string test = "api/v1/Files/test";
