@@ -147,12 +147,9 @@
                                         <textarea class="form__textarea" placeholder="Review"
                                             asp-for="CreateReviewDTO.reviewContent" required></textarea>
                                         <div class="form__slider">
-                                            <input class="form__slider-rating custom_slider" type="range"
-                                                id="slider__rating" value="0" min="0" max="10"
-                                                oninput="range_weight_disp.value = slider__rating.value"
-                                                asp-for="CreateReviewDTO.rating" required>
-                                            <output id="range_weight_disp" class="range_weight_disp slider__rating"
-                                                value="1">0</output>
+                                            <div class="form__slider-rating" id="slider__rating"></div>
+                                            <input type="text" class="resizenum custom_review_input" asp-for="rating"
+                                                value="8.6" />
                                         </div>
                                         @if (User.Identity.IsAuthenticated)
                                         {

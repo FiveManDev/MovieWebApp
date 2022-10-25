@@ -24,14 +24,18 @@ namespace MovieWebApp.Service
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
         }
-        public async Task<List<GenreDTO>> GetAllMovieIsPremium(HttpContext context)
+        public async Task<List<GenreDTO>> GetAllGenre(HttpContext context)
         {
             getClient(context);
             try
             {
                 string url = MovieApiUrl.GetAllGenre;
                 var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
-                return ExtensionMethods.ToModel<List<GenreDTO>>(response.Data);
+                if (response.IsSuccess)
+                {
+                    return ExtensionMethods.ToModel<List<GenreDTO>>(response.Data);
+                }
+                return null;
             }
             catch
             {

@@ -23,6 +23,8 @@
         public const string GetMovie = "/api/v1/Movie/GetMovieInformationById";
         public const string GetAllMovieIsPremium = "/api/v1/Movie/GetAllMovieIsPremium";
         public const string GetMoviesBasedOnGenre = "/api/v1/Movie/GetMoviesBasedOnGenre";
+        public const string GetMovieBaseOnFilter = "/api/v1/Movie/GetMovieBaseOnFilter";
+        public const string GetMoviesBasedOnSearchTextInCatalog = "/api/v1/Movie/GetMoviesBasedOnSearchTextInCatalog";
         #endregion
 
         #region Genre
