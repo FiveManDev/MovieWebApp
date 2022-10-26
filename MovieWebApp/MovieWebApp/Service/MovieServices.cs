@@ -157,6 +157,63 @@ namespace MovieWebApp.Service
             }
 
         }
+        public async Task<List<MovieDTO>> GetMovieBaseOnTopRating(HttpContext context, int count)
+        {
+            getClient(context);
+            try
+            {
+                string url = MovieApiUrl.GetMovieBaseOnTopRating + $"?top={count}";
+                var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
+                if (response.IsSuccess)
+                {
+                    return ExtensionMethods.ToModel<List<MovieDTO>>(response.Data);
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
+        public async Task<GetMovies> GetMovies(HttpContext context, string searchText, string sortBy, string sortType)
+        {
+            getClient(context);
+            try
+            {
+                string url = MovieApiUrl.GetMovies + $"?q={searchText}" + $"&sortBy={sortBy}" + $"&sortType={sortType}";
+                var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
+                if (response.IsSuccess)
+                {
+                    return ExtensionMethods.ToModel<GetMovies>(response.Data);
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
+        public async Task<int> GetTotalNumberOfMovies(HttpContext context)
+        {
+            getClient(context);
+            try
+            {
+                string url = MovieApiUrl.GetTotalNumberOfMovies;
+                var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
+                if (response.IsSuccess)
+                {
+                    return ExtensionMethods.ToModel<int>(response.Data);
+                }
+                return 0;
+            }
+            catch
+            {
+                return 0;
+            }
+
+        }
 
     }
 }

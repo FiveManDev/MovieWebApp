@@ -2,6 +2,7 @@
 @model MovieWebApp.Pages.Admin.Edit_user.IndexModel
 @{
     ViewData["Title"] = "Edit User";
+    ViewData["name"] = @Model.UserDTO.Profile.FirstName + " " + @Model.UserDTO.Profile.LastName;
 }
 
 <!-- main content -->
@@ -33,34 +34,48 @@
                     <!-- profile tabs nav -->
                     <ul class="nav nav-tabs profile__tabs" id="profile__tabs" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Profile</a>
+                            <a class="nav-link active" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1"
+                                aria-selected="true">Profile</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Reviews</a>
+                            <a class="nav-link" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3"
+                                aria-selected="false">Reviews</a>
                         </li>
                     </ul>
                     <!-- end profile tabs nav -->
                     <!-- profile mobile tabs nav -->
                     <div class="profile__mobile-tabs" id="profile__mobile-tabs">
-                        <div class="profile__mobile-tabs-btn dropdown-toggle" role="navigation" id="mobile-tabs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="profile__mobile-tabs-btn dropdown-toggle" role="navigation" id="mobile-tabs"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <input type="button" value="Profile">
                             <span></span>
                         </div>
 
                         <div class="profile__mobile-tabs-menu dropdown-menu" aria-labelledby="mobile-tabs">
                             <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item"><a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Profile</a></li>
+                                <li class="nav-item"><a class="nav-link active" id="1-tab" data-toggle="tab"
+                                        href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Profile</a>
+                                </li>
 
-                                <li class="nav-item"><a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Reviews</a></li>
+                                <li class="nav-item"><a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3"
+                                        role="tab" aria-controls="tab-3" aria-selected="false">Reviews</a></li>
                             </ul>
                         </div>
                     </div>
                     <!-- end profile mobile tabs nav -->
                     <!-- profile btns -->
                     <div class="profile__actions">
-                        <a href="#modal-status3" class="profile__action profile__action--banned open-modal"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,13a1,1,0,0,0-1,1v3a1,1,0,0,0,2,0V14A1,1,0,0,0,12,13Zm5-4V7A5,5,0,0,0,7,7V9a3,3,0,0,0-3,3v7a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V12A3,3,0,0,0,17,9ZM9,7a3,3,0,0,1,6,0V9H9Zm9,12a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V12a1,1,0,0,1,1-1H17a1,1,0,0,1,1,1Z" /></svg></a>
-                        <a href="#modal-delete3" class="profile__action profile__action--delete open-modal"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Z" /></svg></a>
+                        <a href="#modal-status3" class="profile__action profile__action--banned open-modal"><svg
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M12,13a1,1,0,0,0-1,1v3a1,1,0,0,0,2,0V14A1,1,0,0,0,12,13Zm5-4V7A5,5,0,0,0,7,7V9a3,3,0,0,0-3,3v7a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V12A3,3,0,0,0,17,9ZM9,7a3,3,0,0,1,6,0V9H9Zm9,12a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V12a1,1,0,0,1,1-1H17a1,1,0,0,1,1,1Z" />
+                            </svg></a>
+                        <a href="#modal-delete3" class="profile__action profile__action--delete open-modal"><svg
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Z" />
+                            </svg></a>
                     </div>
                     <!-- end profile btns -->
                 </div>
@@ -82,28 +97,32 @@
                                         <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                             <div class="profile__group">
                                                 <label class="profile__label" for="username">Username</label>
-                                                <input id="username" type="text" name="username" class="profile__input" value="User123" readonly>
+                                                <input id="username" type="text" name="username" class="profile__input"
+                                                    value="User123" readonly>
                                             </div>
                                         </div>
 
                                         <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                             <div class="profile__group">
                                                 <label class="profile__label" for="email">Email</label>
-                                                <input id="email" type="text" name="email" class="profile__input" value="email@email.com" readonly>
+                                                <input id="email" type="text" name="email" class="profile__input"
+                                                    value="email@email.com" readonly>
                                             </div>
                                         </div>
 
                                         <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                             <div class="profile__group">
                                                 <label class="profile__label" for="firstname">First Name</label>
-                                                <input id="firstname" type="text" name="firstname" class="profile__input" placeholder="John">
+                                                <input id="firstname" type="text" name="firstname"
+                                                    class="profile__input" placeholder="John">
                                             </div>
                                         </div>
 
                                         <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                             <div class="profile__group">
                                                 <label class="profile__label" for="lastname">Last Name</label>
-                                                <input id="lastname" type="text" name="lastname" class="profile__input" placeholder="Doe">
+                                                <input id="lastname" type="text" name="lastname" class="profile__input"
+                                                    placeholder="Doe">
                                             </div>
                                         </div>
 
@@ -141,21 +160,25 @@
                                         <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                             <div class="profile__group">
                                                 <label class="profile__label" for="oldpass">Old Password</label>
-                                                <input id="oldpass" type="password" name="oldpass" class="profile__input">
+                                                <input id="oldpass" type="password" name="oldpass"
+                                                    class="profile__input">
                                             </div>
                                         </div>
 
                                         <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                             <div class="profile__group">
                                                 <label class="profile__label" for="newpass">New Password</label>
-                                                <input id="newpass" type="password" name="newpass" class="profile__input">
+                                                <input id="newpass" type="password" name="newpass"
+                                                    class="profile__input">
                                             </div>
                                         </div>
 
                                         <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                             <div class="profile__group">
-                                                <label class="profile__label" for="confirmpass">Confirm New Password</label>
-                                                <input id="confirmpass" type="password" name="confirmpass" class="profile__input">
+                                                <label class="profile__label" for="confirmpass">Confirm New
+                                                    Password</label>
+                                                <input id="confirmpass" type="password" name="confirmpass"
+                                                    class="profile__input">
                                             </div>
                                         </div>
 
@@ -210,11 +233,19 @@
                                         </td>
                                         <td>
                                             <div class="main__table-btns">
-                                                <a href="#modal-view2" class="main__table-btn main__table-btn--view open-modal">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.92,11.6C19.9,6.91,16.1,4,12,4S4.1,6.91,2.08,11.6a1,1,0,0,0,0,.8C4.1,17.09,7.9,20,12,20s7.9-2.91,9.92-7.6A1,1,0,0,0,21.92,11.6ZM12,18c-3.17,0-6.17-2.29-7.9-6C5.83,8.29,8.83,6,12,6s6.17,2.29,7.9,6C18.17,15.71,15.17,18,12,18ZM12,8a4,4,0,1,0,4,4A4,4,0,0,0,12,8Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,14Z" /></svg>
+                                                <a href="#modal-view2"
+                                                    class="main__table-btn main__table-btn--view open-modal">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M21.92,11.6C19.9,6.91,16.1,4,12,4S4.1,6.91,2.08,11.6a1,1,0,0,0,0,.8C4.1,17.09,7.9,20,12,20s7.9-2.91,9.92-7.6A1,1,0,0,0,21.92,11.6ZM12,18c-3.17,0-6.17-2.29-7.9-6C5.83,8.29,8.83,6,12,6s6.17,2.29,7.9,6C18.17,15.71,15.17,18,12,18ZM12,8a4,4,0,1,0,4,4A4,4,0,0,0,12,8Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,14Z" />
+                                                    </svg>
                                                 </a>
-                                                <a href="#modal-delete2" class="main__table-btn main__table-btn--delete open-modal">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Z" /></svg>
+                                                <a href="#modal-delete2"
+                                                    class="main__table-btn main__table-btn--delete open-modal">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Z" />
+                                                    </svg>
                                                 </a>
                                             </div>
                                         </td>
@@ -231,14 +262,23 @@
 
                             <ul class="paginator">
                                 <li class="paginator__item paginator__item--prev">
-                                    <a href="#"><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M8.5,12.8l5.7,5.6c0.4,0.4,1,0.4,1.4,0c0,0,0,0,0,0c0.4-0.4,0.4-1,0-1.4l-4.9-5l4.9-5c0.4-0.4,0.4-1,0-1.4c-0.2-0.2-0.4-0.3-0.7-0.3c-0.3,0-0.5,0.1-0.7,0.3l-5.7,5.6C8.1,11.7,8.1,12.3,8.5,12.8C8.5,12.7,8.5,12.7,8.5,12.8z"></path></svg></a>
+                                    <a href="#"><svg xmlns="http://www.w3.org/2000/svg"
+                                            enable-background="new 0 0 24 24" viewBox="0 0 24 24">
+                                            <path
+                                                d="M8.5,12.8l5.7,5.6c0.4,0.4,1,0.4,1.4,0c0,0,0,0,0,0c0.4-0.4,0.4-1,0-1.4l-4.9-5l4.9-5c0.4-0.4,0.4-1,0-1.4c-0.2-0.2-0.4-0.3-0.7-0.3c-0.3,0-0.5,0.1-0.7,0.3l-5.7,5.6C8.1,11.7,8.1,12.3,8.5,12.8C8.5,12.7,8.5,12.7,8.5,12.8z">
+                                            </path>
+                                        </svg></a>
                                 </li>
                                 <li class="paginator__item"><a href="#">1</a></li>
                                 <li class="paginator__item paginator__item--active"><a href="#">2</a></li>
                                 <li class="paginator__item"><a href="#">3</a></li>
                                 <li class="paginator__item"><a href="#">4</a></li>
                                 <li class="paginator__item paginator__item--next">
-                                    <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.54,11.29,9.88,5.64a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.95,5L8.46,17a1,1,0,0,0,0,1.41,1,1,0,0,0,.71.3,1,1,0,0,0,.71-.3l5.66-5.65A1,1,0,0,0,15.54,11.29Z"></path></svg></a>
+                                    <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path
+                                                d="M15.54,11.29,9.88,5.64a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.95,5L8.46,17a1,1,0,0,0,0,1.41,1,1,0,0,0,.71.3,1,1,0,0,0,.71-.3l5.66-5.65A1,1,0,0,0,15.54,11.29Z">
+                                            </path>
+                                        </svg></a>
                                 </li>
                             </ul>
                         </div>
@@ -260,7 +300,10 @@
 
         <span class="reviews__rating">8.4</span>
     </div>
-    <p class="reviews__text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+    <p class="reviews__text">There are many variations of passages of Lorem Ipsum available, but the majority have
+        suffered alteration in some form, by injected humour, or randomised words which don't look even slightly
+        believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything
+        embarrassing hidden in the middle of text.</p>
 </div>
 <!-- end modal view -->
 <!-- modal delete -->

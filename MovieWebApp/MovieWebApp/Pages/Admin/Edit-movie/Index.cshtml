@@ -2,6 +2,7 @@
 @model MovieWebApp.Pages.Admin.Edit_movie.IndexModel
 @{
     ViewData["Title"] = "Edit Movie";
+    ViewData["name"] = @Model.UserDTO.Profile.FirstName + " " + @Model.UserDTO.Profile.LastName;
 }
 
 <!-- main content -->
@@ -24,7 +25,8 @@
                                 <div class="col-12 col-sm-6 col-md-12">
                                     <div class="form__img">
                                         <label for="form__img-upload">Upload cover (270 x 400)</label>
-                                        <input id="form__img-upload" name="form__img-upload" type="file" accept=".png, .jpg, .jpeg">
+                                        <input id="form__img-upload" name="form__img-upload" type="file"
+                                            accept=".png, .jpg, .jpeg">
                                         <img id="form__img" src="#" alt=" ">
                                     </div>
                                 </div>
@@ -38,7 +40,8 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <textarea id="text" name="text" class="form__textarea" placeholder="Description"></textarea>
+                                    <textarea id="text" name="text" class="form__textarea"
+                                        placeholder="Description"></textarea>
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-lg-3">
@@ -172,7 +175,8 @@
                                         <option value="Korea">Korea</option>
                                         <option value="Kuwait">Kuwait</option>
                                         <option value="Kyrgyzstan">Kyrgyzstan</option>
-                                        <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+                                        <option value="Lao People's Democratic Republic">Lao People's Democratic
+                                            Republic</option>
                                         <option value="Latvia">Latvia</option>
                                         <option value="Lebanon">Lebanon</option>
                                         <option value="Lesotho">Lesotho</option>
@@ -308,7 +312,9 @@
                                 <div class="col-12">
                                     <div class="form__gallery">
                                         <label id="gallery1" for="form__gallery-upload">Upload photos</label>
-                                        <input data-name="#gallery1" id="form__gallery-upload" name="gallery" class="form__gallery-upload" type="file" accept=".png, .jpg, .jpeg" multiple>
+                                        <input data-name="#gallery1" id="form__gallery-upload" name="gallery"
+                                            class="form__gallery-upload" type="file" accept=".png, .jpg, .jpeg"
+                                            multiple>
                                     </div>
                                 </div>
                             </div>
@@ -320,7 +326,8 @@
                                     <span>Item type:</span>
                                 </li>
                                 <li>
-                                    <input id="type1" type="radio" name="type" data-toggle="collapse" data-target=".multi-collapse" checked="">
+                                    <input id="type1" type="radio" name="type" data-toggle="collapse"
+                                        data-target=".multi-collapse" checked="">
                                     <label for="type1">Movie</label>
                                 </li>
 
@@ -334,7 +341,9 @@
                                     <div class="collapse show multi-collapse" id="multiCollapseExample1">
                                         <div class="form__video">
                                             <label id="movie1" for="form__video-upload">Upload video</label>
-                                            <input data-name="#movie1" id="form__video-upload" name="movie" class="form__video-upload" type="file" accept="video/mp4,video/x-m4v,video/*">
+                                            <input data-name="#movie1" id="form__video-upload" name="movie"
+                                                class="form__video-upload" type="file"
+                                                accept="video/mp4,video/x-m4v,video/*">
                                         </div>
                                     </div>
                                 </div>

@@ -2,15 +2,17 @@ using MovieAPI.Models.DTO;
 using MovieWebApp.API.ApiConfig;
 using MovieWebApp.Models.DTO;
 using MovieWebApp.Utility.Extension;
+using Newtonsoft.Json.Linq;
 using System.Net.Http.Headers;
 
 namespace MovieWebApp.Service
 {
-    public class ChatServices
+    public class StatisticsServicess
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private HttpClient _httpClient;
-        public ChatServices(IHttpClientFactory httpClientFactory)
+
+        public StatisticsServicess(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
@@ -24,16 +26,16 @@ namespace MovieWebApp.Service
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
         }
-        public async Task<List<UserChat>> GetAllUserChat(HttpContext context)
+        public async Task<StatisticsDTO> GetStatisticsForMonth(HttpContext context)
         {
             getClient(context);
             try
             {
-                string url = MovieApiUrl.GetAllUserChat;
+                string url = MovieApiUrl.GetStatisticsForMonth;
                 var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
                 if (response.IsSuccess)
                 {
-                    return ExtensionMethods.ToModel<List<UserChat>>(response.Data);
+                    return ExtensionMethods.ToModel<StatisticsDTO>(response.Data);
                 }
                 return null;
             }
@@ -43,5 +45,6 @@ namespace MovieWebApp.Service
             }
 
         }
+
     }
 }

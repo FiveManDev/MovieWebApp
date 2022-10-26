@@ -59,6 +59,8 @@ builder.Services.AddSingleton<ProfileServices>();
 builder.Services.AddSingleton<MovieServices>();
 builder.Services.AddSingleton<ReviewServices>();
 builder.Services.AddSingleton<GenreServices>();
+builder.Services.AddSingleton<StatisticsServicess>();
+builder.Services.AddSingleton<ChatServices>();
 builder.Services.AddSingleton<ClassificationServices>();
 //Add services Momo
 AppSettings.PartnerCode = builder.Configuration["MomoConnectionInformation:PartnerCode"];

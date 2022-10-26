@@ -1,14 +1,18 @@
-﻿<tr>
+﻿@model MovieAPI.Models.DTO.UserDTO
+@{
+    var serial = ViewData["serial"];
+}
+<tr>
     <td>
-        <div class="main__table-text">23</div>
+        <div class="main__table-text">@serial</div>
     </td>
     <td>
-        <div class="main__table-text">John Doe</div>
+        <div class="main__table-text">@Model.Profile.FirstName @Model.Profile.LastName</div>
     </td>
     <td>
-        <div class="main__table-text main__table-text--grey">email@email.com</div>
+        <div class="main__table-text main__table-text--grey">@Model.Profile.Email</div>
     </td>
     <td>
-        <div class="main__table-text">Username</div>
+        <div class="main__table-text">@Model.UserName</div>
     </td>
 </tr>

@@ -65,6 +65,44 @@ namespace MovieWebApp.Service
             }
 
         }
+        public async Task<List<ReviewDTO>> GetTopLastestReview(HttpContext context, int count)
+        {
+            getClient(context);
+            try
+            {
+                string url = MovieApiUrl.GetTopLastestReview + $"?top={count}";
+                var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
+                if (response.IsSuccess)
+                {
+                    return ExtensionMethods.ToModel<List<ReviewDTO>>(response.Data);
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
+        public async Task<GetReviews> GetReviews(HttpContext context, string searchText, string sortBy, string sortType)
+        {
+            getClient(context);
+            try
+            {
+                string url = MovieApiUrl.GetReviews + $"?q={searchText}" + $"&sortBy={sortBy}" + $"&sortType={sortType}";
+                var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
+                if (response.IsSuccess)
+                {
+                    return ExtensionMethods.ToModel<GetReviews>(response.Data);
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
 
     }
 }
