@@ -2,6 +2,7 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Dashboard";
+    ViewData["name"] = @Model.UserDTO.Profile.FirstName + " " + @Model.UserDTO.Profile.LastName;
 }
 
 
@@ -25,7 +26,7 @@
             <div class="col-12 col-sm-6 col-xl-3">
                 <div class="stats">
                     <span>Users created this month</span>
-                    <p>5 678</p>
+                    <p>@Model.StatisticsDTO.userCreatedCount</p>
                     <img src="images/admin/comments.svg" alt="">
                 </div>
             </div>
@@ -34,7 +35,7 @@
             <div class="col-12 col-sm-6 col-xl-3">
                 <div class="stats">
                     <span>Movies added this month</span>
-                    <p>172</p>
+                    <p>@Model.StatisticsDTO.movieCreatedCount</p>
                     <img src="images/film.svg" alt="">
                 </div>
             </div>
@@ -43,7 +44,7 @@
             <div class="col-12 col-sm-6 col-xl-3">
                 <div class="stats">
                     <span>Reviews reviewed this month</span>
-                    <p>1 021</p>
+                    <p>@Model.StatisticsDTO.reviewCreatedCount</p>
                     <img src="images/star-half-alt.svg" alt="">
                 </div>
             </div>
@@ -52,7 +53,7 @@
             <div class="col-12 col-sm-6 col-xl-3">
                 <div class="stats">
                     <span>Total money gained</span>
-                    <p>2 500 000 $</p>
+                    <p>@Model.StatisticsDTO.totalMoneyGained $</p>
                     <img src="images/admin/graph-bar.svg" alt="">
                 </div>
             </div>
@@ -64,7 +65,11 @@
                         <h3><img src="images/admin/award.svg" alt=""> Top Movies</h3>
 
                         <div class="dashbox__wrap">
-                            <a class="dashbox__refresh" href="/admin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z" /></svg></a>
+                            <a class="dashbox__refresh" href="/admin"><svg xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z" />
+                                </svg></a>
                             <a class="dashbox__more" href="/admin/catalog">View All</a>
                         </div>
                     </div>
@@ -74,17 +79,20 @@
                             <thead>
                                 <tr>
                                     <th>SERIAL</th>
-                                    <th>TITLE</th>
-                                    <th>CATEGORY</th>
+                                    <th>MOVIE NAME</th>
+                                    <th>TYPE</th>
                                     <th>RATING</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <partial name="Shared/Component/Admin/_DashboardTopMovies" />
-                                <partial name="Shared/Component/Admin/_DashboardTopMovies" />
-                                <partial name="Shared/Component/Admin/_DashboardTopMovies" />
-                                <partial name="Shared/Component/Admin/_DashboardTopMovies" />
-                                <partial name="Shared/Component/Admin/_DashboardTopMovies" />
+                                @if (Model.TopMovies != null)
+                                {
+                                    @for (int i = 0; i < @Model.TopMovies.Count; i++)
+                                    {
+ @await Html.PartialAsync("Shared/Component/Admin/_DashboardTopMovies",@Model.TopMovies[i], new
+                                ViewDataDictionary(ViewData) { {"serial", (i + 1)}})
+                                    }
+                                }
 
                             </tbody>
                         </table>
@@ -99,7 +107,11 @@
                         <h3><img src="images/admin/film.svg" alt=""> Latest Movies</h3>
 
                         <div class="dashbox__wrap">
-                            <a class="dashbox__refresh" href="/admin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z" /></svg></a>
+                            <a class="dashbox__refresh" href="/admin"><svg xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z" />
+                                </svg></a>
                             <a class="dashbox__more" href="/admin/catalog">View All</a>
                         </div>
                     </div>
@@ -109,17 +121,21 @@
                             <thead>
                                 <tr>
                                     <th>SERIAL</th>
-                                    <th>TITLE</th>
-                                    <th>CATEGORY</th>
+                                    <th>MOVIE NAME</th>
+                                    <th>TYPE</th>
                                     <th>STATUS</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <partial name="Shared/Component/Admin/_DashboardLatestMovies" />
-                                <partial name="Shared/Component/Admin/_DashboardLatestMovies" />
-                                <partial name="Shared/Component/Admin/_DashboardLatestMovies" />
-                                <partial name="Shared/Component/Admin/_DashboardLatestMovies" />
-                                <partial name="Shared/Component/Admin/_DashboardLatestMovies" />
+                                @if (Model.LatestMovies != null)
+                                {
+                                    @for (int i = 0; i < @Model.LatestMovies.Count; i++)
+                                    {
+ @await Html.PartialAsync("Shared/Component/Admin/_DashboardLatestMovies",@Model.LatestMovies[i], new
+                                ViewDataDictionary(ViewData) { {"serial", (i + 1)}})
+                                    }
+                                }
+                               
                             </tbody>
                         </table>
                     </div>
@@ -133,7 +149,11 @@
                         <h3><img src="images/admin/user-circle.svg" alt=""> Latest users</h3>
 
                         <div class="dashbox__wrap">
-                            <a class="dashbox__refresh" href="/admin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z" /></svg></a>
+                            <a class="dashbox__refresh" href="/admin"><svg xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z" />
+                                </svg></a>
                             <a class="dashbox__more" href="/admin/users">View All</a>
                         </div>
                     </div>
@@ -149,11 +169,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <partial name="Shared/Component/Admin/_DashboardLatestUsers" />
-                                <partial name="Shared/Component/Admin/_DashboardLatestUsers" />
-                                <partial name="Shared/Component/Admin/_DashboardLatestUsers" />
-                                <partial name="Shared/Component/Admin/_DashboardLatestUsers" />
-                                <partial name="Shared/Component/Admin/_DashboardLatestUsers" />
+                                @if (Model.LastestUsers != null)
+                                {
+                                    @for (int i = 0; i < @Model.LastestUsers.Count; i++)
+                                    {
+ @await Html.PartialAsync("Shared/Component/Admin/_DashboardLatestUsers",@Model.LastestUsers[i], new
+                                ViewDataDictionary(ViewData) { {"serial", (i + 1)}})
+                                    }
+                                }
                             </tbody>
                         </table>
                     </div>
@@ -167,7 +190,11 @@
                         <h3><img src="images/star-half-alt.svg" alt=""> Latest reviews</h3>
 
                         <div class="dashbox__wrap">
-                            <a class="dashbox__refresh" href="/admin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z" /></svg></a>
+                            <a class="dashbox__refresh" href="/admin"><svg xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z" />
+                                </svg></a>
                             <a class="dashbox__more" href="/admin/reviews">View All</a>
                         </div>
                     </div>
@@ -177,17 +204,20 @@
                             <thead>
                                 <tr>
                                     <th>SERIAL</th>
-                                    <th>ITEM</th>
+                                    <th>MOVIE NAME</th>
                                     <th>AUTHOR</th>
                                     <th>RATING</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <partial name="Shared/Component/Admin/_DashboardLatestReviews" />
-                                <partial name="Shared/Component/Admin/_DashboardLatestReviews" />
-                                <partial name="Shared/Component/Admin/_DashboardLatestReviews" />
-                                <partial name="Shared/Component/Admin/_DashboardLatestReviews" />
-                                <partial name="Shared/Component/Admin/_DashboardLatestReviews" />
+                                @if (Model.LatestReviews != null)
+                                {
+                                    @for (int i = 0; i < @Model.LatestReviews.Count; i++)
+                                    {
+ @await Html.PartialAsync("Shared/Component/Admin/_DashboardLatestReviews",@Model.LatestReviews[i], new
+                                ViewDataDictionary(ViewData) { {"serial", (i + 1)}})
+                                    }
+                                }
                             </tbody>
                         </table>
                     </div>

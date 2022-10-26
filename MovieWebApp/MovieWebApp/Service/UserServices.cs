@@ -212,5 +212,44 @@ namespace MovieWebApp.Service
             }
 
         }
+        public async Task<List<UserDTO>> GetLatestCreatedAccount(HttpContext context, int count)
+        {
+            getClient(context);
+            try
+            {
+                string url = MovieApiUrl.GetLatestCreatedAccount + $"?top={count}";
+                var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
+                if (response.IsSuccess)
+                {
+                    return ExtensionMethods.ToModel<List<UserDTO>>(response.Data);
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
+        public async Task<GetUsersDTO> GetUsers(HttpContext context, string searchText, string sortBy, string sortType)
+        {
+            getClient(context);
+            try
+            {
+                string url = MovieApiUrl.GetUsers + $"?q={searchText}" + $"&sortBy={sortBy}" + $"&sortType={sortType}";
+                var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
+
+                if (response.IsSuccess)
+                {
+                    return ExtensionMethods.ToModel<GetUsersDTO>(response.Data);
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
     }
 }

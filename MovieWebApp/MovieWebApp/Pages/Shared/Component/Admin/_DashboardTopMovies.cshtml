@@ -1,14 +1,18 @@
-﻿<tr>
+﻿@model MovieAPI.Models.DTO.MovieDTO
+@{
+    var serial = ViewData["serial"];
+}
+<tr>
     <td>
-        <div class="main__table-text">321</div>
+        <div class="main__table-text">@serial</div>
     </td>
     <td>
-        <div class="main__table-text">I Dream in Another Language</div>
+        <div class="main__table-text">@Model.MovieName</div>
     </td>
     <td>
         <div class="main__table-text">Movie</div>
     </td>
     <td>
-        <div class="main__table-text main__table-text--rate">9.2</div>
+        <div class="main__table-text main__table-text--rate">@Model.Rating</div>
     </td>
 </tr>

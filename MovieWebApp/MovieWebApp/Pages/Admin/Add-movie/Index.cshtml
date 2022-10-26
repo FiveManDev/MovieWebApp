@@ -2,6 +2,7 @@
 @model MovieWebApp.Pages.Admin.Add_movie.IndexModel
 @{
     ViewData["Title"] = "Add new movie";
+        ViewData["name"] = @Model.UserDTO.Profile.FirstName + " " + @Model.UserDTO.Profile.LastName;
 }
 
 <!-- main content -->

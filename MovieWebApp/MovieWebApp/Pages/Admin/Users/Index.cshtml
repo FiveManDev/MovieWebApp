@@ -2,6 +2,7 @@
 @model MovieWebApp.Pages.Admin.Users.IndexModel
 @{
     ViewData["Title"] = "Manage Users";
+        ViewData["name"] = @Model.UserDTO.Profile.FirstName + " " + @Model.UserDTO.Profile.LastName;
 }
 
 <!-- main content -->
@@ -57,14 +58,20 @@
 
                                 <th>REVIEWS</th>
                                 <th>STATUS</th>
-                                <th>CRAETED DATE</th>
+                                <th>CREATED DATE</th>
                                 <th>ACTIONS</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <partial name="Shared/Component/Admin/_UsersItem" />
-                            <partial name="Shared/Component/Admin/_UsersItem" />
+                            @if (Model.GetUsersDTOs.users != null)
+                                {
+                                    @for (int i = 0; i < @Model.GetUsersDTOs.users.Count; i++)
+                                    {
+ @await Html.PartialAsync("Shared/Component/Admin/_UsersItem",@Model.GetUsersDTOs.users[i], new
+                                ViewDataDictionary(ViewData) { {"serial", (i + 1)}})
+                                    }
+                                }
                         </tbody>
                     </table>
                 </div>

@@ -2,6 +2,7 @@
 @model MovieWebApp.Pages.Admin.Catalog.IndexModel
 @{
     ViewData["Title"] = "Manage Catalog";
+    ViewData["name"] = @Model.UserDTO.Profile.FirstName + " " + @Model.UserDTO.Profile.LastName;
 }
 
 <!-- main content -->
@@ -13,19 +14,21 @@
                 <div class="main__title">
                     <h2>Catalog</h2>
 
-                    <span class="main__title-stat">14,452 Total</span>
+                    <span class="main__title-stat">@Model.TotalNumberOfMovies Total</span>
 
                     <div class="main__title-wrap">
                         <!-- filter sort -->
                         <div class="filter" id="filter__sort">
                             <span class="filter__item-label">Sort by:</span>
 
-                            <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <input type="button" name="CatalogSort" value="Date created">
                                 <span></span>
                             </div>
 
-                            <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
+                            <ul class="filter__item-menu dropdown-menu scrollbar-dropdown"
+                                aria-labelledby="filter-sort">
                                 <li>Date created</li>
                                 <li>Rating</li>
                             </ul>
@@ -35,7 +38,11 @@
                         <form action="#" class="main__title-form">
                             <input type="text" placeholder="Find movie / tv series..">
                             <button type="button">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z">
+                                    </path>
+                                </svg>
                             </button>
                         </form>
                         <!-- end search -->
@@ -50,19 +57,25 @@
                         <thead>
                             <tr>
                                 <th>SERIAL</th>
-                                <th>TITLE</th>
+                                <th>MOVIE NAME</th>
                                 <th>RATING</th>
                                 <th>CATEGORY</th>
                                 <th></th>
                                 <th>STATUS</th>
-                                <th>CRAETED DATE</th>
+                                <th>CREATED DATE</th>
                                 <th>ACTIONS</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <partial name="Shared/Component/Admin/_CatalogItem" />
-                            <partial name="Shared/Component/Admin/_CatalogItem" />
+                             @if (Model.GetMovies.movies != null)
+                                {
+                                    @for (int i = 0; i < @Model.GetMovies.movies.Count; i++)
+                                    {
+ @await Html.PartialAsync("Shared/Component/Admin/_CatalogItem",@Model.GetMovies.movies[i], new
+                                ViewDataDictionary(ViewData) { {"serial", (i + 1)}})
+                                    }
+                                }
                         </tbody>
                     </table>
                 </div>
