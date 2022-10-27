@@ -13,19 +13,23 @@ namespace MovieWebApp.Pages.Admin.Support_chat
         private readonly UserServices _userServices;
         private readonly ProfileServices _profileServices;
         private readonly ChatServices _chatServices;
+        private readonly StatisticsServicess _statisticsServicess;
         public UserDTO UserDTO { get; set; }
         public List<UserChat> UserChats { get; set; }
-        public IndexModel(UserServices userServices, ProfileServices profileServices, ChatServices chatServices)
+        public int GetTotalChat { get; set; }
+        public IndexModel(UserServices userServices, ProfileServices profileServices, ChatServices chatServices, StatisticsServicess statisticsServicess)
         {
             _userServices = userServices;
             _profileServices = profileServices;
             _chatServices = chatServices;
+            _statisticsServicess = statisticsServicess;
         }
         public async Task<IActionResult> OnGet()
         {
             var userId = (User.Identity as ClaimsIdentity).FindFirst("UserID").Value;
             UserDTO = await _profileServices.GetInformation(HttpContext, userId);
             UserChats = await _chatServices.GetAllUserChat(HttpContext);
+            GetTotalChat = await _statisticsServicess.GetTotalChat(HttpContext);
             return Page();
         }
     }

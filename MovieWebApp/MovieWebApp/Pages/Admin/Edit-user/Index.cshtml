@@ -1,8 +1,15 @@
-﻿@page
+﻿@page "{id?}"
 @model MovieWebApp.Pages.Admin.Edit_user.IndexModel
 @{
     ViewData["Title"] = "Edit User";
     ViewData["name"] = @Model.UserDTO.Profile.FirstName + " " + @Model.UserDTO.Profile.LastName;
+    var hrefUserStatusId = "#userStatusAdmin" + Model.UserProfile.UserID;
+    var UserStatusId = "userStatusAdmin" + Model.UserProfile.UserID;
+
+    var hrefUserDeleteId = "#userDeleteAdmin" + Model.UserProfile.UserID;
+    var UserDeleteId = "userDeleteAdmin" + Model.UserProfile.UserID;
+
+    var RouteURL = "/admin/edit-user/" + Model.UserProfile.UserID;
 }
 
 <!-- main content -->
@@ -25,10 +32,20 @@
                             <img src="~/images/user.svg" alt="">
                         </div>
                         <!-- or red -->
-                        <div class="profile__meta profile__meta--green">
-                            <h3>Username <span>(Approved)</span></h3>
-                            <span>ID: 23562</span>
-                        </div>
+                        @if (@Model.UserProfile.status)
+                        {
+                            <div class="profile__meta profile__meta--green">
+                                <h3>@Model.UserProfile.UserName <span>(Approved)</span></h3>
+                                <span>@Model.UserProfile.Authorization.AuthorizationName</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="profile__meta profile__meta--red">
+                                <h3>@Model.UserProfile.UserName <span>(Banned)</span></h3>
+                                <span>@Model.UserProfile.Authorization.AuthorizationName</span>
+                            </div>
+                        }
                     </div>
                     <!-- end profile user -->
                     <!-- profile tabs nav -->
@@ -66,12 +83,12 @@
                     <!-- end profile mobile tabs nav -->
                     <!-- profile btns -->
                     <div class="profile__actions">
-                        <a href="#modal-status3" class="profile__action profile__action--banned open-modal"><svg
+                        <a href=@hrefUserStatusId class="profile__action profile__action--banned open-modal"><svg
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <path
                                     d="M12,13a1,1,0,0,0-1,1v3a1,1,0,0,0,2,0V14A1,1,0,0,0,12,13Zm5-4V7A5,5,0,0,0,7,7V9a3,3,0,0,0-3,3v7a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V12A3,3,0,0,0,17,9ZM9,7a3,3,0,0,1,6,0V9H9Zm9,12a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V12a1,1,0,0,1,1-1H17a1,1,0,0,1,1,1Z" />
                             </svg></a>
-                        <a href="#modal-delete3" class="profile__action profile__action--delete open-modal"><svg
+                        <a href=@hrefUserDeleteId class="profile__action profile__action--delete open-modal"><svg
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <path
                                     d="M20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Z" />
@@ -88,7 +105,7 @@
                         <div class="row">
                             <!-- details form -->
                             <div class="col-12 col-lg-6">
-                                <form action="#" class="profile__form">
+                                <form method="post" asp-page-handler="UpdateProfileForAdmin" class="profile__form">
                                     <div class="row">
                                         <div class="col-12">
                                             <h4 class="profile__title">Profile details</h4>
@@ -98,7 +115,7 @@
                                             <div class="profile__group">
                                                 <label class="profile__label" for="username">Username</label>
                                                 <input id="username" type="text" name="username" class="profile__input"
-                                                    value="User123" readonly>
+                                                    value=@Model.UserProfile.UserName disabled>
                                             </div>
                                         </div>
 
@@ -106,29 +123,30 @@
                                             <div class="profile__group">
                                                 <label class="profile__label" for="email">Email</label>
                                                 <input id="email" type="text" name="email" class="profile__input"
-                                                    value="email@email.com" readonly>
+                                                    value=@Model.UserProfile.Profile.Email disabled>
                                             </div>
                                         </div>
 
                                         <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                             <div class="profile__group">
                                                 <label class="profile__label" for="firstname">First Name</label>
-                                                <input id="firstname" type="text" name="firstname"
-                                                    class="profile__input" placeholder="John">
+                                                <input type="text" class="profile__input" placeholder="John"
+                                                    asp-for="AdminEditUserProfileDTO.FirstName" required>
                                             </div>
                                         </div>
 
                                         <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                             <div class="profile__group">
                                                 <label class="profile__label" for="lastname">Last Name</label>
-                                                <input id="lastname" type="text" name="lastname" class="profile__input"
-                                                    placeholder="Doe">
+                                                <input type="text" class="profile__input" placeholder="Doe"
+                                                    asp-for="AdminEditUserProfileDTO.LastName" required>
                                             </div>
                                         </div>
 
                                         <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                             <label class="profile__label" for="subscription">Subscription</label>
-                                            <select class="js-example-basic-single" id="subscription">
+                                            <select class="js-example-basic-single" id="subscription"
+                                                asp-for="AdminEditUserProfileDTO.Subscription">
                                                 <option value="Basic">Basic</option>
                                                 <option value="Premium">Premium</option>
                                             </select>
@@ -136,14 +154,15 @@
 
                                         <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                             <label class="profile__label" for="rights">Rights</label>
-                                            <select class="js-example-basic-single" id="rights">
+                                            <select class="js-example-basic-single" id="rights"
+                                                asp-for="AdminEditUserProfileDTO.Right">
                                                 <option value="User">User</option>
                                                 <option value="Admin">Admin</option>
                                             </select>
                                         </div>
 
                                         <div class="col-12">
-                                            <button class="profile__btn" type="button">Save</button>
+                                            <button class="profile__btn" type="submit">Save</button>
                                         </div>
                                     </div>
                                 </form>
@@ -151,7 +170,7 @@
                             <!-- end details form -->
                             <!-- password form -->
                             <div class="col-12 col-lg-6">
-                                <form action="#" class="profile__form">
+                                <form method="post" asp-page-handler="ChangePassword" class="profile__form">
                                     <div class="row">
                                         <div class="col-12">
                                             <h4 class="profile__title">Change password</h4>
@@ -159,31 +178,40 @@
 
                                         <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                             <div class="profile__group">
-                                                <label class="profile__label" for="oldpass">Old Password</label>
-                                                <input id="oldpass" type="password" name="oldpass"
-                                                    class="profile__input">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                            <div class="profile__group">
-                                                <label class="profile__label" for="newpass">New Password</label>
-                                                <input id="newpass" type="password" name="newpass"
-                                                    class="profile__input">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                            <div class="profile__group">
-                                                <label class="profile__label" for="confirmpass">Confirm New
+                                                <label class="profile__label"
+                                                    asp-for="ChangePasswordDTO.OldPassword">Old
                                                     Password</label>
-                                                <input id="confirmpass" type="password" name="confirmpass"
-                                                    class="profile__input">
+                                                <input id="oldpass" type="password"
+                                                    asp-for="ChangePasswordDTO.OldPassword" class="profile__input"
+                                                    required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                            <div class="profile__group">
+                                                <label class="profile__label"
+                                                    asp-for="ChangePasswordDTO.NewPassword">New
+                                                    Password</label>
+                                                <input id="newpass" type="password"
+                                                    asp-for="ChangePasswordDTO.NewPassword" class="profile__input"
+                                                    pattern=".{6,}" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                            <div class="profile__group">
+                                                <label class="profile__label"
+                                                    asp-for="ChangePasswordDTO.ConfirmPassword">Confirm New
+                                                    Password</label>
+                                                <input id="confirmpass" type="password"
+                                                    asp-for="ChangePasswordDTO.ConfirmPassword" class="profile__input"
+                                                    pattern=".{6,}" required>
                                             </div>
                                         </div>
 
                                         <div class="col-12">
-                                            <button class="profile__btn" type="button">Change</button>
+                                            <button class="profile__btn" type="submit"
+                                                onclick="loading1()">Change</button>
                                         </div>
                                     </div>
                                 </form>
@@ -197,93 +225,38 @@
                     <!-- table -->
                     <div class="col-12">
                         <div class="main__table-wrap">
-                            <table class="main__table">
-                                <thead>
-                                    <tr>
-                                        <th>SERIAL</th>
-                                        <th>ITEM</th>
-                                        <th>AUTHOR</th>
-                                        <th>TEXT</th>
-                                        <th>RATING</th>
-                                        <th>CRAETED DATE</th>
-                                        <th>ACTIONS</th>
-                                    </tr>
-                                </thead>
+                          
+                                <table class="main__table">
+                                    <thead>
+                                        <tr>
+                                            <th>SERIAL</th>
+                                            <th>MOVIE NAME</th>
+                                            <th>AUTHOR</th>
+                                            <th>TEXT</th>
+                                            <th>RATING</th>
+                                            <th>CRAETED DATE</th>
+                                            <th>ACTIONS</th>
+                                        </tr>
+                                    </thead>
 
-                                <tbody>
+                                    <tbody>
+                                    @if (Model.GetReviews != null)
+                            {
+                                        @for (int i = 0; i < @Model.GetReviews.Count; i++)
+                                        {
+                                            @await Html.PartialAsync("Shared/Component/Admin/_ReviewsItem",
+                                    @Model.GetReviews[i],
+                                    new ViewDataDictionary(ViewData) { { "serial", (i + 1) } })
+                                        }
 
-                                    <tr>
-                                        <td>
-                                            <div class="main__table-text">32</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-text">Benched</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-text">John Doe</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-text">Lorem Ipsum is simply dummy text...</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-text main__table-text--rate">8.6</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-text">24 Oct 2019</div>
-                                        </td>
-                                        <td>
-                                            <div class="main__table-btns">
-                                                <a href="#modal-view2"
-                                                    class="main__table-btn main__table-btn--view open-modal">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M21.92,11.6C19.9,6.91,16.1,4,12,4S4.1,6.91,2.08,11.6a1,1,0,0,0,0,.8C4.1,17.09,7.9,20,12,20s7.9-2.91,9.92-7.6A1,1,0,0,0,21.92,11.6ZM12,18c-3.17,0-6.17-2.29-7.9-6C5.83,8.29,8.83,6,12,6s6.17,2.29,7.9,6C18.17,15.71,15.17,18,12,18ZM12,8a4,4,0,1,0,4,4A4,4,0,0,0,12,8Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,14Z" />
-                                                    </svg>
-                                                </a>
-                                                <a href="#modal-delete2"
-                                                    class="main__table-btn main__table-btn--delete open-modal">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Z" />
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            }
+                                    </tbody>
+                                </table>
+                            
                         </div>
                     </div>
                     <!-- end table -->
-                    <!-- paginator -->
-                    <div class="col-12">
-                        <div class="paginator-wrap">
-                            <span>10 from 32</span>
 
-                            <ul class="paginator">
-                                <li class="paginator__item paginator__item--prev">
-                                    <a href="#"><svg xmlns="http://www.w3.org/2000/svg"
-                                            enable-background="new 0 0 24 24" viewBox="0 0 24 24">
-                                            <path
-                                                d="M8.5,12.8l5.7,5.6c0.4,0.4,1,0.4,1.4,0c0,0,0,0,0,0c0.4-0.4,0.4-1,0-1.4l-4.9-5l4.9-5c0.4-0.4,0.4-1,0-1.4c-0.2-0.2-0.4-0.3-0.7-0.3c-0.3,0-0.5,0.1-0.7,0.3l-5.7,5.6C8.1,11.7,8.1,12.3,8.5,12.8C8.5,12.7,8.5,12.7,8.5,12.8z">
-                                            </path>
-                                        </svg></a>
-                                </li>
-                                <li class="paginator__item"><a href="#">1</a></li>
-                                <li class="paginator__item paginator__item--active"><a href="#">2</a></li>
-                                <li class="paginator__item"><a href="#">3</a></li>
-                                <li class="paginator__item"><a href="#">4</a></li>
-                                <li class="paginator__item paginator__item--next">
-                                    <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path
-                                                d="M15.54,11.29,9.88,5.64a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.95,5L8.46,17a1,1,0,0,0,0,1.41,1,1,0,0,0,.71.3,1,1,0,0,0,.71-.3l5.66-5.65A1,1,0,0,0,15.54,11.29Z">
-                                            </path>
-                                        </svg></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- end paginator -->
                 </div>
             </div>
             <!-- end content tabs -->
@@ -291,54 +264,79 @@
     </div>
 </main>
 <!-- end main content -->
-<!-- modal view -->
-<div id="modal-view2" class="zoom-anim-dialog mfp-hide modal modal--view">
-    <div class="reviews__autor">
-        <img class="reviews__avatar" src="~/images/user.svg" alt="">
-        <span class="reviews__name">Best Marvel movie in my opinion</span>
-        <span class="reviews__time">24.08.2018, 17:53 by John Doe</span>
 
-        <span class="reviews__rating">8.4</span>
-    </div>
-    <p class="reviews__text">There are many variations of passages of Lorem Ipsum available, but the majority have
-        suffered alteration in some form, by injected humour, or randomised words which don't look even slightly
-        believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything
-        embarrassing hidden in the middle of text.</p>
-</div>
-<!-- end modal view -->
-<!-- modal delete -->
-<div id="modal-delete2" class="zoom-anim-dialog mfp-hide modal">
-    <h6 class="modal__title">Review delete</h6>
-
-    <p class="modal__text">Are you sure to permanently delete this review?</p>
-
-    <div class="modal__btns">
-        <button class="modal__btn modal__btn--apply" type="button">Delete</button>
-        <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
-    </div>
-</div>
-<!-- end modal delete -->
 <!-- modal status -->
-<div id="modal-status3" class="zoom-anim-dialog mfp-hide modal">
+<div id=@UserStatusId class="zoom-anim-dialog mfp-hide modal">
     <h6 class="modal__title">Status change</h6>
 
-    <p class="modal__text">Are you sure about immediately change status?</p>
+    <p class="modal__text">Are you sure about immediately change status @Model.UserProfile.UserName?</p>
 
     <div class="modal__btns">
-        <button class="modal__btn modal__btn--apply" type="button">Apply</button>
+        <form action=@RouteURL method="GET" class="modal__btn modal__btn--apply">
+            <input type="hidden" name="changeStatusUserAdmin" value=@Model.UserProfile.UserID>
+            <button class="modal__btn modal__btn--apply" type="submit">Apply</button>
+        </form>
         <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
     </div>
 </div>
 <!-- end modal status -->
 <!-- modal delete -->
-<div id="modal-delete3" class="zoom-anim-dialog mfp-hide modal">
+<div id=@UserDeleteId class="zoom-anim-dialog mfp-hide modal">
     <h6 class="modal__title">User delete</h6>
 
-    <p class="modal__text">Are you sure to permanently delete this user?</p>
+    <p class="modal__text">Are you sure to permanently delete @Model.UserProfile.UserName?</p>
 
     <div class="modal__btns">
-        <button class="modal__btn modal__btn--apply" type="button">Delete</button>
+        <form action=@RouteURL method="GET" class="modal__btn modal__btn--apply">
+            <input type="hidden" name="deleteUserAdmin" value=@Model.UserProfile.UserID>
+            <button class="modal__btn modal__btn--apply" type="submit">Delete</button>
+        </form>
         <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
     </div>
 </div>
 <!-- end modal delete -->
+@section Scripts
+{
+<script>
+    var checkMatchPass = false;
+    var firstname = document.getElementById("firstname");
+    var lastname = document.getElementById("lastname");
+    var oldpass = document.getElementById("oldpass");
+    var password = document.getElementById("newpass");
+    var confirm_password = document.getElementById("confirmpass");
+
+    function validatePassword() {
+
+        if (password.value.length < 6) {
+            password.setCustomValidity("Passwords must has geater than 6 character!");
+        } else {
+            password.setCustomValidity('');
+            confirm_password.setCustomValidity('');
+        }
+
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords don't match");
+            checkMatchPass = false;
+        } else {
+            confirm_password.setCustomValidity('');
+            checkMatchPass = true;
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+    function loading1() {
+        if (oldpass !== "" && checkMatchPass) {
+            loading = document.getElementById("loading");
+            loading.hidden = false;
+        }
+    }
+    function loading2() {
+        if ((firstname.value != "" && lastname.value != "")) {
+            loading = document.getElementById("loading");
+            loading.hidden = false;
+        }
+    }
+
+</script>
+}

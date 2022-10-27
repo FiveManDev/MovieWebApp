@@ -236,7 +236,7 @@ namespace MovieWebApp.Service
             getClient(context);
             try
             {
-                string url = MovieApiUrl.GetUsers + $"?q={searchText}" + $"&sortBy={sortBy}" + $"&sortType={sortType}";
+                string url = MovieApiUrl.GetUsers + $"?q={searchText}" + $"&sortBy={sortBy}" + "&pageSize=50" + $"&sortType={sortType}";
                 var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
 
                 if (response.IsSuccess)
@@ -250,6 +250,42 @@ namespace MovieWebApp.Service
                 return null;
             }
 
+        }
+
+        public async Task<bool> ChangeStatusUser(HttpContext context, ChangeStatusUserDTO update)
+        {
+            getClient(context);
+            try
+            {
+                var response = await _httpClient.PutAsJsonAsync(MovieApiUrl.ChangeStatusUser, update);
+
+                // check status code: not yet
+                var rawData = await response.Content.ReadAsStringAsync();
+                var responseApi = ExtensionMethods.ToModel<ApiResponse>(rawData);
+                return responseApi.IsSuccess;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public async Task<bool> DeleteUser(HttpContext context, string Id)
+        {
+            getClient(context);
+            try
+            {
+                string url = MovieApiUrl.DeleteUser + $"?UserId={Id}";
+                var response = await _httpClient.DeleteAsync(url);
+
+                // check status code: not yet
+                var rawData = await response.Content.ReadAsStringAsync();
+                var responseApi = ExtensionMethods.ToModel<ApiResponse>(rawData);
+                return responseApi.IsSuccess;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

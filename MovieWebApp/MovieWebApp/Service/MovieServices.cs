@@ -124,7 +124,7 @@ namespace MovieWebApp.Service
             getClient(context);
             try
             {
-                string url = MovieApiUrl.GetMovieBaseOnFilter;
+                string url = MovieApiUrl.GetMovieBaseOnFilter + $"?genreID={CatalogFilterDTO.genreID}" + $"&quality={CatalogFilterDTO.quality}" + $"&ratingMin={CatalogFilterDTO.ratingMin}" + $"&ratingMax={CatalogFilterDTO.ratingMax}" + $"&releaseTimeMin={CatalogFilterDTO.releaseTimeMin}" + $"&releaseTimeMax={CatalogFilterDTO.releaseTimeMax}";
                 var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
                 if (response.IsSuccess)
                 {
@@ -181,7 +181,7 @@ namespace MovieWebApp.Service
             getClient(context);
             try
             {
-                string url = MovieApiUrl.GetMovies + $"?q={searchText}" + $"&sortBy={sortBy}" + $"&sortType={sortType}";
+                string url = MovieApiUrl.GetMovies + $"?q={searchText}" + $"&sortBy={sortBy}" + "&pageSize=50" + $"&sortType={sortType}";
                 var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
                 if (response.IsSuccess)
                 {
@@ -213,6 +213,41 @@ namespace MovieWebApp.Service
                 return 0;
             }
 
+        }
+        public async Task<bool> UpdateMovieStatus(HttpContext context, UpdateMovieStatusDTO update)
+        {
+            getClient(context);
+            try
+            {
+                var response = await _httpClient.PutAsJsonAsync(MovieApiUrl.UpdateMovieStatus, update);
+
+                // check status code: not yet
+                var rawData = await response.Content.ReadAsStringAsync();
+                var responseApi = ExtensionMethods.ToModel<ApiResponse>(rawData);
+                return responseApi.IsSuccess;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public async Task<bool> DeleteMovie(HttpContext context, string Id)
+        {
+            getClient(context);
+            try
+            {
+                string url = MovieApiUrl.DeleteMovie + $"?movieID={Id}";
+                var response = await _httpClient.DeleteAsync(url);
+
+                // check status code: not yet
+                var rawData = await response.Content.ReadAsStringAsync();
+                var responseApi = ExtensionMethods.ToModel<ApiResponse>(rawData);
+                return responseApi.IsSuccess;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
     }
