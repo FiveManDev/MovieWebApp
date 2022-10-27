@@ -1,4 +1,6 @@
-﻿namespace MovieAPI.Models.DTO
+﻿using MovieWebApp.Models.DTO;
+
+namespace MovieAPI.Models.DTO
 {
     public class ProfileDTO
     {
@@ -10,7 +12,7 @@
         public List<String> Genre { get; set; }
         //Relationship
         public Guid UserID { get; set; }
-        public Guid ClassID { get; set; }
+        public ClassificationDTO classification { get; set; }
 
     }
 }

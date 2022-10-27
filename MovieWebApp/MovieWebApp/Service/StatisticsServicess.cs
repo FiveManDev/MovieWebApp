@@ -26,6 +26,63 @@ namespace MovieWebApp.Service
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
         }
+        public async Task<int> GetTotalChat(HttpContext context)
+        {
+            getClient(context);
+            try
+            {
+                string url = MovieApiUrl.GetTotalChat;
+                var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
+                if (response.IsSuccess)
+                {
+                    return ExtensionMethods.ToModel<int>(response.Data);
+                }
+                return 0;
+            }
+            catch
+            {
+                return 0;
+            }
+
+        }
+        public async Task<int> GetTotalReview(HttpContext context)
+        {
+            getClient(context);
+            try
+            {
+                string url = MovieApiUrl.GetTotalReview;
+                var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
+                if (response.IsSuccess)
+                {
+                    return ExtensionMethods.ToModel<int>(response.Data);
+                }
+                return 0;
+            }
+            catch
+            {
+                return 0;
+            }
+
+        }
+        public async Task<int> GetTotalUser(HttpContext context)
+        {
+            getClient(context);
+            try
+            {
+                string url = MovieApiUrl.GetTotalUser;
+                var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
+                if (response.IsSuccess)
+                {
+                    return ExtensionMethods.ToModel<int>(response.Data);
+                }
+                return 0;
+            }
+            catch
+            {
+                return 0;
+            }
+
+        }
         public async Task<StatisticsDTO> GetStatisticsForMonth(HttpContext context)
         {
             getClient(context);

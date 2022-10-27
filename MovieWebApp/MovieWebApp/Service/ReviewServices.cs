@@ -89,7 +89,7 @@ namespace MovieWebApp.Service
             getClient(context);
             try
             {
-                string url = MovieApiUrl.GetReviews + $"?q={searchText}" + $"&sortBy={sortBy}" + $"&sortType={sortType}";
+                string url = MovieApiUrl.GetReviews + $"?q={searchText}" + $"&sortBy={sortBy}" + "&pageSize=50" + $"&sortType={sortType}";
                 var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
                 if (response.IsSuccess)
                 {
@@ -102,6 +102,44 @@ namespace MovieWebApp.Service
                 return null;
             }
 
+        }
+        public async Task<List<ReviewDTO>> GetAllReviewsOfUser(HttpContext context, string id)
+        {
+            getClient(context);
+            try
+            {
+                string url = MovieApiUrl.GetAllReviewsOfUser + $"?UserID={id}";
+                var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
+                if (response.IsSuccess)
+                {
+                    return ExtensionMethods.ToModel<List<ReviewDTO>>(response.Data);
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
+
+        public async Task<bool> DeleteReview(HttpContext context, string Id)
+        {
+            getClient(context);
+            try
+            {
+                string url = MovieApiUrl.DeleteReview + $"?ReviewID={Id}";
+                var response = await _httpClient.DeleteAsync(url);
+
+                // check status code: not yet
+                var rawData = await response.Content.ReadAsStringAsync();
+                var responseApi = ExtensionMethods.ToModel<ApiResponse>(rawData);
+                return responseApi.IsSuccess;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
     }
