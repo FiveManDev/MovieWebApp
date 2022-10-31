@@ -168,55 +168,6 @@
                                 </form>
                             </div>
                             <!-- end details form -->
-                            <!-- password form -->
-                            <div class="col-12 col-lg-6">
-                                <form method="post" asp-page-handler="ChangePassword" class="profile__form">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <h4 class="profile__title">Change password</h4>
-                                        </div>
-
-                                        <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                            <div class="profile__group">
-                                                <label class="profile__label"
-                                                    asp-for="ChangePasswordDTO.OldPassword">Old
-                                                    Password</label>
-                                                <input id="oldpass" type="password"
-                                                    asp-for="ChangePasswordDTO.OldPassword" class="profile__input"
-                                                    required>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                            <div class="profile__group">
-                                                <label class="profile__label"
-                                                    asp-for="ChangePasswordDTO.NewPassword">New
-                                                    Password</label>
-                                                <input id="newpass" type="password"
-                                                    asp-for="ChangePasswordDTO.NewPassword" class="profile__input"
-                                                    pattern=".{6,}" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                                            <div class="profile__group">
-                                                <label class="profile__label"
-                                                    asp-for="ChangePasswordDTO.ConfirmPassword">Confirm New
-                                                    Password</label>
-                                                <input id="confirmpass" type="password"
-                                                    asp-for="ChangePasswordDTO.ConfirmPassword" class="profile__input"
-                                                    pattern=".{6,}" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <button class="profile__btn" type="submit"
-                                                onclick="loading1()">Change</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <!-- end password form -->
                         </div>
                     </div>
                 </div>

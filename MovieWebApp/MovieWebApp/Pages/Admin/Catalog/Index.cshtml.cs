@@ -20,6 +20,10 @@ namespace MovieWebApp.Pages.Admin.Catalog
         public int TotalNumberOfMovies { get; set; }
         public string changeStatusMovie { get; set; }
         public string deleteMovie { get; set; }
+        [BindProperty]
+        public string CatalogSort { get; set; }
+        [BindProperty]
+        public string CatalogSearch { get; set; }
         public IndexModel(UserServices userServices, ProfileServices profileServices, MovieServices movieService)
         {
             _userServices = userServices;
@@ -30,7 +34,54 @@ namespace MovieWebApp.Pages.Admin.Catalog
         {
             var userId = (User.Identity as ClaimsIdentity).FindFirst("UserID").Value;
             UserDTO = await _profileServices.GetInformation(HttpContext, userId);
+            CatalogSort = "";
+            CatalogSearch = "";
             GetMovies = await _movieService.GetMovies(HttpContext, "", "", "");
+            TotalNumberOfMovies = await _movieService.GetTotalNumberOfMovies(HttpContext);
+
+            changeStatusMovie = Request.Query["changeStatusMovie"].ToString();
+            deleteMovie = Request.Query["deleteMovie"].ToString();
+
+            if (changeStatusMovie != "")
+            {
+                GetMovie = await _movieService.GetMovie(HttpContext, changeStatusMovie);
+                UpdateMovieStatusDTO update = new UpdateMovieStatusDTO();
+                update.movieID = changeStatusMovie;
+                update.IsVisible = !GetMovie.IsVisible;
+                var result = await _movieService.UpdateMovieStatus(HttpContext, update);
+                if (result)
+                {
+                    TempData["success"] = "Change status movie successfully!";
+                }
+                else
+                {
+                    TempData["error"] = "Change status movie fail!";
+                }
+                return RedirectToPage("/Admin/Catalog/Index");
+            }
+            if (deleteMovie != "")
+            {
+                var result = await _movieService.DeleteMovie(HttpContext, deleteMovie);
+                if (result)
+                {
+                    TempData["success"] = "Delete movie successfully!";
+                }
+                else
+                {
+                    TempData["error"] = "Delete movie fail!";
+                }
+                return RedirectToPage("/Admin/Catalog/Index");
+            }
+
+            return Page();
+        }
+        public async Task<IActionResult> OnPostSearchSort()
+        {
+            var userId = (User.Identity as ClaimsIdentity).FindFirst("UserID").Value;
+            UserDTO = await _profileServices.GetInformation(HttpContext, userId);
+
+            GetMovies = await _movieService.GetMovies(HttpContext, CatalogSearch, CatalogSort, "");
+
             TotalNumberOfMovies = await _movieService.GetTotalNumberOfMovies(HttpContext);
 
             changeStatusMovie = Request.Query["changeStatusMovie"].ToString();
