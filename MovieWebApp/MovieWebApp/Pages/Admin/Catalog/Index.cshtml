@@ -26,7 +26,7 @@
 
                             <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <input type="text"  asp-for="CatalogSort" placeholder="Sort type" class="resize_input2" required>
+                                <input type="text"  asp-for="CatalogSort" placeholder="Sort type" class="resize_input2" >
                                 <span></span>
                             </div>
 
@@ -39,7 +39,7 @@
                         <!-- end filter sort -->
                         <!-- search -->
                         <div class="main__title-form">
-                            <input type="text" asp-for="CatalogSearch" placeholder="Find movie / tv series.." required>
+                            <input type="text" asp-for="CatalogSearch" placeholder="Find movie / tv series.." >
                             <button type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path
@@ -59,6 +59,8 @@
             <!-- users -->
             <div class="col-12">
                 <div class="main__table-wrap">
+                     @if (Model.GetMovies != null)
+                    {
                     <table class="main__table">
                         <thead>
                             <tr>
@@ -74,16 +76,18 @@
                         </thead>
 
                         <tbody>
-                             @if (Model.GetMovies != null)
-                                {
+                             
                                     @for (int i = 0; i < @Model.GetMovies.movies.Count; i++)
                                     {
  @await Html.PartialAsync("Shared/Component/Admin/_CatalogItem",@Model.GetMovies.movies[i], new
                                 ViewDataDictionary(ViewData) { {"serial", (i + 1)}})
                                     }
-                                }
+                              
                         </tbody>
                     </table>
+                      }else{
+                         <h2 style="color: white;">Can not find any data you you want!</h2>
+                            }
                 </div>
             </div>
             <!-- end users -->

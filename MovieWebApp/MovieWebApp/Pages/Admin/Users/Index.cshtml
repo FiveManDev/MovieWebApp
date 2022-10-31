@@ -16,38 +16,48 @@
 
                     <span class="main__title-stat">@Model.GetTotalUser Total</span>
 
-                    <div class="main__title-wrap">
+                     <form method="post" asp-page-handler="SearchSort" class="main__title-wrap">
                         <!-- filter sort -->
                         <div class="filter" id="filter__sort">
                             <span class="filter__item-label">Sort by:</span>
 
-                            <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <input type="button" value="Date created">
+                            <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <input type="text"  asp-for="UserSort" placeholder="Sort type" class="resize_input2" >
                                 <span></span>
                             </div>
 
-                            <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
-                                <li>Date created</li>
-                                <li>Pricing plan</li>
+                            <ul class="filter__item-menu dropdown-menu scrollbar-dropdown"
+                                aria-labelledby="filter-sort">
+                                <li>Date</li>
+                                <li>Pricing</li>
                                 <li>Status</li>
                             </ul>
                         </div>
                         <!-- end filter sort -->
                         <!-- search -->
-                        <form action="#" class="main__title-form">
-                            <input type="text" placeholder="Find user..">
-                            <button type="button">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z"></path></svg>
+                        <div class="main__title-form">
+                            <input type="text" asp-for="UserSearch" placeholder="Find movie / tv series.." >
+                            <button type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z">
+                                    </path>
+                                </svg>
                             </button>
-                        </form>
+                        </div>
                         <!-- end search -->
-                    </div>
+                    </form>
+
+
                 </div>
             </div>
             <!-- end main title -->
             <!-- users -->
             <div class="col-12">
                 <div class="main__table-wrap">
+                      @if (Model.GetUsersDTOs != null)
+                                {
                     <table class="main__table">
                         <thead>
                             <tr>
@@ -64,16 +74,17 @@
                         </thead>
 
                         <tbody>
-                            @if (Model.GetUsersDTOs.users != null)
-                                {
+                          
                                     @for (int i = 0; i < @Model.GetUsersDTOs.users.Count; i++)
                                     {
  @await Html.PartialAsync("Shared/Component/Admin/_UsersItem",@Model.GetUsersDTOs.users[i], new
                                 ViewDataDictionary(ViewData) { {"serial", (i + 1)}})
                                     }
-                                }
                         </tbody>
                     </table>
+                                }else{
+                                     <h2 style="color: white;">Can not find any data you you want!</h2>
+                                }
                 </div>
             </div>
             <!-- end users -->
