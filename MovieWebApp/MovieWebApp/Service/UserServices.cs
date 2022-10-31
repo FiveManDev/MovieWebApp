@@ -236,7 +236,16 @@ namespace MovieWebApp.Service
             getClient(context);
             try
             {
-                string url = MovieApiUrl.GetUsers + $"?q={searchText}" + $"&sortBy={sortBy}" + "&pageSize=50" + $"&sortType={sortType}";
+                string url = MovieApiUrl.GetUsers + "?pageSize=50&sortType=desc";
+                if (searchText != "")
+                {
+                    url = url + $"&q={searchText}";
+                }
+                if (sortBy != "")
+                {
+                    url = url + $"&sortBy={sortBy}";
+                }
+
                 var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
 
                 if (response.IsSuccess)

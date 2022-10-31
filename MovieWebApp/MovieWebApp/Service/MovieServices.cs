@@ -124,7 +124,15 @@ namespace MovieWebApp.Service
             getClient(context);
             try
             {
-                string url = MovieApiUrl.GetMovieBaseOnFilter + $"?genreID={CatalogFilterDTO.genreID}" + $"&quality={CatalogFilterDTO.quality}" + $"&ratingMin={CatalogFilterDTO.ratingMin}" + $"&ratingMax={CatalogFilterDTO.ratingMax}" + $"&releaseTimeMin={CatalogFilterDTO.releaseTimeMin}" + $"&releaseTimeMax={CatalogFilterDTO.releaseTimeMax}";
+                string url = "";
+                if (CatalogFilterDTO != null)
+                {
+                    url = MovieApiUrl.GetMovieBaseOnFilter + $"?genreID={CatalogFilterDTO.genreID}" + $"&quality={CatalogFilterDTO.quality}" + $"&ratingMin={CatalogFilterDTO.ratingMin}" + $"&ratingMax={CatalogFilterDTO.ratingMax}" + $"&releaseTimeMin={CatalogFilterDTO.releaseTimeMin}" + $"&releaseTimeMax={CatalogFilterDTO.releaseTimeMax}";
+                }
+                else
+                {
+                    url = MovieApiUrl.GetMovieBaseOnFilter;
+                }
                 var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
                 if (response.IsSuccess)
                 {
@@ -181,11 +189,23 @@ namespace MovieWebApp.Service
             getClient(context);
             try
             {
-                string url = MovieApiUrl.GetMovies + $"?q={searchText}" + $"&sortBy={sortBy}" + "&pageSize=50" + $"&sortType={sortType}";
+                string url = MovieApiUrl.GetMovies + "?pageSize=50&sortType=desc";
+                if (searchText != "")
+                {
+                    url = url + $"&q={searchText}";
+                }
+                if (sortBy != "")
+                {
+                    url = url + $"&sortBy={sortBy}";
+                }
+
                 var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
                 if (response.IsSuccess)
                 {
-                    return ExtensionMethods.ToModel<GetMovies>(response.Data);
+                    var data = ExtensionMethods.ToModel<GetMovies>(response.Data);
+                    System.Console.WriteLine("utl" + url);
+                    System.Console.WriteLine("utl" + data.movies.Count());
+                    return data;
                 }
                 return null;
             }

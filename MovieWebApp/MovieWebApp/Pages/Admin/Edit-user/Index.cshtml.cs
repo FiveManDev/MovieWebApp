@@ -86,30 +86,7 @@ namespace MovieWebApp.Pages.Admin.Edit_user
 
             return Page();
         }
-        public async Task<IActionResult> OnPostChangePassword()
-        {
-            var id = RouteData.Values["id"].ToString();
-            var userId = (User.Identity as ClaimsIdentity).FindFirst("UserID").Value;
-            UserDTO = await _profileServices.GetInformation(HttpContext, userId);
-            UserProfile = await _profileServices.GetInformation(HttpContext, id);
-            UserClass = await _userServices.GetClassOfUser(HttpContext, id);
 
-            GetReviews = await _reviewServices.GetAllReviewsOfUser(HttpContext, id);
-            var result = await _userServices.ChangePassword(HttpContext, ChangePasswordDTO);
-            if (result.IsSuccess)
-            {
-                TempData["success"] = "Change password success!";
-                if (userId == id)
-                {
-                    return RedirectToPage("/Logout/Index");
-                }
-            }
-            else
-            {
-                TempData["error"] = "Change password fail!";
-            }
-            return RedirectToPage("/Admin/Edit-User/Index", new { id = id });
-        }
         public async Task<IActionResult> OnPostUpdateProfileForAdmin()
         {
             var id = RouteData.Values["id"].ToString();

@@ -45,14 +45,6 @@ namespace MovieWebApp.Pages.Catalog
                 UserClass = "";
             }
 
-            catalogFilterDTO = new CatalogFilterDTO();
-            catalogFilterDTO.genreID = new Guid("9ad897ac-89d2-4ef0-be64-a7d58dfd5f8d");
-            catalogFilterDTO.quality = "1080p60";
-            catalogFilterDTO.ratingMin = "2.5";
-            catalogFilterDTO.ratingMax = "8.6";
-            catalogFilterDTO.releaseTimeMin = "2005";
-            catalogFilterDTO.releaseTimeMax = "2015";
-
             MovieFilters = await _movieServices.GetMovieBaseOnFilter(HttpContext, catalogFilterDTO);
 
             return Page();
@@ -76,7 +68,7 @@ namespace MovieWebApp.Pages.Catalog
             {
                 if (genre.GenreName == genreName)
                 {
-                    catalogFilterDTO.genreID = genre.GenreID;
+                    catalogFilterDTO.genreID = genre.GenreID.ToString();
                 }
             }
 
