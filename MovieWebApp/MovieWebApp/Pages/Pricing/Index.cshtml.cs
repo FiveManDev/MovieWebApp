@@ -28,13 +28,13 @@ namespace MovieWebApp.Pages.Pricing
             {
                 var userId = (User.Identity as ClaimsIdentity).FindFirst("UserID").Value;
                 UserClass = await _userServices.GetClassOfUser(HttpContext, userId);
-                ClassificationDTOs = await _classificationServices.GetAllClassification(HttpContext);
-                ClassificationDTOs = ClassificationDTOs.OrderBy(cl=>cl.ClassLevel).ToList();
             }
             else
             {
                 UserClass = "";
             }
+            ClassificationDTOs = await _classificationServices.GetAllClassification(HttpContext);
+            ClassificationDTOs = ClassificationDTOs.OrderBy(cl => cl.ClassLevel).ToList();
             return Page();
         }
         public async Task<IActionResult> OnPost(string amount)
