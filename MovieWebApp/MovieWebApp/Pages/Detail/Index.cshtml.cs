@@ -30,6 +30,7 @@ namespace MovieWebApp.Pages.Detail
         }
         public async Task<IActionResult> OnGet()
         {
+            var token = HttpContext.Request.Cookies["accessToken"];
             var id = RouteData.Values["id"].ToString();
             MovieDTOs = await _movieServices.GetTopLatestReleaseMovies(HttpContext, 6);
             MovieDTO = await _movieServices.GetMovie(HttpContext, id);
@@ -39,45 +40,15 @@ namespace MovieWebApp.Pages.Detail
             {
                 var userId = (User.Identity as ClaimsIdentity).FindFirst("UserID").Value;
                 UserClass = await _userServices.GetClassOfUser(HttpContext, userId);
+                TempData["UserID"] = userId;
             }
             else
             {
                 UserClass = "";
             }
+            TempData["Token"] = token;
             return Page();
         }
-        public async Task<IActionResult> OnPostReview()
-        {
-            var id = RouteData.Values["id"].ToString();
-            MovieDTOs = await _movieServices.GetTopLatestReleaseMovies(HttpContext, 6);
-            MovieDTO = await _movieServices.GetMovie(HttpContext, id);
-            ReviewDTOs = await _reviewServices.GetAllReviewsOfMovie(HttpContext, id);
-
-            if (User.Identity.IsAuthenticated)
-            {
-                var userId = (User.Identity as ClaimsIdentity).FindFirst("UserID").Value;
-                UserClass = await _userServices.GetClassOfUser(HttpContext, userId);
-            }
-            else
-            {
-                UserClass = "";
-            }
-
-            CreateReviewDTO.reviewTime = DateTime.Now;
-            CreateReviewDTO.userID = (User.Identity as ClaimsIdentity).FindFirst("UserID").Value;
-            CreateReviewDTO.movieID = id;
-            CreateReviewDTO.rating = Int32.Parse(rating);
-
-            var result = await _reviewServices.CreateReview(HttpContext, CreateReviewDTO);
-            if (result)
-            {
-                TempData["success"] = "Post review movie successfully!";
-            }
-            else
-            {
-                TempData["error"] = "Post review movie fail!";
-            }
-            return RedirectToPage("/Detail/Index", new { id = id });
-        }
+        
     }
 }

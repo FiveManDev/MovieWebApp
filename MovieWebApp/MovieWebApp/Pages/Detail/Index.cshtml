@@ -3,7 +3,8 @@
 @{
     ViewData["Title"] = "Movie Details";
 }
-
+@Html.Hidden("Token",TempData["Token"])
+@Html.Hidden("UserID",TempData["UserID"])
 <!-- details -->
 <section class="section details">
     <!-- details background -->
@@ -140,26 +141,17 @@
                                         }
                                         <!-- end reviews item -->
                                     </ul>
-
-                                    <form method="post" asp-page-handler="Review" class="form">
                                         <input type="text" class="form__input" placeholder="Title"
-                                            asp-for="CreateReviewDTO.title" required>
+                                            id="reviewTitle" required>
                                         <textarea class="form__textarea" placeholder="Review"
-                                            asp-for="CreateReviewDTO.reviewContent" required></textarea>
+                                            id="reviewContent" required></textarea>
                                         <div class="form__slider">
                                             <div class="form__slider-rating" id="slider__rating"></div>
-                                            <input type="text" class="resizenum custom_review_input" asp-for="rating"
+                                        <input type="text" class="resizenum custom_review_input" id="rating" name="rating"
                                                 value="8.6" />
                                         </div>
-                                        @if (User.Identity.IsAuthenticated)
-                                        {
-                                            <button type="submit" class="form__btn">Send</button>
-                                        }
-                                        else
-                                        {
-                                            <a href="/login" class="section__btn">Send</a>
-                                        }
-                                    </form>
+                                           <button type="submit" class="form__btn" id="sendReview">Send</button>
+                                    
                                 </div>
                             </div>
                             <!-- end reviews -->
