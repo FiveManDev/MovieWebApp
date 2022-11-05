@@ -9,30 +9,32 @@ using System.Xml.Linq;
 
 namespace MovieWebApp.Pages.Verify_signup
 {
-    public class IndexModel : PageModel
+  public class IndexModel : PageModel
+  {
+    private readonly UserServices _userServices;
+    public IndexModel(UserServices userServices)
     {
-        private readonly UserServices _userServices;
-        public IndexModel(UserServices userServices)
-        {
-            _userServices = userServices;
-        }
-        public void OnGet()
-        {
-        }
-        public async Task<IActionResult> OnPost(string verifyCode)
-        {
-            var userData = TempData["user"] as string;
-            var code = TempData["code"] as string;
-            var user = JsonConvert.DeserializeObject<CreateUserRequestDTO>(userData);
-            if (string.Equals(verifyCode, code))
-            {
-                var response = await _userServices.CreateUser(HttpContext, user);
-                if (response)
-                {
-                    return RedirectToPage("/Login/Index");
-                }
-            }
-            return Page();
-        }
+      _userServices = userServices;
     }
+    public void OnGet()
+    {
+    }
+    public async Task<IActionResult> OnPost(string verifyCode)
+    {
+      var userData = TempData["user"] as string;
+      var code = TempData["code"] as string;
+      var user = JsonConvert.DeserializeObject<CreateUserRequestDTO>(userData);
+      if (string.Equals(verifyCode, code))
+      {
+        var response = await _userServices.CreateUser(HttpContext, user);
+        if (response)
+        {
+          return RedirectToPage("/Login/Index");
+        }
+      }
+      TempData.Keep("code");
+      TempData.Keep("user");
+      return Page();
+    }
+  }
 }
