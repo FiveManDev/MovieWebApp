@@ -39,8 +39,8 @@ namespace MovieWebApp.Pages.Admin.Edit_movie
             getMovie = await _movieServices.GetMovie(HttpContext, id);
             GenreDTOs = await _genreServices.GetAllGenre(HttpContext);
             var token = HttpContext.Request.Cookies["accessToken"];
-            var movieID = "";
-            TempData["MovieID"] = userId;
+            var movieID = id;
+            TempData["MovieID"] = movieID;
             TempData["UserID"] = userId;
             TempData["Token"] = token;
             return Page();

@@ -2,7 +2,7 @@
   position: absolute;
   inset: 0;
   background-color: rgba(70, 70, 70, 0.4);
-  z-index: 10;
+  z-index: 10000;
 }
 .custom-loader {
   position: absolute;
