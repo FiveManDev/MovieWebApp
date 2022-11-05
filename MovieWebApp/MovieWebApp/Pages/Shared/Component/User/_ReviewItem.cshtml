@@ -5,18 +5,21 @@
     var editReview = "editReview" + @Model.ReviewID;
     var hrefDelReview = "#delCata" + @Model.ReviewID;
     var delReview = "delCata" + @Model.ReviewID;
-
+    var id = (User.Identity as ClaimsIdentity).FindFirst("UserID").Value;
+    var userID = Guid.Parse(id);
 }
 
-<li class="reviews__item">
+<li class="reviews__item" id="@Model.ReviewID">
     <div class="reviews__autor">
-        <img class="reviews__avatar" src="~/images/user.svg" alt="">
+        <img class="reviews__avatar" src="@Model.Avatar" alt="">
         <span class="reviews__name">@Model.Title</span>
         <span class="reviews__time">@Model.ReviewTime by @Model.FirstName @Model.LastName</span>
 
 
         <div>
-            <span class="reviews__rating2" style="right: 65px;">
+            @if (Model.UserID == userID)
+            {
+            <span class="reviews__rating2" style="right: 65px;" id="editReview">
                 <a href=@hrefEditReview class="main__table-btn main__table-btn--edit open-modal">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path
@@ -24,24 +27,26 @@
                     </svg>
                 </a>
             </span>
-
-            <span class="reviews__rating2" style="right: 40px;">
-                <a href=@hrefDelReview class="main__table-btn main__table-btn--delete open-modal">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path
+            
+                <span class="reviews__rating2" style="right: 40px;" id="deleteReview">
+                    <a href=@hrefDelReview class="main__table-btn main__table-btn--delete open-modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
                             d="M20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Z" />
-                    </svg>
-                </a>
-            </span>
-
-            <span class="reviews__rating2 t-10">
-                <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24"
+                        </svg>
+                    </a>
+                </span>
+            }
+                <span class="reviews__rating2 t-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24"
                     style="margin-right: 5px;">
                     <path
                         d="M22,10.1c0.1-0.5-0.3-1.1-0.8-1.1l-5.7-0.8L12.9,3c-0.1-0.2-0.2-0.3-0.4-0.4C12,2.3,11.4,2.5,11.1,3L8.6,8.2L2.9,9C2.6,9,2.4,9.1,2.3,9.3c-0.4,0.4-0.4,1,0,1.4l4.1,4l-1,5.7c0,0.2,0,0.4,0.1,0.6c0.3,0.5,0.9,0.7,1.4,0.4l5.1-2.7l5.1,2.7c0.1,0.1,0.3,0.1,0.5,0.1v0c0.1,0,0.1,0,0.2,0c0.5-0.1,0.9-0.6,0.8-1.2l-1-5.7l4.1-4C21.9,10.5,22,10.3,22,10.1z">
                     </path>
                 </svg>@Model.Rating
             </span>
+
+            
         </div>
 
     </div>
@@ -54,14 +59,14 @@
     <h6 class="modal__title">Edit review</h6>
 
     <p class="modal__text">Are you sure to permanently edit "@Model.Title "?</p>
+    
+        <div class="modal__btns">
 
-    <div class="modal__btns">
-        <form action="#" method="GET" style="width: 100%;">
-            <input type="hidden" name="editReviewMovie" value=@Model.MovieID>
-            <button class="modal__btn modal__btn--apply" type="submit">Edit</button>
-        </form>
-        <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
-    </div>
+        <button class="modal__btn modal__btn--apply" id="confirmEdit" type="button">Edit</button>
+            <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
+        </div>
+    
+   
 </div>
 <!-- end modal status -->
 <!-- modal delete -->
@@ -71,10 +76,9 @@
     <p class="modal__text">Are you sure to permanently delete "@Model.Title "?</p>
 
     <div class="modal__btns">
-        <form action="#" method="GET" style="width: 100%;">
-            <input type="hidden" name="deleteReviewMovie" value=@Model.MovieID>
-            <button class="modal__btn modal__btn--apply" type="submit">Delete</button>
-        </form>
+
+        <button class="modal__btn modal__btn--apply" id="confirmDelete" type="button">Delete</button>
+        
         <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
     </div>
 </div>
