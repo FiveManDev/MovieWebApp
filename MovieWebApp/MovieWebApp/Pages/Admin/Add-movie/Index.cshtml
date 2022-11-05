@@ -4,7 +4,8 @@
     ViewData["Title"] = "Add new movie";
     ViewData["name"] = @Model.UserDTO.Profile.FirstName + " " + @Model.UserDTO.Profile.LastName;
 }
-
+@Html.Hidden("Token",TempData["Token"])
+@Html.Hidden("UserID",TempData["UserID"])
 <!-- main content -->
 <main class="main">
     <div class="container-fluid">
@@ -36,7 +37,7 @@
                         <div class="col-12 col-md-7 form__content">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="text" class="form__input" placeholder="Title">
+                                    <input id="movieTitle" titetype="text" class="form__input" placeholder="Title">
                                 </div>
 
                                 <div class="col-12">
@@ -45,11 +46,11 @@
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <input type="text" class="form__input" placeholder="Release year">
+                                    <input type="text" class="form__input" placeholder="Release year" id="releaseYear">
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <input type="text" class="form__input" placeholder="Running timed in minutes">
+                                    <input type="text" class="form__input" placeholder="Running timed in minutes" id="runningTime">
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-lg-3">
@@ -63,7 +64,7 @@
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <input type="text" class="form__input" placeholder="Age">
+                                    <input type="text" class="form__input" placeholder="Age" id="age">
                                 </div>
 
                                 <div class="col-12 col-lg-6">
@@ -370,4 +371,5 @@
         </div>
     </div>
 </main>
+<script src="~/js/MovieApi.js"></script>
 <!-- end main content -->
