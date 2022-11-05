@@ -21,20 +21,25 @@ namespace MovieWebApp.Pages.Verify_signup
     }
     public async Task<IActionResult> OnPost(string verifyCode)
     {
-      var userData = TempData["user"] as string;
-      var code = TempData["code"] as string;
-      var user = JsonConvert.DeserializeObject<CreateUserRequestDTO>(userData);
-      if (string.Equals(verifyCode, code))
-      {
-        var response = await _userServices.CreateUser(HttpContext, user);
-        if (response)
+        var userData = TempData["user"] as string;
+        var code = TempData["code"] as string;
+        var user = JsonConvert.DeserializeObject<CreateUserRequestDTO>(userData);
+        if (string.Equals(verifyCode, code))
         {
-          return RedirectToPage("/Login/Index");
+            var response = await _userServices.CreateUser(HttpContext, user);
+            if (response)
+            {
+                return RedirectToPage("/Login/Index");
+            }
+            TempData["error"] = "Account is exist!";
         }
-      }
-      TempData.Keep("code");
-      TempData.Keep("user");
-      return Page();
+        else
+        {
+            TempData["error"] = "Code is wrong! God Damn!";
+        }
+        TempData.Keep("code");
+        TempData.Keep("user");
+        return Page();
     }
   }
 }
