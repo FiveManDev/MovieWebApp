@@ -19,16 +19,16 @@
         <div>
             @if (Model.UserID == userID)
             {
-            <span class="reviews__rating2" style="right: 65px;" id="editReview">
-                <a href=@hrefEditReview class="main__table-btn main__table-btn--edit open-modal">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path
+                <span class="reviews__rating2" style="right: 80px;" id="editReview">
+                    <a href=@hrefEditReview class="main__table-btn main__table-btn--edit open-modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
                             d="M5,18H9.24a1,1,0,0,0,.71-.29l6.92-6.93h0L19.71,8a1,1,0,0,0,0-1.42L15.47,2.29a1,1,0,0,0-1.42,0L11.23,5.12h0L4.29,12.05a1,1,0,0,0-.29.71V17A1,1,0,0,0,5,18ZM14.76,4.41l2.83,2.83L16.17,8.66,13.34,5.83ZM6,13.17l5.93-5.93,2.83,2.83L8.83,16H6ZM21,20H3a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2Z" />
-                    </svg>
-                </a>
-            </span>
-            
-                <span class="reviews__rating2" style="right: 40px;" id="deleteReview">
+                        </svg>
+                    </a>
+                </span>
+
+                <span class="reviews__rating2" style="right: 50px;" id="deleteReview">
                     <a href=@hrefDelReview class="main__table-btn main__table-btn--delete open-modal">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path
@@ -37,8 +37,8 @@
                     </a>
                 </span>
             }
-                <span class="reviews__rating2 t-10">
-                    <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24"
+            <span class="reviews__rating2 t-10">
+                <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24"
                     style="margin-right: 5px;">
                     <path
                         d="M22,10.1c0.1-0.5-0.3-1.1-0.8-1.1l-5.7-0.8L12.9,3c-0.1-0.2-0.2-0.3-0.4-0.4C12,2.3,11.4,2.5,11.1,3L8.6,8.2L2.9,9C2.6,9,2.4,9.1,2.3,9.3c-0.4,0.4-0.4,1,0,1.4l4.1,4l-1,5.7c0,0.2,0,0.4,0.1,0.6c0.3,0.5,0.9,0.7,1.4,0.4l5.1-2.7l5.1,2.7c0.1,0.1,0.3,0.1,0.5,0.1v0c0.1,0,0.1,0,0.2,0c0.5-0.1,0.9-0.6,0.8-1.2l-1-5.7l4.1-4C21.9,10.5,22,10.3,22,10.1z">
@@ -46,7 +46,7 @@
                 </svg>@Model.Rating
             </span>
 
-            
+
         </div>
 
     </div>
@@ -56,17 +56,21 @@
 </li>
 <!-- modal status -->
 <div id=@editReview class="zoom-anim-dialog mfp-hide modal">
-    <h6 class="modal__title">Edit review</h6>
-
-    <p class="modal__text">Are you sure to permanently edit "@Model.Title "?</p>
-    
-        <div class="modal__btns">
-
-        <button class="modal__btn modal__btn--apply" id="confirmEdit" type="button">Edit</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
+    <h6 class="modal__title">Edit review "@Model.Title"</h6>
+    <div class="reviews">
+        <div class="form">
+            <input type="text" class="form__input" placeholder="Title" id="reviewTitle" required>
+            <textarea class="form__textarea" placeholder="Review" id="reviewContent" required></textarea>
+            <div class="form__slider">
+                <input type="number" class=" form__input" id="rating2" name="rating2" min="0" max="10" value="8" />
+            </div>
         </div>
-    
-   
+    </div>
+
+    <div class="modal__btns">
+        <button class="modal__btn modal__btn--apply" id="confirmEdit" type="button">Edit</button>
+        <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
+    </div>
 </div>
 <!-- end modal status -->
 <!-- modal delete -->
@@ -78,7 +82,7 @@
     <div class="modal__btns">
 
         <button class="modal__btn modal__btn--apply" id="confirmDelete" type="button">Delete</button>
-        
+
         <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
     </div>
 </div>

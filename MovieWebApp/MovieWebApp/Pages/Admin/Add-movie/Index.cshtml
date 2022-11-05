@@ -2,7 +2,7 @@
 @model MovieWebApp.Pages.Admin.Add_movie.IndexModel
 @{
     ViewData["Title"] = "Add new movie";
-        ViewData["name"] = @Model.UserDTO.Profile.FirstName + " " + @Model.UserDTO.Profile.LastName;
+    ViewData["name"] = @Model.UserDTO.Profile.FirstName + " " + @Model.UserDTO.Profile.LastName;
 }
 
 <!-- main content -->
@@ -25,7 +25,8 @@
                                 <div class="col-12 col-sm-6 col-md-12">
                                     <div class="form__img">
                                         <label for="form__img-upload">Upload cover (270 x 400)</label>
-                                        <input id="form__img-upload" name="form__img-upload" type="file" accept=".png, .jpg, .jpeg">
+                                        <input id="form__img-upload" name="form__img-upload" type="file"
+                                            accept=".png, .jpg, .jpeg">
                                         <img id="form__img" src="#" alt=" ">
                                     </div>
                                 </div>
@@ -39,7 +40,8 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <textarea id="text" name="text" class="form__textarea" placeholder="Description"></textarea>
+                                    <textarea id="text" name="text" class="form__textarea"
+                                        placeholder="Description"></textarea>
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-lg-3">
@@ -53,8 +55,10 @@
                                 <div class="col-12 col-sm-6 col-lg-3">
                                     <select class="js-example-basic-single" id="quality">
                                         <option value=""></option>
-                                        <option value="FullHD">FullHD</option>
-                                        <option value="HD">HD</option>
+                                        <option value="1080p60">1080p60</option>
+                                        <option value="720p60">720p60</option>
+                                        <option value="480p">480p</option>
+                                        <option value="360p">360p</option>
                                     </select>
                                 </div>
 
@@ -173,7 +177,8 @@
                                         <option value="Korea">Korea</option>
                                         <option value="Kuwait">Kuwait</option>
                                         <option value="Kyrgyzstan">Kyrgyzstan</option>
-                                        <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+                                        <option value="Lao People's Democratic Republic">Lao People's Democratic
+                                            Republic</option>
                                         <option value="Latvia">Latvia</option>
                                         <option value="Lebanon">Lebanon</option>
                                         <option value="Lesotho">Lesotho</option>
@@ -291,7 +296,7 @@
                                 <div class="col-12 col-lg-6">
                                     <select class="js-example-basic-multiple" id="genre" multiple="multiple">
                                         <option value="Action">Action</option>
-                                        <option value="Animation">Animation</option>
+                                        <option value="Animation">Cartoon</option>
                                         <option value="Comedy">Comedy</option>
                                         <option value="Crime">Crime</option>
                                         <option value="Drama">Drama</option>
@@ -302,14 +307,24 @@
                                         <option value="Science-fiction">Science-fiction</option>
                                         <option value="Thriller">Thriller</option>
                                         <option value="Western">Western</option>
-                                        <option value="Otheer">Otheer</option>
+                                        <option value="Otheer">Other</option>
                                     </select>
                                 </div>
 
-                                <div class="col-12">
+                                <div class="col-12 col-lg-6">
+                                    <select class="js-example-basic-multiple" id="classMovie">
+                                        <option value=""></option>
+                                        <option value="Basic">Basic</option>
+                                        <option value="Premium">Premium</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-12  col-lg-6">
                                     <div class="form__gallery">
                                         <label id="gallery1" for="form__gallery-upload">Upload photos</label>
-                                        <input data-name="#gallery1" id="form__gallery-upload" name="gallery" class="form__gallery-upload" type="file" accept=".png, .jpg, .jpeg" multiple>
+                                        <input data-name="#gallery1" id="form__gallery-upload" name="gallery"
+                                            class="form__gallery-upload" type="file" accept=".png, .jpg, .jpeg"
+                                            multiple>
                                     </div>
                                 </div>
                             </div>
@@ -318,10 +333,11 @@
                         <div class="col-12">
                             <ul class="form__radio">
                                 <li>
-                                    <span>Item type:</span>
+                                    <span>Video type:</span>
                                 </li>
                                 <li>
-                                    <input id="type1" type="radio" name="type" data-toggle="collapse" data-target=".multi-collapse" checked="">
+                                    <input id="type1" type="radio" name="type" data-toggle="collapse"
+                                        data-target=".multi-collapse" checked="">
                                     <label for="type1">Movie</label>
                                 </li>
 
@@ -335,7 +351,9 @@
                                     <div class="collapse show multi-collapse" id="multiCollapseExample1">
                                         <div class="form__video">
                                             <label id="movie1" for="form__video-upload">Upload video</label>
-                                            <input data-name="#movie1" id="form__video-upload" name="movie" class="form__video-upload" type="file" accept="video/mp4,video/x-m4v,video/*">
+                                            <input data-name="#movie1" id="form__video-upload" name="movie"
+                                                class="form__video-upload" type="file"
+                                                accept="video/mp4,video/x-m4v,video/*">
                                         </div>
                                     </div>
                                 </div>

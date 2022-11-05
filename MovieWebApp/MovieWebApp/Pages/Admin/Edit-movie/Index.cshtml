@@ -27,7 +27,7 @@
                                         <label for="form__img-upload">Upload cover (270 x 400)</label>
                                         <input id="form__img-upload" name="form__img-upload" type="file"
                                             accept=".png, .jpg, .jpeg">
-                                        <img id="form__img" src=@Model.getMovie.CoverImage alt=" ">
+                                        <img id="form__img" src="" alt=" ">
                                     </div>
                                 </div>
                             </div>
@@ -36,39 +36,38 @@
                         <div class="col-12 col-md-7 form__content">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="text" class="form__input" asp-for="getMovie.MovieName"
-                                        placeholder="Movie name">
+                                    <input type="text" class="form__input" placeholder="Movie name">
                                 </div>
 
                                 <div class="col-12">
-                                    <textarea name="text" class="form__textarea" asp-for="getMovie.Description"
-                                        placeholder="Description"></textarea>
+                                    <textarea name="text" class="form__textarea" placeholder="Description"></textarea>
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <input type="text" class="form__input" asp-for="getMovie.ReleaseTime"
-                                        placeholder="Release year">
+                                    <input type="text" class="form__input" placeholder="Release year">
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <input type="text" class="form__input" asp-for="getMovie.RunningTime"
-                                        placeholder="Running timed in minutes">
+                                    <input type="text" class="form__input" placeholder="Running timed in minutes">
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <select class="js-example-basic-single" asp-for="getMovie.Quality" id="quality">
+                                    <select class="js-example-basic-single" id="quality">
                                         <option value=""></option>
-                                        <option value="FullHD">FullHD</option>
-                                        <option value="HD">HD</option>
+                                        <option value="1080p60">1080p60</option>
+                                        <option value="720p60">720p60</option>
+                                        <option value="480p">480p</option>
+                                        <option value="360p">360p</option>
                                     </select>
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <input type="text" class="form__input" asp-for="getMovie.Age" placeholder="Age">
+                                    <input type="text" class="form__input" placeholder="Age">
                                 </div>
 
                                 <div class="col-12 col-lg-6">
-                                    <select class="js-example-basic-multiple" asp-for="getMovie.Country" id="country">
+                                    <select class="js-example-basic-multiple" id="country">
+                                        <option value=""></option>
                                         <option value="Afghanistan">Afghanistan</option>
                                         <option value="Åland Islands">Åland Islands</option>
                                         <option value="Albania">Albania</option>
@@ -294,17 +293,34 @@
                                     </select>
                                 </div>
 
+
+
                                 <div class="col-12 col-lg-6">
-                                    <select class="js-example-basic-multiple" asp-for="getMovie.Genres" id="genre"
-                                        multiple="multiple">
-                                        @foreach (var item in Model.GenreDTOs)
-                                        {
-                                            <option value=@item.GenreName>@item.GenreName</option>
-                                        }
+                                    <select class="js-example-basic-multiple" id="genre" multiple="multiple">
+                                        <option value="Action">Action</option>
+                                        <option value="Animation">Cartoon</option>
+                                        <option value="Comedy">Comedy</option>
+                                        <option value="Crime">Crime</option>
+                                        <option value="Drama">Drama</option>
+                                        <option value="Fantasy">Fantasy</option>
+                                        <option value="Historical">Historical</option>
+                                        <option value="Horror">Horror</option>
+                                        <option value="Romance">Romance</option>
+                                        <option value="Science-fiction">Science-fiction</option>
+                                        <option value="Thriller">Thriller</option>
+                                        <option value="Western">Western</option>
+                                        <option value="Otheer">Other</option>
                                     </select>
                                 </div>
 
-                                <div class="col-12">
+                                <div class="col-12 col-lg-6">
+                                    <select class="js-example-basic-multiple" id="classMovie">
+                                        <option value=""></option>
+                                        <option value="Basic">Basic</option>
+                                        <option value="Premium">Premium</option>
+                                    </select>
+                                </div>
+                                <div class="col-12  col-lg-6">
                                     <div class="form__gallery">
                                         <label id="gallery1" for="form__gallery-upload">Upload photos</label>
                                         <input data-name="#gallery1" id="form__gallery-upload" name="gallery"
@@ -318,7 +334,7 @@
                         <div class="col-12">
                             <ul class="form__radio">
                                 <li>
-                                    <span>Item type:</span>
+                                    <span>Video type:</span>
                                 </li>
                                 <li>
                                     <input id="type1" type="radio" name="type" data-toggle="collapse"

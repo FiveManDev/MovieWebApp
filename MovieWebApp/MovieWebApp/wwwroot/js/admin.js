@@ -78,6 +78,10 @@ $(document).ready(function () {
     placeholder: "Choose genre / genres",
   });
 
+  $("#classMovie").select2({
+    placeholder: "Choose class",
+  });
+
   $("#subscription, #rights").select2();
 
   /*==============================
