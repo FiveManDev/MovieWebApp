@@ -43,5 +43,24 @@ namespace MovieWebApp.Service
             }
 
         }
+        public async Task<List<ChatMessage>> GetChatMessage(HttpContext context,Guid groupID)
+        {
+            getClient(context);
+            try
+            {
+                string url = MovieApiUrl.GetChatForUser+ "?GroupID="+groupID;
+                var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
+                if (response.IsSuccess)
+                {
+                    return ExtensionMethods.ToModel<List<ChatMessage>>(response.Data);
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
     }
 }
