@@ -63,14 +63,14 @@
             <div class="col-12 col-xl-6">
                 <video controls cross origin playsinline poster=@Model.MovieDTO.Thumbnail id="player">
                     <!-- Video files -->
-                    <source src=@Model.MovieDTO.MovieURL type="video/mp4" size="576">
+                    <source src=@Model.MovieDTO.MovieURL type="video/mp4" size="360">
+                    <source src=@Model.MovieDTO.MovieURL type="video/mp4" size="480">
                     <source src=@Model.MovieDTO.MovieURL type="video/mp4" size="720">
                     <source src=@Model.MovieDTO.MovieURL type="video/mp4" size="1080">
-                    <source src=@Model.MovieDTO.MovieURL type="video/mp4" size="1440">
 
                     <!-- Caption files -->
                     <track kind="captions" label="English" srclang="en" src="" default>
-                    <track kind="captions" label="Français" srclang="fr" src="">
+                    <track kind="captions" label="VietNam" srclang="vn" src="">
 
                     <!-- Fallback for browsers that don't support the <video> element -->
                     <a href=@Model.MovieDTO.MovieURL download>Download</a>

@@ -4547,7 +4547,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 }
 
 .plyr__control--overlaid svg {
-  display: none;
+  /* display: none; */
 }
 
 .plyr__control--overlaid:hover,

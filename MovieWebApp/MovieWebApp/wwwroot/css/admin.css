@@ -3638,3 +3638,9 @@ input[type="file"] {
   width: 80px !important;
   margin: 0 !important;
 }
+#errorMessage {
+  display: none;
+}
+.activeMsg {
+  display: block !important;
+}

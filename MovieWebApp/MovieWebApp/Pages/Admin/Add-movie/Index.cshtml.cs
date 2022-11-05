@@ -22,7 +22,9 @@ namespace MovieWebApp.Pages.Admin.Add_movie
         {
             var userId = (User.Identity as ClaimsIdentity).FindFirst("UserID").Value;
             UserDTO = await _profileServices.GetInformation(HttpContext, userId);
-
+            var token = HttpContext.Request.Cookies["accessToken"];
+            TempData["UserID"] = userId;
+            TempData["Token"] = token;
             return Page();
         }
     }

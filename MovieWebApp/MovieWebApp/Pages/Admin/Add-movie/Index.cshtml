@@ -4,7 +4,8 @@
     ViewData["Title"] = "Add new movie";
     ViewData["name"] = @Model.UserDTO.Profile.FirstName + " " + @Model.UserDTO.Profile.LastName;
 }
-
+@Html.Hidden("Token",TempData["Token"])
+@Html.Hidden("UserID",TempData["UserID"])
 <!-- main content -->
 <main class="main">
     <div class="container-fluid">
@@ -36,7 +37,7 @@
                         <div class="col-12 col-md-7 form__content">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="text" class="form__input" placeholder="Title">
+                                    <input id="movieTitle" titetype="text" class="form__input" placeholder="Title">
                                 </div>
 
                                 <div class="col-12">
@@ -45,11 +46,12 @@
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <input type="text" class="form__input" placeholder="Release year">
+                                    <input type="text" class="form__input" placeholder="Release year" id="releaseYear">
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <input type="text" class="form__input" placeholder="Running timed in minutes">
+                                    <input type="text" class="form__input" placeholder="Running timed in minutes"
+                                        id="runningTime">
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-lg-3">
@@ -63,7 +65,7 @@
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <input type="text" class="form__input" placeholder="Age">
+                                    <input type="text" class="form__input" placeholder="Age" id="age">
                                 </div>
 
                                 <div class="col-12 col-lg-6">
@@ -295,19 +297,22 @@
 
                                 <div class="col-12 col-lg-6">
                                     <select class="js-example-basic-multiple" id="genre" multiple="multiple">
-                                        <option value="Action">Action</option>
-                                        <option value="Animation">Cartoon</option>
+                                        <option value="Drama Films">Drama Films</option>
+                                        <option value="Documentary">Documentary</option>
+                                        <option value="Horror Films">Horror Films</option>
+                                        <option value="Mucicals (Dance)">Mucicals (Dance)</option>
+                                        <option value="Cartoon">Cartoon</option>
+                                        <option value="Adventure">Adventure</option>
+                                        <option value="Westerns">Westerns</option>
                                         <option value="Comedy">Comedy</option>
-                                        <option value="Crime">Crime</option>
-                                        <option value="Drama">Drama</option>
-                                        <option value="Fantasy">Fantasy</option>
-                                        <option value="Historical">Historical</option>
-                                        <option value="Horror">Horror</option>
+                                        <option value="War (Anti-war)">War (Anti-war)</option>
+                                        <option value="Tragedy">Tragedy</option>
+                                        <option value="Action">Action</option>
+                                        <option value="Epics / Hisorical">Epics / Hisorical</option>
+                                        <option value="Crime & Gangster">Crime & Gangster</option>
                                         <option value="Romance">Romance</option>
-                                        <option value="Science-fiction">Science-fiction</option>
-                                        <option value="Thriller">Thriller</option>
-                                        <option value="Western">Western</option>
-                                        <option value="Otheer">Other</option>
+                                        <option value="Science Fiction">Science Fiction</option>
+                                        <option value="Sitcom">Sitcom</option>
                                     </select>
                                 </div>
 
@@ -327,6 +332,12 @@
                                             multiple>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div>
+                                <h2 id="errorMessage" class="activeMsg" style="color:red;">Some thing wrong!</h2>
                             </div>
                         </div>
 
@@ -359,7 +370,7 @@
                                 </div>
                                 <!-- end movie -->
                                 <div class="col-12">
-                                    <button type="button" class="form__btn">publish</button>
+                                    <button type="button" class="form__btn" onclick="UploadMovie()">publish</button>
                                 </div>
                             </div>
                         </div>
@@ -370,4 +381,5 @@
         </div>
     </div>
 </main>
+<script src="~/js/MovieApi.js"></script>
 <!-- end main content -->
