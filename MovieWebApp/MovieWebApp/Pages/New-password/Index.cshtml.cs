@@ -18,6 +18,7 @@ namespace MovieWebApp.Pages.New_password
             {
                 return Redirect("/");
             }
+            TempData.Keep("email");
             return Page();
         }
         public async Task<IActionResult> OnPost(string newPassword,string confirmPasword)
@@ -37,6 +38,8 @@ namespace MovieWebApp.Pages.New_password
                     return Redirect("/login");
                 }
             }
+
+            TempData.Keep("email");
             return Page();
         }
     }
