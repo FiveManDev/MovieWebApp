@@ -62,6 +62,7 @@
 
         #region Chat
         public const string GetAllUserChat = "/api/v1/Chat/GetAllUserChat";
+        public const string GetChatForUser = "api/v1/Chat/GetChatMessage";
         #endregion
 
         #region test

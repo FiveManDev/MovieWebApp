@@ -4,6 +4,7 @@
     ViewData["Title"] = "Contact";
 }
 @Html.Hidden("UserID",TempData["UserID"])
+@Html.Hidden("Token",TempData["Token"])
 <!-- page title -->
 <section class="section section--first section--bg" data-bg="images/section/section.jpg">
     <div class="container">
@@ -39,7 +40,17 @@
 
                     <div class="col-12 form form--contacts" >
                         <div class="card-body">
-                            @* <!--Admin message-->
+                            @foreach (var item in Model.chatMessage)
+                            {
+                                if (item.isFromAdmin)
+                                {
+                                    @await Html.PartialAsync("Shared/Component/User/_ContactOtheruserMessage", item)
+                                }else{
+                                    @await Html.PartialAsync("Shared/Component/User/_ContactOwneruserMessage", item)
+                                }
+                            }
+                            @* 
+                                <!--Admin message-->
                             <partial name="Shared/Component/User/_ContactOtheruserMessage" />
                             <partial name="Shared/Component/User/_ContactOtheruserMessage" />
                             <partial name="Shared/Component/User/_ContactOtheruserMessage" />

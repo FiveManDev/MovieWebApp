@@ -1,9 +1,11 @@
-﻿<div class="d-flex flex-row justify-content-start mb-4">
+﻿@model MovieWebApp.Models.DTO.ChatMessage;
+
+<div class="d-flex flex-row justify-content-start mb-4">
     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
          alt="avatar 1" style="width: 45px; height: 100%;">
     <div class="p-3 ml-3" style="border-radius: 15px; background-color: #ff55a5">
         <p class="small mb-0">
-            Hello and thank you for visiting MDBootstrap. 
+             @Model.messageContent
         </p>
     </div>
 </div>

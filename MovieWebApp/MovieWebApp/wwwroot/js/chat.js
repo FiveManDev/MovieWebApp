@@ -1,11 +1,15 @@
 "use strict";
-
+var baseUrl = "https://localhost:7237/"
 var userID = document.getElementById("UserID").value
 var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7237/chat").build();
 document.querySelector(".form__btn").disabled = true;
 //Response
-connection.on("SendMessage", function (message) {
-    AddMessage(message);
+connection.on("SendMessage", function (from,message) {
+    console.log(message)
+    if (from === "Admin") {
+        AddMessage(message);
+    }
+    
 });
 connection.start().then(function () {
     connection.invoke("JoinGroup", userID).then(function () {
@@ -30,3 +34,47 @@ function AddMessage(message) {
     div.innerHTML = html;
     document.querySelector(".card-body").appendChild(div)
 }
+function AddMyMessage(message) {
+    var html = `
+    <div class="p-3 mr-3 border" style="border-radius: 15px; background-color: #fbfbfb;">
+        <p class="small mb-0">${message}</p>
+    </div>
+    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
+         alt="avatar 1" style="width: 45px; height: 100%;">
+`
+    var div = document.createElement("div");
+    div.setAttribute("class", "d-flex flex-row justify-content-end mb-4");
+    div.innerHTML = html;
+    document.querySelector(".card-body").appendChild(div)
+}
+function CreateChat() {
+    var token = document.getElementById("Token").value;
+    if (token === "") {
+        window.location = "/login"
+    }
+    var content = document.querySelector(".form__textarea").value;
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer " + token);
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+        "groupID": userID,
+        "message": content
+    });
+
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+
+    fetch("https://localhost:7237/api/v1/Chat/SendMessageFromUser", requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            let json = JSON.parse(result)
+            AddMyMessage(json.data)
+        })
+        .catch(error => console.log('error', error));
+}
+document.querySelector(".form__btn").addEventListener("click", CreateChat)
