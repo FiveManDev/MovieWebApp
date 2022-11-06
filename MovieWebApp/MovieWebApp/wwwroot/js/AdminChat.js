@@ -155,12 +155,15 @@ var connection = new signalR.HubConnectionBuilder()
 
 //Response
 function HubOn() {
-  connection.on("SendMessage", function (from, id, message) {
+  connection.on("SendMessage", function (from, id, message,avatar) {
     //scroll bottom of chat
     var MyID = document.getElementById("MyID").value;
     if (!CompareGuid(id, MyID)) {
       var parent = document.querySelector(".boxchat_container");
       var image = parent.querySelector(".custom_image").src;
+      if(from==="Admin"){
+        image = avatar;
+      }
       renderOtherChat(message, image);
     }
   });
@@ -208,6 +211,8 @@ function UpdateStatus(id, element) {
     .then((response) => response.json())
     .then((result) => {
       if (result.isSuccess) {
+        element.classList.remove("main__table-text--green")
+        element.classList.add("main__table-text--red")
         element.textContent = "Old";
       }
     })

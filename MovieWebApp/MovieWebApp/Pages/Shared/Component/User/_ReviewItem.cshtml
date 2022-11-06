@@ -5,8 +5,12 @@
     var editReview = "editReview" + @Model.ReviewID;
     var hrefDelReview = "#delCata" + @Model.ReviewID;
     var delReview = "delCata" + @Model.ReviewID;
-    var id = (User.Identity as ClaimsIdentity).FindFirst("UserID").Value;
-    var userID = Guid.Parse(id);
+    var userID =new Guid();
+    if(User.Identity.IsAuthenticated){
+        var id = (User.Identity as ClaimsIdentity).FindFirst("UserID").Value;
+        userID = Guid.Parse(id);
+    }
+    
 }
 
 <li class="reviews__item" id="@Model.ReviewID">
