@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Add new movie";
     ViewData["name"] = @Model.UserDTO.Profile.FirstName + " " + @Model.UserDTO.Profile.LastName;
+    ViewData["avatar"] = @Model.UserDTO.Profile.Avatar;
 }
 @Html.Hidden("Token",TempData["Token"])
 @Html.Hidden("UserID",TempData["UserID"])

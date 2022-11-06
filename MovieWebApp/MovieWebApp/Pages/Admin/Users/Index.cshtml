@@ -2,7 +2,8 @@
 @model MovieWebApp.Pages.Admin.Users.IndexModel
 @{
     ViewData["Title"] = "Manage Users";
-        ViewData["name"] = @Model.UserDTO.Profile.FirstName + " " + @Model.UserDTO.Profile.LastName;
+    ViewData["name"] = @Model.UserDTO.Profile.FirstName + " " + @Model.UserDTO.Profile.LastName;
+    ViewData["avatar"] = @Model.UserDTO.Profile.Avatar;
 }
 
 <!-- main content -->

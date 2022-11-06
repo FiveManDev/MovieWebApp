@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Manage Support";
     ViewData["name"] = @Model.UserDTO.Profile.FirstName + " " + @Model.UserDTO.Profile.LastName;
+    ViewData["avatar"] = @Model.UserDTO.Profile.Avatar;
 }
 @Html.Hidden("MyID",TempData["MyID"])
 @Html.Hidden("Token",TempData["Token"])

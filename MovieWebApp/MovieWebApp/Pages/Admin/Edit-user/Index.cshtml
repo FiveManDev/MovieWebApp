@@ -8,7 +8,7 @@
 
     var hrefUserDeleteId = "#userDeleteAdmin" + Model.UserProfile.UserID;
     var UserDeleteId = "userDeleteAdmin" + Model.UserProfile.UserID;
-
+    ViewData["avatar"] = @Model.UserDTO.Profile.Avatar;
     var RouteURL = "/admin/edit-user/" + Model.UserProfile.UserID;
 }
 
