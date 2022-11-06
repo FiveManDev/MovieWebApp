@@ -40,15 +40,20 @@
 
                     <div class="col-12 form form--contacts" >
                         <div class="card-body">
-                            @foreach (var item in Model.chatMessage)
-                            {
-                                if (item.isFromAdmin)
+                            @if(Model.chatMessage!=null){
+                                @foreach (var item in Model.chatMessage)
                                 {
-                                    @await Html.PartialAsync("Shared/Component/User/_ContactOtheruserMessage", item)
-                                }else{
-                                    @await Html.PartialAsync("Shared/Component/User/_ContactOwneruserMessage", item)
+                                    if (item.isFromAdmin)
+                                    {
+                                        @await Html.PartialAsync("Shared/Component/User/_ContactOtheruserMessage", item)
+                                    }
+                                    else
+                                    {
+                                        @await Html.PartialAsync("Shared/Component/User/_ContactOwneruserMessage", item)
+                                    }
                                 }
                             }
+                            
                             @* 
                                 <!--Admin message-->
                             <partial name="Shared/Component/User/_ContactOtheruserMessage" />

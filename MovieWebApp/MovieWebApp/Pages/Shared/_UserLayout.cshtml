@@ -73,9 +73,22 @@
                                         <a href="/help" class="header__nav-link">Help</a>
                                     </li>
 
-                                    <li class="header__nav-item">
-                                        <a href="/contact" class="header__nav-link">Contact</a>
-                                    </li>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        @if (!(User.Identity as
+                                       ClaimsIdentity).FindFirst(ClaimTypes.Role).Value.Equals("Admin"))
+                                        {
+                                            <li class="header__nav-item">
+                                                <a href="/contact" class="header__nav-link">Contact</a>
+                                            </li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <li class="header__nav-item">
+                                            <a href="/login" class="header__nav-link">Contact</a>
+                                        </li>
+                                    }
 
                                     <!-- dropdown -->
                                     <li class="dropdown header__nav-item">
