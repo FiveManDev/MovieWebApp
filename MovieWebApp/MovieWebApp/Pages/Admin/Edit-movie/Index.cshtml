@@ -29,7 +29,7 @@
                                         <label for="form__img-upload">Upload cover (270 x 400)</label>
                                         <input id="form__img-upload" name="form__img-upload" type="file"
                                             accept=".png, .jpg, .jpeg">
-                                        <img id="form__img" src="" alt=" ">
+                                        <img id="form__img" src=@Model.getMovie.CoverImage alt=" ">
                                     </div>
                                 </div>
                             </div>
@@ -38,25 +38,27 @@
                         <div class="col-12 col-md-7 form__content">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="text" class="form__input" id="movieTitle" placeholder="Movie name">
+                                    <input type="text" class="form__input" id="movieTitle" placeholder="Movie name"
+                                        asp-for="getMovie.MovieName">
                                 </div>
 
                                 <div class="col-12">
-                                    <textarea name="text" id="text" class="form__textarea"
-                                        placeholder="Description"></textarea>
+                                    <textarea name="text" id="text" class="form__textarea" placeholder="Description"
+                                        asp-for="getMovie.Description"></textarea>
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <input type="text" class="form__input" placeholder="Release year" id="releaseYear">
+                                    <input type="text" class="form__input" placeholder="Release year" id="releaseYear"
+                                        asp-for="getMovie.ReleaseTime">
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-lg-3">
                                     <input type="text" class="form__input" placeholder="Running timed in minutes"
-                                        id="runningTime">
+                                        id="runningTime" asp-for="getMovie.RunningTime">
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <select class="js-example-basic-single" id="quality">
+                                    <select class="js-example-basic-single" id="quality" asp-for="getMovie.Quality">
                                         <option value=""></option>
                                         <option value="1080p60">1080p60</option>
                                         <option value="720p60">720p60</option>
@@ -66,11 +68,12 @@
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <input type="text" class="form__input" placeholder="Age" id="age">
+                                    <input type="text" class="form__input" placeholder="Age" id="age"
+                                        asp-for="getMovie.Age">
                                 </div>
 
                                 <div class="col-12 col-lg-6">
-                                    <select class="js-example-basic-multiple" id="country">
+                                    <select class="js-example-basic-multiple" id="country" asp-for="getMovie.Country">
                                         <option value=""></option>
                                         <option value="Afghanistan">Afghanistan</option>
                                         <option value="Åland Islands">Åland Islands</option>
@@ -300,7 +303,8 @@
 
 
                                 <div class="col-12 col-lg-6">
-                                    <select class="js-example-basic-multiple" id="genre" multiple="multiple">
+                                    <select class="js-example-basic-multiple" id="genre" multiple="multiple"
+                                        asp-for="getMovie.Genres">
                                         <option value="Drama Films">Drama Films</option>
                                         <option value="Documentary">Documentary</option>
                                         <option value="Horror Films">Horror Films</option>
@@ -321,7 +325,8 @@
                                 </div>
 
                                 <div class="col-12 col-lg-6">
-                                    <select class="js-example-basic-multiple" id="classMovie">
+                                    <select class="js-example-basic-multiple" id="classMovie"
+                                        asp-for="getMovie.ClassName">
                                         <option value=""></option>
                                         <option value="Basic">Basic</option>
                                         <option value="Premium">Premium</option>
@@ -340,7 +345,7 @@
 
                         <div class="col-12">
                             <div>
-                                <h2 id="errorMessage" class="activeMsg" style="color:red;">Some thing wrong!</h2>
+                                <h2 id="errorMessage" style="color:red;">Some thing wrong!</h2>
                             </div>
                         </div>
 

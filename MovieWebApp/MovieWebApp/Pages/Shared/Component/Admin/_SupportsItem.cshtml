@@ -2,17 +2,17 @@
 @{
     var serial = ViewData["serial"];
 }
-<tr>
+<tr class="supportsItem">
     <td>
-        <div class="main__table-text">@serial</div>
+        <div id=@Model.userID class="main__table-text userID">@serial</div>
     </td>
     <td>
         <div class="main__user">
             <div class="main__avatar">
-                <img src="~/images/user.svg" alt="">
+                <img src=@Model.avatar alt="">
             </div>
             <div class="main__meta">
-                <h3>@Model.firstName @Model.lastName</h3>
+                <h3 class="fullname">@Model.firstName @Model.lastName</h3>
                 <span>@Model.email</span>
             </div>
         </div>

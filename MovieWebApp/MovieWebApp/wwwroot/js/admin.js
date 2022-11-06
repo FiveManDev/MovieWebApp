@@ -181,7 +181,7 @@ function load_header_icon() {
     let zoomout = ele.querySelector(".zoomout");
 
     exit.addEventListener("click", () => {
-      ele.style.display = "none";
+      ele.parentNode.removeChild(ele);
     });
 
     zoomout.addEventListener("click", () => {
@@ -216,7 +216,7 @@ function load_header_icon() {
     });
   });
 }
-load_header_icon();
+
 function load_small_zoomout() {
   let small_zoomout = document.querySelectorAll(".small_zoomout");
   small_zoomout.forEach((ele) => {
@@ -231,16 +231,35 @@ function load_small_zoomout() {
         if (e.getAttribute("src") == small_zoomout_img) {
           e.parentNode.parentNode.parentNode.parentNode.parentNode.style.display =
             "block";
-          ele.style.display = "none";
+          ele.parentNode.removeChild(ele);
         }
       });
     });
     ele.querySelector(".small_zoomout_icon").onclick = () => {
-      ele.style.display = "none";
+      let boxchat = document.querySelectorAll(".boxchat");
+      let small_zoomout_img = ele
+        .querySelector(".small_zoomout_img")
+        .getAttribute("src");
+      let boxchat_img = document.querySelectorAll(
+        ".boxchat_header_title_img .custom_image"
+      );
+      boxchat_img.forEach((e) => {
+        if (e.getAttribute("src") == small_zoomout_img) {
+          boxchat.forEach((bc) => {
+            if (
+              bc.childNodes[1].childNodes[1].childNodes[1].childNodes[1]
+                .childNodes[1].src == small_zoomout_img
+            ) {
+              bc.parentNode.removeChild(bc);
+            }
+          });
+        }
+      });
+      ele.parentNode.removeChild(ele);
     };
   });
 }
-load_small_zoomout();
+
 function load_edit_border() {
   let otheruser_chat = document.querySelectorAll(".otheruser_chat");
   let owneruser_chat = document.querySelectorAll(".owneruser_chat");
@@ -288,7 +307,6 @@ function load_edit_border() {
     }
   });
 }
-load_edit_border();
 
 function footer_img_message() {
   let footer_img_message = document.querySelectorAll(".footer_img_message");
@@ -299,7 +317,6 @@ function footer_img_message() {
     };
   });
 }
-footer_img_message();
 
 // render small zoomout icon
 function render_small_zoomout_icon({ link = "", src = "", title = "" }) {
@@ -323,11 +340,13 @@ function render_small_zoomout_icon({ link = "", src = "", title = "" }) {
 function render_chatbox({ link = "", src = "", title = "" }) {
   let main = document.querySelector(".boxchat_container");
   let boxchat = document.createElement("div");
+  src =
+    "https://moviewebapi.s3.ap-southeast-1.amazonaws.com/Image/Logo.png?AWSAccessKeyId=AKIAUBYK6ZN225WS3AEB&Expires=1698917928&Signature=4LvpFf8IS0a8kOeATaWauwOg2Wo%3D";
   boxchat.classList.add("boxchat");
   boxchat.innerHTML = `
         <div class="boxchat_header">
           <div class="boxchat_header_title">
-            <a href="${link}">
+            <a href="/admin/edit-user/${link}">
               <span class="boxchat_header_title_img wh_wrap_header">
                 <img src="${src}" alt="" class="custom_image" />
               </span>
@@ -342,34 +361,31 @@ function render_chatbox({ link = "", src = "", title = "" }) {
         </div>
 
         <div class="boxchat_inner">
-                   
+            <div class="otheruser">
+              <div class="otheruser_image wh_wrap_inner">
+                  <img src="${src}" alt="" class="custom_image" />
+              </div>
+              <div class="otheruser_chat">
+                  <span class="otheruser_chat_message">Need support!</span>
+              </div>
+            </div>
+
+            <div class="owneruser">
+                <div class="owneruser_chat">
+                    <span class="owneruser_chat_message">Welcome to admin support!</span>
+                </div>
+            </div>
+
         </div>
 
         <div class="boxchat_footer">
-          <div class="boxchat_footer_image">
-            <label for="messagefile"><i class="fas fa-images"></i>Image</label>
-            <input
-              type="file"
-              name="messagefile"
-              id="messagefile"
-              accept="image/*"
-            />
-          </div>
-
           <div class="boxchat_footer_groupinput">
-            <div class="boxchat_footer_input">
-            <div class="boxchat_footer_input_img"> </div>
-              <textarea
-                name=""
-                id="textbox"
-                class="textbox"
-                placeholder="Aa"
-                rows="1"
-              ></textarea>
-            </div>
-            <div class="boxchat_footer_sender">
-              <i class="fas fa-paper-plane"></i>
-            </div>
+              <div class="boxchat_footer_input">
+                  <textarea name="" id="textbox" class="textbox" placeholder="Type your messages..." rows="1"></textarea>
+              </div>
+              <div class="boxchat_footer_sender">
+                  <button type="button" class="form__btn_chat">Send</button>
+              </div>
           </div>
         </div>
   `;
@@ -422,22 +438,48 @@ function render_owneruser_img({ src = "" }) {
 
 //send file
 
-let owner = document.querySelector(".boxchat_footer");
-let boxchat_footer_sender = document.querySelector(".boxchat_footer_sender");
-if (boxchat_footer_sender) {
-  boxchat_footer_sender.addEventListener("click", () => {
-    let listimg = owner.querySelectorAll(".footer_img_message");
-    let textbox = owner.querySelector(".textbox").value;
-    if (listimg != null) {
-      listimg.forEach((img) => {
-        let src = img.querySelector("img").src;
-        render_owneruser_img({ src: `${src}` });
-        img.remove();
+function sendMessageSupport() {
+  let owner = document.querySelector(".boxchat_footer");
+  let boxchat_footer_sender = document.querySelector(".boxchat_footer_sender");
+  if (boxchat_footer_sender) {
+    boxchat_footer_sender.addEventListener("click", () => {
+      let listimg = owner.querySelectorAll(".footer_img_message");
+      let textbox = owner.querySelector(".textbox").value;
+      if (listimg != null) {
+        listimg.forEach((img) => {
+          let src = img.querySelector("img").src;
+          render_owneruser_img({ src: `${src}` });
+          img.remove();
+        });
+      }
+      if (textbox != "") {
+        render_owneruser_text({ title: `${textbox}` });
+        owner.querySelector(".textbox").value = "";
+      }
+    });
+  }
+}
+/*supportsItem*/
+function createPopupChatbox() {
+  let supportsItems = document.querySelectorAll(".supportsItem");
+
+  supportsItems.forEach((ele) => {
+    ele.addEventListener("click", () => {
+      let boxchat_container = document.querySelectorAll(".boxchat");
+      boxchat_container.forEach((ele) => {
+        ele.parentNode.removeChild(ele);
       });
-    }
-    if (textbox != "") {
-      render_owneruser_text({ title: `${textbox}` });
-      owner.querySelector(".textbox").value = "";
-    }
+
+      render_chatbox({
+        link: `${ele.querySelector(".userID").id}`,
+        title: `${ele.querySelector(".fullname").innerHTML}`,
+      });
+      sendMessageSupport();
+      load_header_icon();
+      load_small_zoomout();
+      load_edit_border();
+      footer_img_message();
+    });
   });
 }
+createPopupChatbox();

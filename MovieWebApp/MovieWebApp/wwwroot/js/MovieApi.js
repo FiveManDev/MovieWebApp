@@ -2,7 +2,9 @@
 
 function UploadMovie() {
   var loading = document.getElementById("loading");
+  var errorMessage = document.getElementById("errorMessage");
   loading.hidden = false;
+  errorMessage.classList.remove("activeMsg");
 
   var token = document.getElementById("Token").value;
   if (token === "") {
@@ -64,6 +66,7 @@ function UploadMovie() {
         toastr.success("Upload video successfully!");
       } else {
         toastr.error("Upload video fail!");
+        errorMessage.classList.add("activeMsg");
       }
     })
     .catch((error) => console.log("error", error));
