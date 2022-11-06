@@ -469,7 +469,7 @@ function createPopupChatbox() {
       boxchat_container.forEach((ele) => {
         ele.parentNode.removeChild(ele);
       });
-
+      document.getElementById("UserID").id = ele.id 
       render_chatbox({
         link: `${ele.querySelector(".userID").id}`,
         title: `${ele.querySelector(".fullname").innerHTML}`,

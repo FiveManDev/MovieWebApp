@@ -66,7 +66,7 @@ function UploadMovie() {
         toastr.success("Upload video successfully!");
       } else {
         toastr.error("Upload video fail!");
-        errorMessage.classList.add("activeMsg");
+        /*errorMessage.classList.add("activeMsg");*/
       }
     })
     .catch((error) => console.log("error", error));

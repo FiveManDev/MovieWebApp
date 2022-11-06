@@ -4,7 +4,8 @@
     ViewData["Title"] = "Manage Support";
     ViewData["name"] = @Model.UserDTO.Profile.FirstName + " " + @Model.UserDTO.Profile.LastName;
 }
-
+@Html.Hidden("MyID",TempData["MyID"])
+@Html.Hidden("Token",TempData["Token"])
 <!-- main content -->
 <main class="main">
     <div class="container-fluid">
@@ -64,3 +65,4 @@
     @* <partial name="Shared/Component/Admin/_SupportsChatBox" /> *@
 
 </div>
+<input type="hidden" id="UserID" />

@@ -30,6 +30,9 @@ namespace MovieWebApp.Pages.Admin.Support_chat
             UserDTO = await _profileServices.GetInformation(HttpContext, userId);
             UserChats = await _chatServices.GetAllUserChat(HttpContext);
             GetTotalChat = await _statisticsServicess.GetTotalChat(HttpContext);
+            var token = HttpContext.Request.Cookies["accessToken"];
+            TempData["Token"] = token;
+            TempData["MyID"] = userId;
             return Page();
         }
     }
