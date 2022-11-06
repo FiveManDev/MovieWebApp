@@ -33,11 +33,11 @@
     <td>
         @if (Model.isRead)
         {
-            <div class="main__table-text main__table-text--red">Old</div>
+            <div class="main__table-text main__table-text--red" id="chatStatus" ticketID ="@Model.ticketID">Old</div>
         }
         else
         {
-            <div class="main__table-text main__table-text--green">New</div>
+            <div class="main__table-text main__table-text--green" id="chatStatus" ticketID="@Model.ticketID">New</div>
         }
     </td>
 </tr>

@@ -1,18 +1,21 @@
-﻿function SendMessageByAdmin() {
+﻿var BaseUrl = "https://localhost:7237/"
+
+function SendMessageByAdmin(content) {
   var token = document.getElementById("Token").value;
   if (token === "") {
     window.location = "/login";
-  }
-  var UserID = document.getElementById("UserID");
-  var MyID = document.getElementById("MyID");
+    }
+    var UserID = document.getElementById("UserID").value;
+    var MyID = document.getElementById("MyID").value;
+   
   var myHeaders = new Headers();
   myHeaders.append("Authorization", "Bearer " + token);
-  myHeaders.append("Content-Type", "application/json");
-
+    myHeaders.append("Content-Type", "application/json");
+    console.log(content);
   var raw = JSON.stringify({
     groupID: UserID,
     adminID: MyID,
-    message: "string",
+    message: content,
   });
 
   var requestOptions = {
@@ -22,12 +25,11 @@
     redirect: "follow",
   };
 
-  fetch(
-    "https://localhost:7237/api/v1/Chat/SendMessageFromAdmin",
+    fetch(BaseUrl+"api/v1/Chat/SendMessageFromAdmin",
     requestOptions
-  )
-    .then((response) => response.text())
-    .then((result) => console.log(result))
+    )
+        .then((response) => response.json())
+        .then((result) => renderMyChat(result.data))
     .catch((error) => console.log("error", error));
 }
 
@@ -64,9 +66,9 @@ function sendMessageSupport() {
   if (boxchat_footer_sender) {
     boxchat_footer_sender.addEventListener("click", () => {
       let textbox = owner.querySelector(".textbox").value;
-      if (textbox != "") {
-        renderMyChat(`${textbox}`);
-        owner.querySelector(".textbox").value = "";
+        if (textbox != "") {
+          owner.querySelector(".textbox").value = "";
+          SendMessageByAdmin(textbox)
       }
     });
   }
@@ -87,8 +89,20 @@ function createPopupChatbox() {
       boxchat_container.forEach((ele) => {
         ele.parentNode.removeChild(ele);
       });
-
-      //   document.getElementById("UserID").id = ele.id;
+        var userID = document.getElementById("UserID")
+        if (userID.value !== "") {
+            Disconnect()
+        }
+        userID.value = ele.id;
+        HubConnect(userID.value)
+        RenderChat()
+        var statusElm = ele.querySelector("#chatStatus")
+        var status = statusElm.textContent
+        var ticketID = statusElm.getAttribute("ticketid")
+        if (status === "New") {
+            UpdateStatus(ticketID, statusElm)
+        }
+        
       render_chatbox({
         link: `${ele.querySelector(".userID").id}`,
         title: `${ele.querySelector(".fullname").innerHTML}`,
@@ -101,3 +115,96 @@ function createPopupChatbox() {
   });
 }
 createPopupChatbox();
+function RenderChat() {
+    var token = document.getElementById("Token").value;
+    if (token === "") {
+        window.location = "/login";
+    }
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer " + token);
+
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+    
+    var UserID = document.getElementById("UserID").value;
+    fetch(BaseUrl +"api/v1/Chat/GetChatMessage?GroupID=" + UserID, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            result.data.forEach(e => {
+                if (!e.isFromAdmin) {
+                    var parent = document.querySelector(".boxchat_container")
+                    var image = parent.querySelector(".custom_image").src;
+                    renderOtherChat(e.messageContent, image)
+                } else {
+                    renderMyChat(e.messageContent)
+                }
+            })
+        })
+        .catch(error => console.log('error', error));
+}
+var connection = new signalR.HubConnectionBuilder()
+    .withUrl(BaseUrl+"chat")
+    .build();
+
+//Response
+function HubOn() {
+    connection.on("SendMessage", function (from,id, message) {
+        //scroll bottom of chat
+        var MyID = document.getElementById("MyID").value;
+        console.log(id, MyID );
+        if (!CompareGuid(id, UserID)) {
+            var parent = document.querySelector(".boxchat_container")
+            var image = parent.querySelector(".custom_image").src;
+            renderOtherChat(message, image);
+        }
+    });
+}
+function HubConnect(UserID) {
+    connection = new signalR.HubConnectionBuilder()
+        .withUrl(BaseUrl + "chat")
+        .build();
+    connection.start().then(function () {
+        connection.invoke("JoinGroup", UserID).then(function () {
+            console.log("Connect and Join Group Success");
+        });
+    }).catch(function (err) {
+        return console.error(err.toString());
+    });
+    HubOn()
+}
+function Disconnect() {
+    connection.stop();
+}
+
+    
+function CompareGuid(guid1, guid2) {
+    var regExp = new RegExp(guid1, "i");
+
+    return regExp.test(`{${guid2}}`);
+}
+function UpdateStatus(id, element) {
+    var token = document.getElementById("Token").value;
+    if (token === "") {
+        window.location = "/login";
+    }
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer " + token);
+
+    var requestOptions = {
+        method: 'PUT',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    fetch(BaseUrl+"api/v1/Chat/UpdateReadStatus?TicketID=" + id, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            if (result.isSuccess) {
+                element.textContent="Old"
+            }
+        })
+        .catch(error => console.log('error', error));
+}

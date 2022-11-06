@@ -6,7 +6,7 @@ var connection = new signalR.HubConnectionBuilder()
   .build();
 document.querySelector(".form__btn").disabled = true;
 //Response
-connection.on("SendMessage", function (from, message) {
+connection.on("SendMessage", function (from,id, message) {
   //scroll bottom of chat
 
   console.log(message);
