@@ -158,8 +158,7 @@ function HubOn() {
   connection.on("SendMessage", function (from, id, message) {
     //scroll bottom of chat
     var MyID = document.getElementById("MyID").value;
-    console.log(id, MyID);
-    if (!CompareGuid(id, UserID)) {
+    if (!CompareGuid(id, MyID)) {
       var parent = document.querySelector(".boxchat_container");
       var image = parent.querySelector(".custom_image").src;
       renderOtherChat(message, image);
