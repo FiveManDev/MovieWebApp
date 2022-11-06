@@ -308,16 +308,6 @@ function load_edit_border() {
   });
 }
 
-function footer_img_message() {
-  let footer_img_message = document.querySelectorAll(".footer_img_message");
-  footer_img_message.forEach((ele) => {
-    let clearimg = ele.querySelector(".footer_img_message_icon");
-    clearimg.onclick = () => {
-      ele.remove();
-    };
-  });
-}
-
 // render small zoomout icon
 function render_small_zoomout_icon({ link = "", src = "", title = "" }) {
   let small_zooomout_container = document.querySelector(
@@ -361,20 +351,7 @@ function render_chatbox({ link = "", src = "", title = "" }) {
         </div>
 
         <div class="boxchat_inner">
-            <div class="otheruser">
-              <div class="otheruser_image wh_wrap_inner">
-                  <img src="${src}" alt="" class="custom_image" />
-              </div>
-              <div class="otheruser_chat">
-                  <span class="otheruser_chat_message">Need support!</span>
-              </div>
-            </div>
-
-            <div class="owneruser">
-                <div class="owneruser_chat">
-                    <span class="owneruser_chat_message">Welcome to admin support!</span>
-                </div>
-            </div>
+           
 
         </div>
 
@@ -391,95 +368,3 @@ function render_chatbox({ link = "", src = "", title = "" }) {
   `;
   main.appendChild(boxchat);
 }
-// render message
-function render_otheruser({ src = "" }) {
-  let main = document.querySelector(".boxchat_inner");
-  let otheruser = document.createElement("div");
-  otheruser.classList.add("otheruser");
-  otheruser.innerHTML = `
-            <div class="otheruser_image wh_wrap_inner">
-              <img src="${src}" alt="" class="custom_image" />
-            </div>
-            <div class="otheruser_chat">
-             
-            </div>
-  `;
-  main.appendChild(otheruser);
-}
-function render_owneruser() {
-  let main = document.querySelector(".boxchat_inner");
-  let owneruser = document.createElement("div");
-  owneruser.classList.add("owneruser");
-  owneruser.innerHTML = `
-            <div class="owneruser_chat">
-            
-            </div>
-             `;
-  main.appendChild(owneruser);
-}
-function render_owneruser_text({ title = "" }) {
-  let owneruser_chat = document.querySelectorAll(".owneruser_chat");
-  let owneruser_chat_message = document.createElement("div");
-  owneruser_chat_message.classList.add("owneruser_chat_message");
-  owneruser_chat_message.innerHTML = `${title}`;
-  owneruser_chat[owneruser_chat.length - 1].appendChild(owneruser_chat_message);
-}
-function render_owneruser_img({ src = "" }) {
-  let owneruser_chat = document.querySelectorAll(".owneruser_chat");
-  let owneruser_chat_message = document.createElement("div");
-  owneruser_chat_message.classList.add("owneruser_chat_message");
-  owneruser_chat_message.innerHTML = `<img
-  src="${src}"
-  alt=""
-  class="owner_chat_message_image"
-/>`;
-  owneruser_chat[owneruser_chat.length - 1].appendChild(owneruser_chat_message);
-}
-
-//send file
-
-function sendMessageSupport() {
-  let owner = document.querySelector(".boxchat_footer");
-  let boxchat_footer_sender = document.querySelector(".boxchat_footer_sender");
-  if (boxchat_footer_sender) {
-    boxchat_footer_sender.addEventListener("click", () => {
-      let listimg = owner.querySelectorAll(".footer_img_message");
-      let textbox = owner.querySelector(".textbox").value;
-      if (listimg != null) {
-        listimg.forEach((img) => {
-          let src = img.querySelector("img").src;
-          render_owneruser_img({ src: `${src}` });
-          img.remove();
-        });
-      }
-      if (textbox != "") {
-        render_owneruser_text({ title: `${textbox}` });
-        owner.querySelector(".textbox").value = "";
-      }
-    });
-  }
-}
-/*supportsItem*/
-function createPopupChatbox() {
-  let supportsItems = document.querySelectorAll(".supportsItem");
-
-  supportsItems.forEach((ele) => {
-    ele.addEventListener("click", () => {
-      let boxchat_container = document.querySelectorAll(".boxchat");
-      boxchat_container.forEach((ele) => {
-        ele.parentNode.removeChild(ele);
-      });
-      document.getElementById("UserID").id = ele.id 
-      render_chatbox({
-        link: `${ele.querySelector(".userID").id}`,
-        title: `${ele.querySelector(".fullname").innerHTML}`,
-      });
-      sendMessageSupport();
-      load_header_icon();
-      load_small_zoomout();
-      load_edit_border();
-      footer_img_message();
-    });
-  });
-}
-createPopupChatbox();
