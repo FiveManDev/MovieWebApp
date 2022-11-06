@@ -105,6 +105,7 @@ function createPopupChatbox() {
 
       render_chatbox({
         link: `${ele.querySelector(".userID").id}`,
+        src: `${ele.querySelector(".modelAvatar").src}`,
         title: `${ele.querySelector(".fullname").innerHTML}`,
       });
       sendMessageSupport();

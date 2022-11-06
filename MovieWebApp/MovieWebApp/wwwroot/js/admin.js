@@ -330,8 +330,7 @@ function render_small_zoomout_icon({ link = "", src = "", title = "" }) {
 function render_chatbox({ link = "", src = "", title = "" }) {
   let main = document.querySelector(".boxchat_container");
   let boxchat = document.createElement("div");
-  src =
-    "https://moviewebapi.s3.ap-southeast-1.amazonaws.com/Image/Logo.png?AWSAccessKeyId=AKIAUBYK6ZN225WS3AEB&Expires=1698917928&Signature=4LvpFf8IS0a8kOeATaWauwOg2Wo%3D";
+
   boxchat.classList.add("boxchat");
   boxchat.innerHTML = `
         <div class="boxchat_header">
