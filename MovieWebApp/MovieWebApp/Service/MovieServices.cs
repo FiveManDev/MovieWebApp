@@ -269,6 +269,24 @@ namespace MovieWebApp.Service
         return false;
       }
     }
+  public async Task<List<MovieDTO>> GetMoviesBasedOnSearchText(HttpContext context, string searchText)
+    {
+      getClient(context);
+      try
+      {
+        string url = MovieApiUrl.GetMoviesBasedOnSearchText + $"?searchText={searchText}&top=20";
+        var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
+        if (response.IsSuccess)
+        {
+          return ExtensionMethods.ToModel<List<MovieDTO>>(response.Data);
+        }
+        return null;
+      }
+      catch
+      {
+        return null;
+      }
 
+    }
   }
 }

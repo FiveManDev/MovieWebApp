@@ -30,6 +30,7 @@
         public const string GetMoviesBasedOnGenre = "/api/v1/Movie/GetMoviesBasedOnGenre";
         public const string GetMovieBaseOnFilter = "/api/v1/Movie/GetMovieBaseOnFilter";
         public const string GetMoviesBasedOnSearchTextInCatalog = "/api/v1/Movie/GetMoviesBasedOnSearchTextInCatalog";
+        public const string GetMoviesBasedOnSearchText = "api/v1/Movie/GetMoviesBasedOnSearchText";
         public const string GetMovieBaseOnTopRating = "/api/v1/Movie/GetMovieBaseOnTopRating";
         public const string GetMovies = "/api/v1/Movie/GetMovies";
         public const string GetTotalNumberOfMovies = "/api/v1/Movie/GetTotalNumberOfMovies";

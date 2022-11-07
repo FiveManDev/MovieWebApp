@@ -25,7 +25,7 @@ namespace MovieWebApp.Pages.Search
         {
 
             searchText = Request.Query["searchText"].ToString();
-            MovieSearched = await _movieServices.GetMoviesBasedOnSearchTextInCatalog(HttpContext, searchText);
+            MovieSearched = await _movieServices.GetMoviesBasedOnSearchText(HttpContext, searchText);
 
             if (User.Identity.IsAuthenticated)
             {
